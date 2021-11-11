@@ -6,21 +6,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class user extends Model
+class Book extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'users';
-    protected $primaryKey = 'user_id';
+    protected $table = 'books';
+    protected $primaryKey = 'book_id';
     public $incrementing = true;
     public $timestamps = true;
 
     protected $fillable = [
-        'user_email',
-        'user_name',
-        'user_pass',
-        'user_role'
+        'book_name',
+        'genre_id',
+        'booktype_id',
+        'publisher_id',
+        'writer_id',
+        'language_id'
     ];
-
 }
