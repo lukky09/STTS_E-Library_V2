@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLanguagesTable extends Migration
+class CreateShopuserrelationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateLanguagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('languages', function (Blueprint $table) {
-            $table->id('language_id')->autoIncrement();
-            $table->string('language')->unique();
+        Schema::create('shopuserrelations', function (Blueprint $table) {
+            $table->integer('shop_id');
+            $table->integer('user_id');
+            $table->integer('book_id');
+            $table->integer('book_qty');
+            $table->integer('book_subtotal');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreateLanguagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('languages');
+        Schema::dropIfExists('shopuserrelations');
     }
 }
