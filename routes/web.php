@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Facade\FlareClient\View;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,5 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('register');
 });
+Route::post('/registeruser',[UserController::class, 'doRegis']);
+Route::post('/loginuser',[UserController::class, 'doLogin']);

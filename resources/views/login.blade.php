@@ -29,7 +29,7 @@
                 </div>
                 <button type="submit" class="btn btn-light mb-3 rounded-pill">Sign In</button>
                 <span class="d-flex justify-content-center container-xl mb-3">No account?</span>
-                <a href="{{url('/register')}}" class="btn btn-outline-light mb-3 rounded-pill">Register</a>
+                <a href="{{url('/register')}}" class="btn btn-outline-light mb-3 rounded-pill">Sign Up</a>
             </form>
 
         </div>
