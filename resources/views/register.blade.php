@@ -43,39 +43,33 @@
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-user-tab">
                     {{-- register user --}}
-                    <form action="" method="POST" class="form">
+                    <form action="/registerUser" method="POST" class="form">
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="inpFirstname" class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="inpFirstname" name="firstname">
+                                <input type="text" class="form-control" id="inpFirstname" name="user_fname">
                             </div>
                             <div class="col">
                                 <label for="inpLastname" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="inpLastname" name="lastname">
+                                <input type="text" class="form-control" id="inpLastname" name="user_lname">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="exampleInputEmail1" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="user_email">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="pass" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="pass" name="password">
+                                <input type="password" class="form-control" id="pass" name="user_pass">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="cpass" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" id="cpass" name="password_confirmation">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="companyphone" class="form-label invisible">Phone Number</label>
-                                <input type="text" class="form-control invisible" id="hidden">
+                                <input type="password" class="form-control" id="cpass" name="user_pass_confirmation">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-light mb-3 rounded-pill">Sign Up</button>
@@ -113,6 +107,12 @@
                             <div class="col">
                                 <label for="companycpass" class="form-label">Confirm Password</label>
                                 <input type="password" class="form-control" id="companycpass" name="password_confirmation">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="companyphone" class="form-label invisible">Phone Number</label>
+                                <input type="text" class="form-control invisible" id="hidden">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-light mb-3 rounded-pill">Sign Up</button>

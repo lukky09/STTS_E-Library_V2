@@ -18,8 +18,10 @@ class user extends Model
 
     protected $fillable = [
         'user_email',
-        'user_name',
+        'user_fname',
+        'user_lname',
         'user_pass',
+        'user_saldo',
         'user_role'
     ];
 
