@@ -101,7 +101,7 @@
         font-size: 1rem;
         color: #130f40;
         text-transform: none;
-        margin: 1rem 0;
+        margin: 0.5rem 0;
     }
 
     .header .login-form .remember {
@@ -157,6 +157,44 @@
         text-decoration: underline;
     }
 
+    .header .login-form .role_user{
+        color: #05636d;
+        display: inline;
+        margin-right: 5%;
+    }
+
+    .header input[type='radio'] {
+        margin-right: 10px;
+    }
+
+    input:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: #d1d3d1;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+    }
+
+    input:checked:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: #05636d;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+    }
+
     /* end login */
     /* end navbar */
 
@@ -202,7 +240,7 @@
 
     .search-form form {
         width: 50%;
-        margin: 0 2rem;
+        margin: 0 1rem;
         padding-bottom: 2rem;
         display: -webkit-box;
         display: -ms-flexbox;
@@ -314,14 +352,12 @@
             <input type="checkbox" name="" id="remember-me">
             <label for="remember-me">remember me</label>
         </div>
-        Login as: <br>
-        <div class="">
-            User
-            <input type="radio" name="a" id="" class="form-control" onclick="changeToUser()" checked>
+        {{-- Login as: <br> --}}
+        <div class="role_user">
+            <input type="radio" name="a" id="" class="form-control" onclick="changeToUser()" checked> User
         </div>
-        <div class="">
-            Supplier
-            <input type="radio" name="a" id="" class="form-control" onclick="changeToSupp()">
+        <div class="role_user">
+            <input type="radio" name="a" id="" class="form-control" onclick="changeToSupp()"> Supplier
         </div>
         <input type="submit" value="sign in" class="btn">
         <div class="links">

@@ -314,7 +314,7 @@
     </style>
 
     <section class="header_slider" data-scene>
-        <div class="img-slider">
+        <div class="img-slider" data-aos="zoom-out-right">
             <div class="slide active_slide">
                 <img src="{{ url(URL::asset('rss/images/banner1.jpg')) }}">
                 <div class="info">
@@ -364,7 +364,7 @@
     <div class="main_container" data-scene>
         <!-- Filter Gallery -->
         <div class="container-fluid filterbox">
-            <div class="filter-tabs">
+            <div class="filter-tabs" data-aos="fade-up">
                 <div class="filter-sort">
                     <div class="navigation">
                         <a href="javascript:void(0)" data-filter="all" class="button active">All</a>
@@ -376,11 +376,11 @@
                     </div>
                 </div>
             </div>
-            <div class="main-wrap wrap-inner">
+            <div class="main-wrap wrap-inner" >
                 <div id="content">
                     <div class="main-full" id="main">
                         <ol class="content">
-                            <li class="team shot-thumbnail Animation">
+                            <li class="team shot-thumbnail Animation" data-aos="fade-up">
                                 <div class="multi-shot">
                                     <div class="dribbble-img">
                                         <a class="dribbble-link">
@@ -416,7 +416,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="team shot-thumbnail Branding">
+                            <li class="team shot-thumbnail Branding" data-aos="fade-up">
                                 <div class="multi-shot">
                                     <div class="dribbble-img">
                                         <a class="dribbble-link">
@@ -452,7 +452,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="team shot-thumbnail Illustration">
+                            <li class="team shot-thumbnail Illustration" data-aos="fade-up">
                                 <div class="multi-shot">
                                     <div class="dribbble-img">
                                         <a class="dribbble-link">
@@ -488,7 +488,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="team shot-thumbnail Mobile">
+                            <li class="team shot-thumbnail Mobile" data-aos="fade-up">
                                 <div class="multi-shot">
                                     <div class="dribbble-img">
                                         <a class="dribbble-link">
@@ -524,7 +524,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="team shot-thumbnail Illustration">
+                            <li class="team shot-thumbnail Illustration" data-aos="fade-up">
                                 <div class="multi-shot">
                                     <div class="dribbble-img">
                                         <a class="dribbble-link">
@@ -560,7 +560,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="team shot-thumbnail Illustration">
+                            <li class="team shot-thumbnail Illustration" data-aos="fade-up">
                                 <div class="multi-shot">
                                     <div class="dribbble-img">
                                         <a class="dribbble-link">
@@ -596,7 +596,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="team shot-thumbnail Print">
+                            <li class="team shot-thumbnail Print" data-aos="fade-up">
                                 <div class="multi-shot">
                                     <div class="dribbble-img">
                                         <a class="dribbble-link">
