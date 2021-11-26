@@ -10,7 +10,7 @@ footer{
 footer .container{
   position: relative;
   width: 100%;
-  background: #3586ff;
+  background: linear-gradient(to top, #073b54, #05636d, #3586ff) ;
   min-height: 100px;
   padding: 20px 50px;
   display: flex;

@@ -264,8 +264,8 @@
             <li>
                 <div id="nav-close" class="fas fa-times"></div>
             </li>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Products</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/product">Products</a></li>
         </ul>
     </div>
     <div class="right-menu icons">
@@ -282,8 +282,8 @@
     </div>
     <form action="" class="login-form">
         <h3>sign in</h3>
-        <input type="email" name="" placeholder="enter your email" id="" class="box">
-        <input type="password" name="" placeholder="enter your password" id="" class="box">
+        <input type="email" name="" placeholder="enter your email" class="box">
+        <input type="password" name="" placeholder="enter your password" class="box">
         <div class="remember">
             <input type="checkbox" name="" id="remember-me">
             <label for="remember-me">remember me</label>

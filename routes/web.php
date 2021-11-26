@@ -29,3 +29,7 @@ Route::post('/registerUser',[UserController::class, 'doRegis']);
 Route::post('/loginUser',[UserController::class, 'doLogin']);
 Route::post('/registerSupp',[SupplierController::class, 'doRegis']);
 Route::post('/loginSupp',[SupplierController::class, 'doLogin']);
+
+Route::get('/product', function () {
+    return view('customer.product');
+});

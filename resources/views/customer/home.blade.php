@@ -348,7 +348,7 @@
 
         /* newsletter */
         .newsletter {
-            background-image: url({{ URL::asset('rss/images/banner1.jpg') }});
+            background-image: url({{ URL::asset('rss/images/banner.jpg') }});
             /* background-attachment: fixed; */
             background-position: center;
             background-repeat: no-repeat;
