@@ -19,7 +19,7 @@ class CreateShopsTable extends Migration
             $table->string('shop_name');
             $table->integer('shop_saldo')->default(0);
             $table->string('shop_pass');
-            $table->integer('shop_phone');
+            $table->string('shop_phone');
             $table->timestamps();
             $table->softDeletes();
         });
