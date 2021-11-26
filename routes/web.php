@@ -27,6 +27,7 @@ Route::get('/register', function () {
 });
 Route::post('/registerUser',[UserController::class, 'doRegis']);
 Route::post('/loginUser',[UserController::class, 'doLogin']);
+Route::post('/logoutUser',[UserController::class, 'doLogout']);
 Route::post('/registerSupp',[SupplierController::class, 'doRegis']);
 Route::post('/loginSupp',[SupplierController::class, 'doLogin']);
 

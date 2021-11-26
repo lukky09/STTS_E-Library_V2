@@ -18,7 +18,7 @@
         color: lightgrey;
     }
     .nav .nav-item .nav-link.active{
-        background:green;
+        background:rgb(18, 93, 103);
     }
 
 
@@ -31,10 +31,10 @@
         <div class="col-xl-3 mt-auto mb-auto ms-5" style="">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item col-sm" role="presentation">
-                    <button class="nav-link active" id="pills-user-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">User</button>
+                    <button class="nav-link active rounded-pill" id="pills-user-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">User</button>
                 </li>
                 <li class="nav-item col-sm" role="presentation">
-                    <button class="nav-link" id="pills-supplier-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Publisher</button>
+                    <button class="nav-link rounded-pill" id="pills-supplier-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Publisher</button>
                 </li>
                 {{-- <li class="nav-item" role="presentation">
                   <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
@@ -70,6 +70,12 @@
                             <div class="col">
                                 <label for="cpass" class="form-label">Confirm Password</label>
                                 <input type="password" class="form-control" id="cpass" name="user_pass_confirmation">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="cpass" class="form-label invisible">Confirm Password</label>
+                                <input type="password" class="form-control invisible" id="s" name="kosong">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-light mb-3 rounded-pill">Sign Up</button>
@@ -109,12 +115,12 @@
                                 <input type="password" class="form-control" id="companycpass" name="password_confirmation">
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <div class="col">
                                 <label for="companyphone" class="form-label invisible">Phone Number</label>
                                 <input type="text" class="form-control invisible" id="hidden">
                             </div>
-                        </div>
+                        </div> --}}
                         <button type="submit" class="btn btn-light mb-3 rounded-pill">Sign Up</button>
                         <span class="d-flex justify-content-center container-xl mb-3">Already signed up?</span>
                         <a href="{{url('/login')}}" class="btn btn-outline-light mb-3 rounded-pill">Sign In</a>

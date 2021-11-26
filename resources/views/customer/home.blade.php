@@ -399,9 +399,18 @@
     <!-- header-banner -->
     <div class="header-landing" data-scene>
         <div class="content">
-            <small>Welcome to our</small>
-            <h1>Book's<br> Creative Store</h1>
-            <button type="button" class="btn">Take a tour</button>
+            @if (Session::has('login'))
+                @php
+                    $user = DB::table('users')->where('user_id',Session::get('login'))->first();
+                @endphp
+                <small>Welcome, {{$user->user_fname}}, to our</small>
+                <h1>Book's<br> Creative Store</h1>
+                <button type="button" class="btn">Take a tour</button>
+            @else
+                <small>Welcome, to our</small>
+                <h1>Book's<br> Creative Store</h1>
+                <button type="button" class="btn">Take a tour</button>
+            @endif
         </div>
         <div class="bubbles">
             <img src="{{ url(URL::asset('rss/images/bubble.png')) }}">
