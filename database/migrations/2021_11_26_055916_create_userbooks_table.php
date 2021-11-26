@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSuppliersTable extends Migration
+class CreateUserbooksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateSuppliersTable extends Migration
      */
     public function up()
     {
-        Schema::create('suppliers', function (Blueprint $table) {
-            $table->id('supplier_id')->autoIncrement();
-            $table->string('supplier_name')->unique();
-            $table->integer('supplier_saldo')->default(0);
+        Schema::create('userbooks', function (Blueprint $table) {
+            $table->integer("user_id");
+            $table->integer("book_id");
+            $table->integer("qty");
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateSuppliersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('suppliers');
+        Schema::dropIfExists('userbooks');
     }
 }

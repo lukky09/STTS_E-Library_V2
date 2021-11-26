@@ -14,6 +14,7 @@ class CreateShopuserrelationsTable extends Migration
     public function up()
     {
         Schema::create('shopuserrelations', function (Blueprint $table) {
+            $table->id('shopuser_transid')->autoIncrement();
             $table->integer('shop_id');
             $table->integer('user_id');
             $table->integer('book_id');

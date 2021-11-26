@@ -17,10 +17,8 @@ class CreateBooksTable extends Migration
             $table->id("book_id")->autoIncrement();
             $table->string('book_name');
             $table->integer("genre_id");
-            $table->integer("booktype_id");
             $table->integer("publisher_id");
-            $table->integer("writer_id");
-            $table->integer("language_id");
+            $table->integer("author_id");
             $table->timestamps();
             $table->softDeletes();
         });

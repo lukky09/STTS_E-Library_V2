@@ -5,16 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BookType extends Model
+class Shop extends Model
 {
     use HasFactory;
 
-    protected $table = 'booktypes';
-    protected $primaryKey = 'booktype_id';
+    protected $table = 'shops';
+    protected $primaryKey = 'shop_id';
     public $incrementing = false;
     public $timestamps = true;
 
     protected $fillable = [
-        'booktype'
+        'shop_email',
+        'shop_name',
+        'shop_pass',
+        'shop_phone',
+        'shop_saldo'
     ];
 }

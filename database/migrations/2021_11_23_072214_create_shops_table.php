@@ -17,6 +17,7 @@ class CreateShopsTable extends Migration
             $table->id('shop_id')->autoIncrement();
             $table->string('shop_email')->unique();
             $table->string('shop_name');
+            $table->integer('shop_saldo')->default(0);
             $table->string('shop_pass');
             $table->integer('shop_phone');
             $table->timestamps();

@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Language extends Model
+class Author extends Model
 {
     use HasFactory;
 
-    protected $table = 'languages';
-    protected $primaryKey = 'language_id';
-    public $incrementing = false;
+    protected $table = 'authors';
+    protected $primaryKey = 'author_id';
+    public $incrementing = true;
     public $timestamps = true;
 
     protected $fillable = [
-        'language'
+        'author_name'
     ];
 }

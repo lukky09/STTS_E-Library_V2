@@ -14,6 +14,7 @@ class CreateShopsupplierrelationsTable extends Migration
     public function up()
     {
         Schema::create('shopsupplierrelations', function (Blueprint $table) {
+            $table->id('shopsupplier_transid')->autoIncrement();
             $table->integer('shop_id');
             $table->integer('supplier_id');
             $table->integer('book_id');
