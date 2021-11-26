@@ -252,6 +252,11 @@
     /* end search */
     /* end header */
 
+    .font-change{
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        margin-left: 10px;
+    }
+
 </style>
 
 <!-- header -->
@@ -274,19 +279,49 @@
                 <div id="menu-btn" class="fas fa-bars"></div>
             </li>
             <li><a href="#" class="fas fa-shopping-cart"></a></li>
+            {{-- belum login --}}
+            @if (Session::has('login') == false)
             <li><a href="#" class="far fa-user" id="login-btn"></i></a></li>
+            @else
+                @php
+                    $user = DB::table('users')->where('user_id',Session::get('login'))->first();
+                @endphp
+            <li onclick="doLogout()"><a href="#" class="far fa-user" id="logged-btn"></i><span class="font-change">{{$user->user_fname}}</span></a> </li>
+
+            @endif
+
             <li><a>
                     <div id="search-btn" class="fas fa-search"></div>
                 </a></li>
+                <form action="/logoutUser" id="logoutform" method="POST" style="width:0px; height: 0px;">
+                    @csrf
+                </form>
         </ul>
     </div>
-    <form action="" class="login-form">
+    {{-- login --}}
+    <form action="/loginUser" class="login-form" id="loginform" method="POST">
+        @csrf
         <h3>sign in</h3>
-        <input type="email" name="" placeholder="enter your email" id="" class="box">
-        <input type="password" name="" placeholder="enter your password" id="" class="box">
+        <input type="text" name="userlogin" placeholder="enter your email" id="" class="box">
+        @error('userlogin')
+            {{$message}}
+        @enderror
+        <input type="password" name="password" placeholder="enter your password" id="" class="box">
+        @error('password')
+            {{$message}}
+        @enderror
         <div class="remember">
             <input type="checkbox" name="" id="remember-me">
             <label for="remember-me">remember me</label>
+        </div>
+        Login as: <br>
+        <div class="">
+            User
+            <input type="radio" name="a" id="" class="form-control" onclick="changeToUser()" checked>
+        </div>
+        <div class="">
+            Supplier
+            <input type="radio" name="a" id="" class="form-control" onclick="changeToSupp()">
         </div>
         <input type="submit" value="sign in" class="btn">
         <div class="links">
@@ -302,4 +337,15 @@
         <label for="search-box" class="fas fa-search"></label>
     </form>
 </div>
+<script>
+    function doLogout(){
+        document.querySelector("#logoutform").submit();
+    }
+    function changeToUser(){
+        document.querySelector("#loginform").action="/loginUser";
+    }
+    function changeToSupp(){
+        document.querySelector("#loginform").action="/loginSupp";
+    }
+</script>
 

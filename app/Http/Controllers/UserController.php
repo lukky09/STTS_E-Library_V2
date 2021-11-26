@@ -3,15 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\user;
+use App\Rules\CorrectPasswordRule;
+use App\Rules\RegisteredUserRule;
 use App\Rules\UniqueMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
     //
     public function doLogin(Request $req)
     {
-        # code...
+        $user = user::where('user_email',$req->userlogin)->get();
+        $count = count($user);
+        // dump($count);
+        // dump($user);
+        $req->validate([
+            'userlogin'=>["required", new RegisteredUserRule($count)],
+        ]);
+        $user = $user[0];
+        $req->validate([
+            'password'=>["required", new CorrectPasswordRule($user->user_pass)],
+        ]);
+
+        Session::put('login',$user->user_id);
+        return redirect('/');
     }
     public function doRegis(Request $req)
     {
@@ -31,5 +47,9 @@ class UserController extends Controller
     public function doUpdateProfile(Request $req)
     {
         # code...
+    }
+    public function doLogout(Request $req){
+        Session::forget('login');
+        return redirect('/');
     }
 }
