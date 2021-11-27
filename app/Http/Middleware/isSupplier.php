@@ -17,7 +17,7 @@ class isSupplier
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Session::has('usertype') && Session::get('usertype') == 1){
+        if(getAuthUserType() == "supp"){
             return $next($request);
         }else{
             return redirect('');

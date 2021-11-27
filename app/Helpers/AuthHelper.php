@@ -25,3 +25,18 @@ function getAuthUser()
         }
     }
 }
+
+function getAuthUserType()
+{
+    if(sudahLogin() == false){
+        return "none";
+    }else{
+        if(Auth::guard('user_provider')->check()){
+            return "user";
+        }else if("supplier_provider"){
+            return "supp";
+        }else{
+            return "shop";
+        }
+    }
+}

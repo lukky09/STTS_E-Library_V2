@@ -17,7 +17,7 @@ class isUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Session::has('usertype') && Session::get('usertype') == 0){
+        if(getAuthUserType() == "user"){
             return $next($request);
         }else{
             return redirect('');

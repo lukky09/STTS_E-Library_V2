@@ -17,7 +17,7 @@ class isShop
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Session::has('usertype') && Session::get('usertype') == 2){
+        if(getAuthUserType() == "shop"){
             return $next($request);
         }else{
             return redirect('');
