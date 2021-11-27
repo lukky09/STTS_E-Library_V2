@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class user extends Model
+class user extends Authenticatable
 {
     use HasFactory;
     use SoftDeletes;
@@ -24,5 +25,13 @@ class user extends Model
         'user_saldo',
         'user_role'
     ];
+
+    /**
+     * @return string
+     */
+    public function getAuthPassword()
+    {
+        return $this->user_pass;
+    }
 
 }

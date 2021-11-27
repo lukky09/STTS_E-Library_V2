@@ -16,6 +16,7 @@ class CreateSuppliersTable extends Migration
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id('supplier_id')->autoIncrement();
             $table->string('supplier_name')->unique();
+            $table->string('supplier_email');
             $table->string('supplier_pass');
             $table->integer('supplier_saldo')->default(0);
             $table->timestamps();

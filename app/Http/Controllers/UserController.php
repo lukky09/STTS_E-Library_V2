@@ -7,6 +7,7 @@ use App\Rules\CorrectPasswordRule;
 use App\Rules\RegisteredUserRule;
 use App\Rules\UniqueMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -14,19 +15,34 @@ class UserController extends Controller
     //
     public function doLogin(Request $req)
     {
-        $user = user::where('user_email',$req->userlogin)->get();
-        $count = count($user);
-        // dump($count);
-        // dump($user);
         $req->validate([
-            'userlogin'=>["required", new RegisteredUserRule($count)],
-        ]);
-        $user = $user[0];
-        $req->validate([
-            'password'=>["required", new CorrectPasswordRule($user->user_pass)],
+            'userlogin'=>"required",
+            'password'=>"required",
         ]);
 
-        Session::put('login',$user->user_id);
+        $credential = [
+            'user_email' => strtolower($req->userlogin),
+            'password' => $req->password
+        ];
+
+        if(Auth::guard('user_provider')->attempt($credential)){
+            dd(getAuthUser());
+        }else{
+            //gagal masuk
+        }
+
+        // $user = user::where('user_email',$req->userlogin)->get();
+        // $count = count($user);
+        // // dump($count);
+        // // dump($user);
+        // $req->validate([
+        //     'userlogin'=>["required", new RegisteredUserRule($count)],
+        // ]);
+        // $user = $user[0];
+        // $req->validate([
+        //     'password'=>["required", new CorrectPasswordRule($user->user_pass)],
+        // ]);
+        // Session::put('login',$user->user_id);
         return redirect('/');
     }
     public function doRegis(Request $req)

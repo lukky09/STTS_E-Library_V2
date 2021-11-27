@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Supplier extends Model
+class Supplier extends Authenticatable
 {
     use HasFactory;
 
@@ -18,4 +19,12 @@ class Supplier extends Model
         'supplier_name',
         'supplier_saldo'
     ];
+
+    /**
+     * @return string
+     */
+    public function getAuthPassword()
+    {
+        return $this->supplier_password;
+    }
 }
