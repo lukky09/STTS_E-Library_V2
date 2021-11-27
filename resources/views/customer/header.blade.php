@@ -350,7 +350,7 @@
         @enderror
         <div class="remember">
             <input type="checkbox" name="" id="remember-me">
-            <label for="remember-me">remember me</label>
+            <label for="remember-me">Remember me</label>
         </div>
         {{-- Login as: <br> --}}
         <div class="role_user">
@@ -358,6 +358,9 @@
         </div>
         <div class="role_user">
             <input type="radio" name="a" id="" class="form-control" onclick="changeToSupp()"> Supplier
+        </div>
+        <div class="role_user">
+            <input type="radio" name="a" id="" class="form-control" onclick="changeToShop()"> Shop
         </div>
         <input type="submit" value="sign in" class="btn">
         <div class="links">
@@ -382,6 +385,9 @@
     }
     function changeToSupp(){
         document.querySelector("#loginform").action="/loginSupp";
+    }
+    function changeToShop(){
+        document.querySelector("#loginform").action="/loginShop";
     }
 </script>
 

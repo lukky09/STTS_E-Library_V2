@@ -34,3 +34,23 @@ Route::post('/loginSupp',[SupplierController::class, 'doLogin']);
 Route::get('/product', function () {
     return view('customer.product');
 });
+
+//session usertype = -1
+Route::middleware(['admin'])->group(function () {
+
+});
+
+//session usertype = 0
+Route::middleware(['user'])->group(function () {
+
+});
+
+//session usertype = 1
+Route::middleware(['supplier'])->group(function () {
+
+});
+
+//session usertype = 2
+Route::middleware(['shop'])->group(function () {
+
+});
