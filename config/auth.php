@@ -42,11 +42,7 @@ return [
         ],
         'supplier_provider' => [
             'driver' => 'session',
-            'provider' => 'users',
-        ],
-        'shop_provider' => [
-            'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'suppliers',
         ],
     ],
 
@@ -76,12 +72,7 @@ return [
         'suppliers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Supplier::class,
-        ],
-
-        'shops' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Shop::class,
-        ],
+        ]
     ],
 
     /*

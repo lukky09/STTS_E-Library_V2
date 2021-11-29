@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Auth;
 
 function sudahLogin()
 {
-    if(Auth::guard('user_provider')->check() || Auth::guard('supplier_provider')->check() || Auth::guard('shop_provider')->check()){
+    if(Auth::guard('user_provider')->check() || Auth::guard('supplier_provider')->check()){
         return true;
     }else{
         return false;
@@ -18,10 +18,8 @@ function getAuthUser()
     }else{
         if(Auth::guard('user_provider')->check()){
             return Auth::guard('user_provider')->user();
-        }else if("supplier_provider"){
-            return Auth::guard('supplier_provider')->user();
         }else{
-            return Auth::guard('shop_provider')->user();
+            return Auth::guard('supplier_provider')->user();
         }
     }
 }
@@ -31,10 +29,10 @@ function getAuthUserType()
     if(sudahLogin() == false){
         return "none";
     }else{
-        if(Auth::guard('user_provider')->check()){
-            return "user";
-        }else if("supplier_provider"){
+        if(Auth::guard('supplier_provider')->check()){
             return "supp";
+        }else if(Auth::guard('user_provider')->user()->isadmin == 0){
+            return "user";
         }else{
             return "shop";
         }

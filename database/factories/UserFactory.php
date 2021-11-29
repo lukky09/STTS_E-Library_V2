@@ -20,7 +20,7 @@ class UserFactory extends Factory
         return [
             'user_fname' => $firstname,
             'user_lname' => $lastname,
-            'user_email' => strtolower($firstname)."@user.com",
+            'user_email' => strtolower($firstname).substr(strtolower($lastname),0,2)."@user.com",
             'user_pass' => Hash::make('123'),
             'user_saldo' => rand(1,100) * 1000
         ];

@@ -359,9 +359,6 @@
         <div class="role_user">
             <input type="radio" name="a" id="" class="form-control" onclick="changeToSupp()"> Supplier
         </div>
-        <div class="role_user">
-            <input type="radio" name="a" id="" class="form-control" onclick="changeToShop()"> Shop
-        </div>
         <input type="submit" value="sign in" class="btn">
         <div class="links">
             <a href="#">sign up</a>
@@ -385,9 +382,6 @@
     }
     function changeToSupp(){
         document.querySelector("#loginform").action="/loginSupp";
-    }
-    function changeToShop(){
-        document.querySelector("#loginform").action="/loginShop";
     }
 </script>
 
