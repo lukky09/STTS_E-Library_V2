@@ -49,7 +49,8 @@ Route::middleware(['user'])->group(function () {
 Route::middleware(['supplier'])->group(function () {
     Route::get('home', [SupplierController::class, 'toSuppHome']);
 });
-// Route::get('supphome', [SupplierController::class, 'toSuppHome']);
+Route::get('supphome', [SupplierController::class, 'toSuppHome']);
+Route::get('suppadd', [SupplierController::class, 'toSuppAdd']);
 
 //session usertype = 2
 Route::middleware(['shop'])->group(function () {

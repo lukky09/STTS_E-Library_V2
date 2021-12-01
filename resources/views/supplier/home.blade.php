@@ -1,4 +1,4 @@
-@extends('customer.main')
+@extends('supplier.main')
 
 @section('main')
     <style>
@@ -6,7 +6,8 @@
         .header-landing {
             width: 100%;
             height: 100vh;
-            background-image: url({{ URL::asset('rss/images/background.png') }});
+            /* background-image: url({{ URL::asset('rss/images/background.png') }}); */
+            background-color: #312244;
             background-size: cover;
             background-position: center;
             position: relative;
@@ -405,14 +406,12 @@
                 @endphp
                 <small>Welcome, {{$user->user_fname}}, to our</small>
                 <h1>Book's<br> Creative Store</h1>
-                <button type="button" class="btn">Take a tour</button>
             @else
                 <small>Welcome, to our</small>
                 <h1>Book's<br> Creative Store</h1>
-                <button type="button" class="btn">Take a tour</button>
             @endif
         </div>
-        <div class="bubbles">
+        {{-- <div class="bubbles">
             <img src="{{ url(URL::asset('rss/images/bubble.png')) }}">
             <img src="{{ url(URL::asset('rss/images/bubble.png')) }}">
             <img src="{{ url(URL::asset('rss/images/bubble.png')) }}">
@@ -420,7 +419,7 @@
             <img src="{{ url(URL::asset('rss/images/bubble.png')) }}">
             <img src="{{ url(URL::asset('rss/images/bubble.png')) }}">
             <img src="{{ url(URL::asset('rss/images/bubble.png')) }}">
-        </div>
+        </div> --}}
     </div>
 
     <section class="brand-logo" data-scene>
@@ -592,4 +591,6 @@
             </div>
         </div>
     </section>
+    <div class="container_footer">@include('supplier.footer')</div>
+
 @endsection

@@ -57,4 +57,18 @@ class SupplierController extends Controller
     {
         return view('supplier.home');
     }
+    public function toSuppAdd(Request $req)
+    {
+        return view('supplier.addbook');
+    }
+
+    public function doAdd(Request $req)
+    {
+        $req->validate([
+            "booktitle"=>"required",
+            "bookgenre"=>"required",
+            "bookpublisher"=>"required",
+            "bookauthor"=>"required"
+        ]);
+    }
 }

@@ -600,9 +600,8 @@
     </div>
 
     <main class="app">
-        <div class="container_header">@include('customer.header')</div>
+        <div class="container_header">@include('supplier.header')</div>
         <div class="container_main">@yield('main')</div>
-        <div class="container_footer">@include('customer.footer')</div>
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
