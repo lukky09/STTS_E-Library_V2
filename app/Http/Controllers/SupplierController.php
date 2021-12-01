@@ -20,14 +20,16 @@ class SupplierController extends Controller
         ]);
 
         $credential = [
-            'supplier_email' => strtolower($req->userlogin),
+            'supplier_email' => $req->userlogin,
             'password' => $req->password
         ];
-
+        dump(Auth::guard('supplier_provider')->attempt($credential));
         if(Auth::guard('supplier_provider')->attempt($credential)){
             //berhasil
+            // return redirect('/supplier/home');
         }else{
             //gagal masuk
+            // return redirect('/');
         }
         // $supp = Supplier::where('supplier_name',$req->userlogin)->get();
         // $count = count($supp);
@@ -44,10 +46,15 @@ class SupplierController extends Controller
         // Session::put('loginsupp',$supp->supp_id);
         dump(Auth::guard('supplier_provider')->user());
         //harus return ke home supplier di sini
-        // return redirect('/');
+        // return redirect('/supplier/home');
     }
     public function doRegis(Request $req)
     {
         # code...
+    }
+
+    public function toSuppHome(Request $req)
+    {
+        return view('supplier.home');
     }
 }
