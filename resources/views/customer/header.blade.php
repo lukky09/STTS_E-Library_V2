@@ -361,7 +361,7 @@
         </div>
         <input type="submit" value="sign in" class="btn">
         <div class="links">
-            <a href="#">sign up</a>
+            <a href="/register">sign up</a>
         </div>
     </form>
 </header>

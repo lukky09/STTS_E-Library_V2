@@ -44,32 +44,48 @@
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-user-tab">
                     {{-- register user --}}
                     <form action="/registerUser" method="POST" class="form">
+                        @csrf
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="inpFirstname" class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="inpFirstname" name="user_fname">
+                                <input type="text" class="form-control" id="inpFirstname" name="user_fname" value="{{old('user_fname')}}">
+                                @error('user_fname')
+                                    {{$message}}
+                                @enderror
                             </div>
                             <div class="col">
                                 <label for="inpLastname" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="inpLastname" name="user_lname">
+                                <input type="text" class="form-control" id="inpLastname" name="user_lname" value="{{old('user_lname')}}">
+                                @error('user_lname')
+                                    {{$message}}
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="exampleInputEmail1" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="user_email">
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="user_email" value="{{old('user_email')}}">
+                                @error('user_email')
+                                    {{$message}}
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="pass" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="pass" name="user_pass">
+                                @error('user_pass')
+                                    {{$message}}
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="cpass" class="form-label">Confirm Password</label>
                                 <input type="password" class="form-control" id="cpass" name="user_pass_confirmation">
+                                @error('user_pass_confirmation')
+                                    {{$message}}
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -84,35 +100,48 @@
                     </form>
                 </div>
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-supplier-tab">
-                    <form action="" method="POST">
+                    <form action="/registerSupp" method="POST">
+                        @csrf
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="companyname" class="form-label">Company Name</label>
-                                <input type="text" class="form-control" id="companyname" aria-describedby="emailHelp" name="companyname">
+                                <input type="text" class="form-control" id="companyname" name="supplier_name">
+                                @error('supplier_name')
+                                    {{$message}}
+                                @enderror
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <div class="col">
                                 <label for="companyphone" class="form-label">Phone Number</label>
-                                <input type="number" class="form-control" id="companyphone" aria-describedby="emailHelp" name="companyphone">
+                                <input type="number" class="form-control" id="companyphone" aria-describedby="emailHelp" name="supplier_phone">
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="companyemail" class="form-label">Company Email</label>
-                                <input type="email" class="form-control" id="companyemail" aria-describedby="emailHelp" name="companyemail">
+                                <input type="email" class="form-control" id="companyemail" aria-describedby="emailHelp" name="supplier_email">
+                                @error('supplier_email')
+                                    {{$message}}
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="companypass" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="companypass" name="password">
+                                <input type="password" class="form-control" id="companypass" name="supplier_pass">
+                                @error('supplier_pass')
+                                    {{$message}}
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="companycpass" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" id="companycpass" name="password_confirmation">
+                                <input type="password" class="form-control" id="companycpass" name="supplier_pass_confirmation">
+                                @error('supplier_pass_confirmation')
+                                    {{$message}}
+                                @enderror
                             </div>
                         </div>
                         {{-- <div class="row mb-3">

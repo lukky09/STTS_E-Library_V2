@@ -307,8 +307,8 @@
             <li>
                 <div id="nav-close" class="fas fa-times"></div>
             </li>
-            <li><a href="/">Home</a></li>
-            <li><a href="/product">Add</a></li>
+            <li><a href="/supplier/">Home</a></li>
+            <li><a href="/supplier/add">Add</a></li>
         </ul>
     </div>
     <div class="right-menu icons">
@@ -318,13 +318,14 @@
             </li>
             {{-- <li><a href="#" class="fas fa-shopping-cart"></a></li> --}}
             {{-- belum login --}}
-        @if (Session::has('login') == false)
-            <li><a href="#" class="far fa-user" id="login-btn"></i></a></li>
+            @if (sudahLogin() == false)
+                <li><a href="#" class="far fa-user" id="login-btn"></i></a></li>
             @else
                 @php
-                    $user = DB::table('users')->where('user_id',Session::get('login'))->first();
+                    $supp = getAuthUser();
+                    // dump($supp);
                 @endphp
-            <li onclick="doLogout()"><a href="#" class="far fa-user" id="logged-btn"></i><span class="font-change">{{$user->user_fname}}</span></a> </li>
+            <li onclick="doLogout()"><a href="#" class="far fa-user" id="logged-btn"></i><span class="font-change">{{$supp->supplier_name}}</span></a> </li>
 
             @endif
 

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Supplier;
 use App\Rules\CorrectPasswordRule;
 use App\Rules\RegisteredUserRule;
+use App\Rules\UniqueMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class SupplierController extends Controller
@@ -48,7 +50,24 @@ class SupplierController extends Controller
     }
     public function doRegis(Request $req)
     {
-        # code...
+        $req->validate(
+            [
+                'supplier_name' => "required",
+                'supplier_email' => ["required","email", new UniqueMail()],
+                'supplier_pass_confirmation' => "required",
+                'supplier_pass' => "required|min:8|confirmed",
+            ]
+        );
+        // dump($req->supplier_name);
+        // dump($req->all());
+        // dump($req->supplier_name);
+        Supplier::create([
+            "supplier_name"=>$req->supplier_name,
+            "supplier_email"=>$req->supplier_email,
+            "supplier_pass"=>Hash::make($req->supplier_name),
+        ]);
+
+        return redirect('');
     }
 
     public function toSuppHome(Request $req)
@@ -63,7 +82,7 @@ class SupplierController extends Controller
     public function doAdd(Request $req)
     {
         $req->validate([
-            "booktitle"=>"required",
+            "booktitle"=>"required|string",
             "bookgenre"=>"required",
             "bookpublisher"=>"required",
             "bookauthor"=>"required"

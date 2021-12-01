@@ -17,7 +17,9 @@ class Supplier extends Authenticatable
 
     protected $fillable = [
         'supplier_name',
-        'supplier_saldo'
+        'supplier_saldo',
+        'supplier_email',
+        'supplier_pass'
     ];
 
     /**
