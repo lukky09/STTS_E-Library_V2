@@ -47,7 +47,9 @@ Route::middleware(['user'])->group(function () {
 
 //session usertype = 1
 Route::middleware(['supplier'])->group(function () {
-    Route::get('home', [SupplierController::class, 'toSuppHome']);
+    Route::prefix('supplier')->group(function () {
+        Route::get('/', [SupplierController::class, 'toSuppHome']);
+    });
 });
 Route::get('supphome', [SupplierController::class, 'toSuppHome']);
 Route::get('suppadd', [SupplierController::class, 'toSuppAdd']);

@@ -582,7 +582,7 @@
                     <div class="text-inner">
                         <p>Setelah kehilangan anak dan pernikahannya, Renae Adiana tidak lagi memercayai cinta dan adanya
                             akhir yang bahagia. Dengan kekurangan terbesar yang dimiliki Renae, tidak akan ada laki-laki
-                            yang menginginkan Renae sebagai istrinya. </p>
+                            yang menginginkan Renae sebagai istrinya.</p>
                         <a href="#" class="btn">Learn More</a>
                     </div>
                 </div>

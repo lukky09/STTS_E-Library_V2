@@ -25,6 +25,6 @@ class Supplier extends Authenticatable
      */
     public function getAuthPassword()
     {
-        return $this->supplier_password;
+        return $this->supplier_pass;
     }
 }

@@ -23,10 +23,8 @@ class SupplierController extends Controller
             'supplier_email' => $req->userlogin,
             'password' => $req->password
         ];
-        dump(Auth::guard('supplier_provider')->attempt($credential));
         if(Auth::guard('supplier_provider')->attempt($credential)){
-            //berhasil
-            // return redirect('/supplier/home');
+            return redirect('/supplier');
         }else{
             //gagal masuk
             // return redirect('/');
@@ -44,7 +42,7 @@ class SupplierController extends Controller
         // ]);
 
         // Session::put('loginsupp',$supp->supp_id);
-        dump(Auth::guard('supplier_provider')->user());
+        dd(Auth::guard('supplier_provider')->user());
         //harus return ke home supplier di sini
         // return redirect('/supplier/home');
     }
