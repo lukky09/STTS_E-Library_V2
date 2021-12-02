@@ -6,8 +6,10 @@ use App\Models\user;
 use App\Rules\CorrectPasswordRule;
 use App\Rules\RegisteredUserRule;
 use App\Rules\UniqueMail;
+use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -30,6 +32,7 @@ class UserController extends Controller
             return redirect('/');
         }else{
             //gagal masuk
+            echo 'ga bisa masuk';
         }
 
         // $user = user::where('user_email',$req->userlogin)->get();
@@ -44,7 +47,7 @@ class UserController extends Controller
         //     'password'=>["required", new CorrectPasswordRule($user->user_pass)],
         // ]);
         // Session::put('login',$user->user_id);
-        return redirect('/');
+        // return redirect('/');
     }
     public function doRegis(Request $req)
     {
@@ -57,7 +60,12 @@ class UserController extends Controller
                 'user_pass' => "required|min:8|confirmed",
             ]
         );
-        user::create($req->all());
+        user::create([
+            "user_fname"=>$req->user_fname,
+            "user_lname"=>$req->user_lname,
+            "user_email"=>$req->user_email,
+            "user_pass"=>Hash::make($req->user_pass),
+        ]);
 
         return redirect('/login');
     }

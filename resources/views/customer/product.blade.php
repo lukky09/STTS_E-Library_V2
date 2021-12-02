@@ -312,6 +312,8 @@
         .main_container .sci li button:hover {
             background: #05636d;
         }
+
+
         /* end-gallery */
 
     </style>

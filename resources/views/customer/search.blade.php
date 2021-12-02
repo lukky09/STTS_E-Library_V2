@@ -6,6 +6,10 @@
         background: #05636d;
     }
 
+    .main-contain{
+        background-color: blue;
+        height: 5000px;
+    }
     .main_contain img{
         width: 300px;
         height: 400px;
@@ -13,8 +17,12 @@
     }
     .main_contain .main-wrapper{
         margin-top: 8%;
-        min-height: 50vh;
+        /* min-height: 50vh; */
         overflow-x: 0;
+        background-color: blue;
+        height: fit-content;
+        /* heightnya 500*jumlah item */
+        /* nanti coba tiap query, value ini diganti pake blade php */
     }
     .main_contain .container{
         max-width: 1200px;
@@ -218,7 +226,7 @@
                         </div>
                     </div>
                     <div class = "item-detail">
-                        <a href = "#" class = "item-name">Accent Chair</a>
+                        <a href = "#" class = "item-name">Accent Chair A</a>
                         <div class = "item-price">
                             <span class = "new-price">$220.00</span>
                             <span class = "old-price">$275.60</span>
@@ -338,7 +346,7 @@
                         </div>
                     </div>
                     <div class = "item-detail">
-                        <a href = "#" class = "item-name">Accent Chair</a>
+                        <a href = "#" class = "item-name">Accent Chair SDF</a>
                         <div class = "item-price">
                             <span class = "new-price">$220.00</span>
                             <span class = "old-price">$275.60</span>
@@ -357,6 +365,7 @@
     const itemList = document.querySelector('.item-list');
     const gridViewBtn = document.getElementById('grid-active-btn'); //grid
     const detailsViewBtn = document.getElementById('details-active-btn'); //list
+    const a = document.querySelector('.main-wrapper');
 
     gridViewBtn.classList.add('active-btn');
     detailsViewBtn.classList.remove('active-btn');
@@ -365,12 +374,14 @@
         gridViewBtn.classList.add('active-btn');
         detailsViewBtn.classList.remove('active-btn');
         itemList.classList.remove('details-active');
+        a.style.height = "fit-content"
     });
 
     detailsViewBtn.addEventListener('click', () => {
         detailsViewBtn.classList.add('active-btn');
         gridViewBtn.classList.remove("active-btn");
         itemList.classList.add("details-active");
+        a.style.height = "3000px";
     });
 </script>
 @endsection
