@@ -96,6 +96,6 @@ class SupplierController extends Controller
             "author_id" => $req->bookauthor
         ]);
 
-        return back();
+        return redirect('/supplier/add')->with('message',"Success inserting new book \"$req->booktitle\"");
     }
 }
