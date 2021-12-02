@@ -192,10 +192,10 @@
 <section class="main_contain" data-scene>
     <div class = "main-wrapper">
         <div class = "container">
-            <div class = "main-title" id="main_title">
+            <div class = "main-title" id="main_title" data-aos="fade-up">
                 <h2>Product Shop List</h2>
             </div>
-            <div class = "display-style-btns">
+            <div class = "display-style-btns" data-aos="zoom-out-right">
                 <button type = "button" id = "grid-active-btn">
                     <i class = "fas fa-th"></i>
                 </button>
@@ -205,7 +205,7 @@
             </div>
 
             <div class = "item-list">
-                <div class = "item">
+                <div class = "item" data-aos="zoom-out-up">
                     <div class = "item-img">
                         <img src = "{{ url(URL::asset('rss/book/img1.jpg')) }}">
                         <div class = "icon-list">
@@ -229,7 +229,7 @@
                     </div>
                 </div>
 
-                <div class = "item">
+                <div class = "item" data-aos="zoom-out-up">
                     <div class = "item-img">
                         <img src = "{{ url(URL::asset('rss/book/img1.jpg')) }}">
                         <div class = "icon-list">
@@ -253,7 +253,7 @@
                     </div>
                 </div>
 
-                <div class = "item">
+                <div class = "item" data-aos="zoom-out-up">
                     <div class = "item-img">
                         <img src = "{{ url(URL::asset('rss/book/img1.jpg')) }}">
                         <div class = "icon-list">
@@ -277,7 +277,7 @@
                     </div>
                 </div>
 
-                <div class = "item">
+                <div class = "item" data-aos="zoom-out-up">
                     <div class = "item-img">
                         <img src = "{{ url(URL::asset('rss/book/img1.jpg')) }}">
                         <div class = "icon-list">
@@ -301,7 +301,7 @@
                     </div>
                 </div>
 
-                <div class = "item">
+                <div class = "item" data-aos="zoom-out-up">
                     <div class = "item-img">
                         <img src = "{{ url(URL::asset('rss/book/img1.jpg')) }}">
                         <div class = "icon-list">
@@ -325,7 +325,7 @@
                     </div>
                 </div>
 
-                <div class = "item">
+                <div class = "item" data-aos="zoom-out-up">
                     <div class = "item-img">
                         <img src = "{{ url(URL::asset('rss/book/img1.jpg')) }}">
                         <div class = "icon-list">

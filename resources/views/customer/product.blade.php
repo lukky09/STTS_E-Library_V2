@@ -2,6 +2,9 @@
 
 @section('main')
     <style>
+        header{
+            background: #05636d;
+        }
         /* header-slider */
         .header_slider {
             /* background: #05636d; */
