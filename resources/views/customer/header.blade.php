@@ -295,6 +295,109 @@
         margin-left: 10px;
     }
 
+    /* profile */
+    .action{
+        position: fixed;
+        top: 20px;
+        right: 30px;
+    }
+
+    .action .profile{
+        position: relative;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .action .profile img{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .action .menu{
+        position: absolute;
+        top: 120px;
+        right: -10px;
+        padding: 10px 20px;
+        background: #fff;
+        width: 200px;
+        box-sizing: 0 5px 25px rgba(0,0,0,0.1);
+        border-radius: 15px;
+        transition: 0.5s;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .action .menu.active{
+        top: 80px;
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .action .menu::before{
+        content: '';
+        position: absolute;
+        top: -5px;
+        right: 28px;
+        width: 20px;
+        height: 20px;
+        background: #fff;
+        transform: rotate(45deg)
+    }
+
+    .action .menu h3{
+        width: 100%;
+        text-align: center;
+        font-size: 18px;
+        padding: 20px 0;
+        font-weight: 500;
+        color: #555;
+        line-height: 1.2em;
+    }
+
+    .action .menu h3 span{
+        font-size: 14px;
+        color: #212F45;
+        font-weight: 400;
+    }
+
+    .action .menu ul li{
+        list-style: none;
+        padding: 10px 0;
+        border-top: 1px solid rgba(0,0,0,0.05);
+        display: flex;
+        align-items: center;
+    }
+
+    .action .menu ul li img{
+        max-width: 20px;
+        margin-right: 10px;
+        opacity: 0.5;
+        transition: 0.5s;
+    }
+
+    .action .menu ul li:hover img{
+        opacity: 1;
+    }
+
+    .action .menu ul li a{
+        display: inline-block;
+        text-decoration: none;
+        color: #555;
+        font-weight: 500;
+        transition: 0.5s;
+    }
+
+    .action .menu ul li:hover a{
+        color: #05636d;
+    }
+    /* end-profile */
 </style>
 
 <!-- header -->
@@ -317,6 +420,7 @@
                 <div id="menu-btn" class="fas fa-bars"></div>
             </li>
             <li><a href="#" class="fas fa-shopping-cart"></a></li>
+            <li><a><div id="search-btn" class="fas fa-search"></div></a>
             {{-- belum login --}}
             @if (Session::has('login') == false)
             <li><a href="#" class="far fa-user" id="login-btn"></i></a></li>
@@ -325,15 +429,22 @@
                     $user = DB::table('users')->where('user_id',Session::get('login'))->first();
                 @endphp
             <li onclick="doLogout()"><a href="#" class="far fa-user" id="logged-btn"></i><span class="font-change">{{$user->user_fname}}</span></a> </li>
-
             @endif
-
-            <li><a>
-                    <div id="search-btn" class="fas fa-search"></div>
-                </a></li>
-                <form action="/logoutUser" id="logoutform" method="POST" style="width:0px; height: 0px;">
-                    @csrf
-                </form>
+            <li>
+                <div class="action">
+                    <div class="profile" onclick="menuToogle();">
+                       <img src="{{ url(URL::asset('rss/images/profile.png')) }}">
+                    </div>
+                    <div class="menu">
+                        <h3>Nama <br><span>Profile</span></h3>
+                        <ul>
+                            <li><img src="{{ url(URL::asset('rss/icons/account.png')) }}"><a href="#">My Profile</a></li>
+                            <li><img src="{{ url(URL::asset('rss/icons/history.png')) }}"><a href="#">History</a></li>
+                            <li><img src="{{ url(URL::asset('rss/icons/logout.png')) }}"><a href="#">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
         </ul>
     </div>
     {{-- login --}}
@@ -382,6 +493,11 @@
     }
     function changeToSupp(){
         document.querySelector("#loginform").action="/loginSupp";
+    }
+
+    function menuToogle() {
+        const toggleMenu = document.querySelector('.menu');
+        toggleMenu.classList.toggle('active');
     }
 </script>
 

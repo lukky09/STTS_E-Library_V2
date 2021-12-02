@@ -34,6 +34,15 @@ Route::post('/loginSupp',[SupplierController::class, 'doLogin']);
 Route::get('/product', function () {
     return view('customer.product');
 });
+Route::get('/{search}/search', function () {
+    return view('customer.search');
+});
+Route::get('/{id}/detail', function () {
+    return view('customer.detail');
+});
+Route::get('/cart', function () {
+    return view('customer.cart');
+});
 
 //session usertype = -1
 Route::middleware(['admin'])->group(function () {
