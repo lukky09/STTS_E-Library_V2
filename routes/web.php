@@ -27,7 +27,7 @@ Route::get('/register', function () {
 });
 Route::post('/registerUser',[UserController::class, 'doRegis']);
 Route::post('/loginUser',[UserController::class, 'doLogin']);
-Route::post('/logoutUser',[UserController::class, 'doLogout']);
+Route::get('/logoutUser',[UserController::class, 'doLogout']);
 Route::post('/registerSupp',[SupplierController::class, 'doRegis']);
 Route::post('/loginSupp',[SupplierController::class, 'doLogin']);
 
@@ -56,8 +56,14 @@ Route::middleware(['user'])->group(function () {
 
 //session usertype = 1
 Route::middleware(['supplier'])->group(function () {
-
+    Route::prefix('supplier')->group(function () {
+        Route::get('/', [SupplierController::class, 'toSuppHome']);
+        Route::get('/add', [SupplierController::class, 'toSuppAdd']);
+        Route::post('/doAddBook', [SupplierController::class, 'doAdd']);
+    });
 });
+// Route::get('supphome', [SupplierController::class, 'toSuppHome']);
+// Route::get('suppadd', [SupplierController::class, 'toSuppAdd']);
 
 //session usertype = 2
 Route::middleware(['shop'])->group(function () {

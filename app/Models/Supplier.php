@@ -17,7 +17,9 @@ class Supplier extends Authenticatable
 
     protected $fillable = [
         'supplier_name',
-        'supplier_saldo'
+        'supplier_saldo',
+        'supplier_email',
+        'supplier_pass'
     ];
 
     /**
@@ -25,6 +27,6 @@ class Supplier extends Authenticatable
      */
     public function getAuthPassword()
     {
-        return $this->supplier_password;
+        return $this->supplier_pass;
     }
 }

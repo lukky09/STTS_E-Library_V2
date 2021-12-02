@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Models\Supplier;
 use App\Models\user;
 use Illuminate\Contracts\Validation\Rule;
 
@@ -28,7 +29,8 @@ class UniqueMail implements Rule
     {
         //
         $temp = user::where('user_email','=',$value)->get();
-        if(sizeof($temp) > 0){
+        $temp2 = Supplier::where('supplier_email','=',$value)->get();
+        if(sizeof($temp) > 0 || sizeof($temp2) > 0){
             return false;
         }
         return true;
@@ -41,6 +43,6 @@ class UniqueMail implements Rule
      */
     public function message()
     {
-        return 'Email harus unik';
+        return 'Email terpakai';
     }
 }

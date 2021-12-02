@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Supplier;
 use App\Rules\CorrectPasswordRule;
 use App\Rules\RegisteredUserRule;
+use App\Rules\UniqueMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class SupplierController extends Controller
@@ -20,14 +23,14 @@ class SupplierController extends Controller
         ]);
 
         $credential = [
-            'supplier_email' => strtolower($req->userlogin),
+            'supplier_email' => $req->userlogin,
             'password' => $req->password
         ];
-
         if(Auth::guard('supplier_provider')->attempt($credential)){
-            //berhasil
+            return redirect('/supplier');
         }else{
             //gagal masuk
+            // return redirect('/');
         }
         // $supp = Supplier::where('supplier_name',$req->userlogin)->get();
         // $count = count($supp);
@@ -42,12 +45,57 @@ class SupplierController extends Controller
         // ]);
 
         // Session::put('loginsupp',$supp->supp_id);
-        dump(Auth::guard('supplier_provider')->user());
+        dd(Auth::guard('supplier_provider')->user());
         //harus return ke home supplier di sini
-        // return redirect('/');
+        // return redirect('/supplier/home');
     }
     public function doRegis(Request $req)
     {
-        # code...
+        $req->validate(
+            [
+                'supplier_name' => "required",
+                'supplier_email' => ["required","email", new UniqueMail()],
+                'supplier_pass_confirmation' => "required",
+                'supplier_pass' => "required|min:8|confirmed",
+            ]
+        );
+        // dump($req->supplier_name);
+        // dump($req->all());
+        // dump($req->supplier_name);
+        Supplier::create([
+            "supplier_name"=>$req->supplier_name,
+            "supplier_email"=>$req->supplier_email,
+            "supplier_pass"=>Hash::make($req->supplier_name),
+        ]);
+
+        return redirect('');
+    }
+
+    public function toSuppHome(Request $req)
+    {
+        return view('supplier.home');
+    }
+    public function toSuppAdd(Request $req)
+    {
+        return view('supplier.addbook');
+    }
+
+    public function doAdd(Request $req)
+    {
+        $req->validate([
+            "booktitle"=>"required|string",
+            "bookgenre"=>"required",
+            "bookpublisher"=>"required",
+            "bookauthor"=>"required"
+        ]);
+
+        Book::create([
+            "book_name" => $req->booktitle,
+            "genre_id" => $req->bookgenre,
+            "publisher_id" => $req->bookpublisher,
+            "author_id" => $req->bookauthor
+        ]);
+
+        return back();
     }
 }
