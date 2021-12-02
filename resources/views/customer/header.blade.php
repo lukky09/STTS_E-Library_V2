@@ -323,7 +323,7 @@
     .action .menu{
         position: absolute;
         top: 120px;
-        right: -10px;
+        right: 50px;
         padding: 10px 20px;
         background: #fff;
         width: 200px;
@@ -422,29 +422,30 @@
             <li><a href="#" class="fas fa-shopping-cart"></a></li>
             <li><a><div id="search-btn" class="fas fa-search"></div></a>
             {{-- belum login --}}
-            @if (Session::has('login') == false)
+            @if (sudahLogin() == false)
             <li><a href="#" class="far fa-user" id="login-btn"></i></a></li>
             @else
                 @php
-                    $user = DB::table('users')->where('user_id',Session::get('login'))->first();
+                    $user = getAuthUser();
                 @endphp
-            <li onclick="doLogout()"><a href="#" class="far fa-user" id="logged-btn"></i><span class="font-change">{{$user->user_fname}}</span></a> </li>
-            @endif
+            <li onclick="menuToogle();"><a href="#" class="far fa-user" id="logged-btn"></i><span class="font-change">{{$user->user_fname}}</span></a> </li>
             <li>
                 <div class="action">
-                    <div class="profile" onclick="menuToogle();">
+                    {{-- <div class="profile" onclick="menuToogle();">
                        <img src="{{ url(URL::asset('rss/images/profile.png')) }}">
-                    </div>
+                    </div> --}}
                     <div class="menu">
-                        <h3>Nama <br><span>Profile</span></h3>
+                        <h3>{{$user->user_fname . ' ' . $user->user_lname . '\'s'}}<br><span>Profile</span></h3>
                         <ul>
                             <li><img src="{{ url(URL::asset('rss/icons/account.png')) }}"><a href="#">My Profile</a></li>
                             <li><img src="{{ url(URL::asset('rss/icons/history.png')) }}"><a href="#">History</a></li>
-                            <li><img src="{{ url(URL::asset('rss/icons/logout.png')) }}"><a href="#">Logout</a></li>
+                            <li><img src="{{ url(URL::asset('rss/icons/logout.png')) }}"><a href="/logoutUser">Logout</a></li>
                         </ul>
                     </div>
                 </div>
             </li>
+            @endif
+
         </ul>
     </div>
     {{-- login --}}

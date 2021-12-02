@@ -332,8 +332,8 @@
             <li><a>
                     <div id="search-btn" class="fas fa-search"></div>
                 </a></li>
-                <form action="/logoutUser" id="logoutform" method="POST" style="width:0px; height: 0px;">
-                    @csrf
+                <form action="/logoutUser" id="logoutform" method="get" style="width:0px; height: 0px;">
+                    {{-- @csrf --}}
                 </form>
         </ul>
     </div>
