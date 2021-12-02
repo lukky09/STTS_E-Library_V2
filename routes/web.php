@@ -50,6 +50,7 @@ Route::middleware(['supplier'])->group(function () {
     Route::prefix('supplier')->group(function () {
         Route::get('/', [SupplierController::class, 'toSuppHome']);
         Route::get('/add', [SupplierController::class, 'toSuppAdd']);
+        Route::post('/doAddBook', [SupplierController::class, 'doAdd']);
     });
 });
 // Route::get('supphome', [SupplierController::class, 'toSuppHome']);

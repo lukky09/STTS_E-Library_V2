@@ -437,7 +437,8 @@
         /* end-news */
 </style>
 <div class="addform" data-scene>
-    <form action="" method="POST" class="" style="">
+    <form action="{{url('supplier/doAddBook')}}" method="POST" class="" style="">
+        @csrf
         <h1>Add Book</h1>
         <div class="row mt-2">
             <label for="form-title">Title</label>

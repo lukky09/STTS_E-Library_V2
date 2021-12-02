@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Supplier;
 use App\Rules\CorrectPasswordRule;
 use App\Rules\RegisteredUserRule;
@@ -87,5 +88,14 @@ class SupplierController extends Controller
             "bookpublisher"=>"required",
             "bookauthor"=>"required"
         ]);
+
+        Book::create([
+            "book_name" => $req->booktitle,
+            "genre_id" => $req->bookgenre,
+            "publisher_id" => $req->bookpublisher,
+            "author_id" => $req->bookauthor
+        ]);
+
+        return back();
     }
 }
