@@ -473,6 +473,9 @@
                 @endforeach
             </select>
         </div>
+        @if(session('message'))
+            <small>{{session('message')}}</small><br>
+        @endif
         <button class="btn">Add</button>
     </form>
 </div>
