@@ -399,11 +399,12 @@
     <!-- header-banner -->
     <div class="header-landing" data-scene>
         <div class="content">
-            @if (Session::has('login'))
-                @php
-                    $user = DB::table('users')->where('user_id',Session::get('login'))->first();
-                @endphp
-                <small>Welcome, {{$user->user_fname}}, to our</small>
+            @if (sudahLogin())
+                @if(getAuthUserType() == "user")
+                    <small>Welcome, {{getAuthUser()->user_fname}}, to our</small>
+                @elseif (getAuthUserType() == "supp")
+                    <small>Welcome, {{getAuthUser()->supplier_name}}, to our</small>
+                @endif
                 <h1>Book's<br> Creative Store</h1>
                 <button type="button" class="btn">Take a tour</button>
             @else

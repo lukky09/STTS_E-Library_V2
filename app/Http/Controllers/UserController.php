@@ -26,7 +26,8 @@ class UserController extends Controller
         ];
 
         if(Auth::guard('user_provider')->attempt($credential)){
-            dd(getAuthUser());
+            // dd(getAuthUser());
+            return redirect('/');
         }else{
             //gagal masuk
         }
@@ -65,7 +66,9 @@ class UserController extends Controller
         # code...
     }
     public function doLogout(Request $req){
-        Session::forget('login');
+        if(Auth::guard('user_provider')->check()){
+            Auth::guard('user_provider')->logout();
+        }
         return redirect('/');
     }
 }
