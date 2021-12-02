@@ -43,6 +43,12 @@ Route::get('/{id}/detail', function () {
 Route::get('/cart', function () {
     return view('customer.cart');
 });
+Route::get('/profile', function () {
+    return view('customer.profile');
+});
+Route::get('/history', function () {
+    return view('customer.history');
+});
 
 //session usertype = -1
 Route::middleware(['admin'])->group(function () {

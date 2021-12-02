@@ -7,6 +7,7 @@
         }
 
         .main_contain {
+            margin-top: 3%;
             display: flex;
             text-decoration: none;
             list-style: none;

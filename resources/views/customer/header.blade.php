@@ -397,6 +397,11 @@
     .action .menu ul li:hover a{
         color: #05636d;
     }
+
+    .search-form form button{
+        background: transparent;
+        border: none;
+    }
     /* end-profile */
 </style>
 
@@ -419,7 +424,7 @@
             <li>
                 <div id="menu-btn" class="fas fa-bars"></div>
             </li>
-            <li><a href="#" class="fas fa-shopping-cart"></a></li>
+            <li><a href="/cart" class="fas fa-shopping-cart"></a></li>
             <li><a><div id="search-btn" class="fas fa-search"></div></a>
             {{-- belum login --}}
             @if (sudahLogin() == false)
@@ -437,8 +442,8 @@
                     <div class="menu">
                         <h3>{{$user->user_fname . ' ' . $user->user_lname . '\'s'}}<br><span>Profile</span></h3>
                         <ul>
-                            <li><img src="{{ url(URL::asset('rss/icons/account.png')) }}"><a href="#">My Profile</a></li>
-                            <li><img src="{{ url(URL::asset('rss/icons/history.png')) }}"><a href="#">History</a></li>
+                            <li><img src="{{ url(URL::asset('rss/icons/account.png')) }}"><a href="/profile">My Profile</a></li>
+                            <li><img src="{{ url(URL::asset('rss/icons/history.png')) }}"><a href="/history">History</a></li>
                             <li><img src="{{ url(URL::asset('rss/icons/logout.png')) }}"><a href="/logoutUser">Logout</a></li>
                         </ul>
                     </div>
@@ -480,11 +485,12 @@
 
 <div class="search-form">
     <div id="close-search" class="fas fa-times"></div>
-    <form action="">
+    <form action="{{ url('/id/search') }}">
         <input type="search" name="" placeholder="Search here..." id="search-box">
-        <label for="search-box" class="fas fa-search"></label>
+        <button type="submit"><label for="search-box" class="fas fa-search"></label></button>
     </form>
 </div>
+
 <script>
     function doLogout(){
         document.querySelector("#logoutform").submit();

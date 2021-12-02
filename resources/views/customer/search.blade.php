@@ -7,7 +7,7 @@
     }
 
     .main-contain{
-        background-color: blue;
+        /* background-color: blue; */
         height: 5000px;
     }
     .main_contain img{
@@ -19,7 +19,7 @@
         margin-top: 8%;
         /* min-height: 50vh; */
         overflow-x: 0;
-        background-color: blue;
+        /* background-color: blue; */
         height: fit-content;
         /* heightnya 500*jumlah item */
         /* nanti coba tiap query, value ini diganti pake blade php */
