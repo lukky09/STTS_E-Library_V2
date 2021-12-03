@@ -485,8 +485,8 @@
 
 <div class="search-form">
     <div id="close-search" class="fas fa-times"></div>
-    <form action="{{ url('/id/search') }}">
-        <input type="search" name="" placeholder="Search here..." id="search-box">
+    <form action="{{ url('/search') }}">
+        <input type="search" name="isisearch" placeholder="Search here..." id="search-box">
         <button type="submit"><label for="search-box" class="fas fa-search"></label></button>
     </form>
 </div>

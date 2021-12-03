@@ -49,6 +49,12 @@ class UserController extends Controller
         // Session::put('login',$user->user_id);
         // return redirect('/');
     }
+
+    public function search(Request $req)
+    {
+        return view('customer.search',['search' => $req->isisearch]);
+    }
+
     public function doRegis(Request $req)
     {
         # code...

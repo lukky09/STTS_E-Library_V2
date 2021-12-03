@@ -34,9 +34,7 @@ Route::post('/loginSupp',[SupplierController::class, 'doLogin']);
 Route::get('/product', function () {
     return view('customer.product');
 });
-Route::get('/{search}/search', function () {
-    return view('customer.search');
-});
+Route::get('/search',[UserController::class, 'search']);
 Route::get('/{id}/detail', function () {
     return view('customer.detail');
 });
