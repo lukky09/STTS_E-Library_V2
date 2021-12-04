@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use Facade\FlareClient\View;
@@ -34,10 +35,8 @@ Route::post('/loginSupp',[SupplierController::class, 'doLogin']);
 Route::get('/product', function () {
     return view('customer.product');
 });
-Route::get('/search',[UserController::class, 'search']);
-Route::get('/{id}/detail', function () {
-    return view('customer.detail');
-});
+Route::get('/search',[ShopController::class, 'search']);
+Route::get('/detail/{id}', [ShopController::class, 'detail']);
 Route::get('/cart', function () {
     return view('customer.cart');
 });
@@ -46,11 +45,6 @@ Route::get('/profile', function () {
 });
 Route::get('/history', function () {
     return view('customer.history');
-});
-
-//session usertype = -1
-Route::middleware(['admin'])->group(function () {
-
 });
 
 //session usertype = 0

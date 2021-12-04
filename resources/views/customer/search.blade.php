@@ -230,8 +230,10 @@
     </style>
 
     @php
-    $books = DB::table('shopbooks')->get();
-    dd($books);
+    $books = DB::table('books')
+        ->where('shop_qty', '>', 0)
+        ->where('book_name', 'LIKE', "%$search%")
+        ->get();
     @endphp
 
     <section class="main_contain" data-scene>
@@ -249,170 +251,38 @@
                     </button>
                 </div>
 
-                @foreach ($books as $b)
-                    @php
-                        $book = DB::table('books')
-                            ->where('book_id', $b->book_id)
-                            ->first();
-                    @endphp
-                @endforeach
-
                 <div class="item-list">
-                    <div class="item" data-aos="zoom-out-up">
-                        <div class="item-img">
-                            <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
-                            <div class="icon-list">
-                                <button type="button">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                                <button type="button">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
+                    @foreach ($books as $b)
+                        <div class="item" data-aos="zoom-out-up">
+                            <div class="item-img">
+                                <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
+                                <div class="icon-list">
+                                    <a href="/detail/{{$b->book_id}}">
+                                        <button type="button">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </a>
+                                    @if (getAuthUserType() == 'user')
+                                        <button type="button">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </button>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                        <div class="item-detail">
-                            <a href="#" class="item-name">Accent Chair A</a>
-                            <div class="item-price">
-                                <span class="new-price">$220.00</span>
-                                <span class="old-price">$275.60</span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore fugiat quod corporis
-                                delectus sequi laudantium molestias vero distinctio, qui numquam dolore, corrupti, enim
-                                consectetur cum?</p>
-                            <button type="button" class="add-btn btn">add to cart</button>
+                            <div class="item-detail">
+                                <a href="#" class="item-name">{{ $b->book_name }}</a>
+                                <div class="item-price">
+                                    <span class="new-price">Rp.
+                                        {{ number_format($b->shop_price, 2, ',', '.') }}</span>
+                                    <!--<span class="old-price">$275.60</span> -->
+                                </div>
+                                <p>{{ $b->book_synopsis }}</p>
+                                <button type="button" class="add-btn btn">add to cart</button>
 
-                        </div>
-                    </div>
-
-                    <div class="item" data-aos="zoom-out-up">
-                        <div class="item-img">
-                            <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
-                            <div class="icon-list">
-                                <button type="button">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                                <button type="button">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
                             </div>
                         </div>
-                        <div class="item-detail">
-                            <a href="#" class="item-name">Accent Chair</a>
-                            <div class="item-price">
-                                <span class="new-price">$220.00</span>
-                                <span class="old-price">$275.60</span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore fugiat quod corporis
-                                delectus sequi laudantium molestias vero distinctio, qui numquam dolore, corrupti, enim
-                                consectetur cum?</p>
-                            <button type="button" class="add-btn btn">add to cart</button>
+                    @endforeach
 
-                        </div>
-                    </div>
-
-                    <div class="item" data-aos="zoom-out-up">
-                        <div class="item-img">
-                            <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
-                            <div class="icon-list">
-                                <button type="button">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                                <button type="button">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="item-detail">
-                            <a href="#" class="item-name">Accent Chair</a>
-                            <div class="item-price">
-                                <span class="new-price">$220.00</span>
-                                <span class="old-price">$275.60</span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore fugiat quod corporis
-                                delectus sequi laudantium molestias vero distinctio, qui numquam dolore, corrupti, enim
-                                consectetur cum?</p>
-                            <button type="button" class="add-btn btn">add to cart</button>
-
-                        </div>
-                    </div>
-
-                    <div class="item" data-aos="zoom-out-up">
-                        <div class="item-img">
-                            <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
-                            <div class="icon-list">
-                                <button type="button">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                                <button type="button">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="item-detail">
-                            <a href="#" class="item-name">Accent Chair</a>
-                            <div class="item-price">
-                                <span class="new-price">$220.00</span>
-                                <span class="old-price">$275.60</span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore fugiat quod corporis
-                                delectus sequi laudantium molestias vero distinctio, qui numquam dolore, corrupti, enim
-                                consectetur cum?</p>
-                            <button type="button" class="add-btn btn">add to cart</button>
-
-                        </div>
-                    </div>
-
-                    <div class="item" data-aos="zoom-out-up">
-                        <div class="item-img">
-                            <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
-                            <div class="icon-list">
-                                <button type="button">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                                <button type="button">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="item-detail">
-                            <a href="#" class="item-name">Accent Chair</a>
-                            <div class="item-price">
-                                <span class="new-price">$220.00</span>
-                                <span class="old-price">$275.60</span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore fugiat quod corporis
-                                delectus sequi laudantium molestias vero distinctio, qui numquam dolore, corrupti, enim
-                                consectetur cum?</p>
-                            <button type="button" class="add-btn btn">add to cart</button>
-
-                        </div>
-                    </div>
-
-                    <div class="item" data-aos="zoom-out-up">
-                        <div class="item-img">
-                            <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
-                            <div class="icon-list">
-                                <button type="button">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                                <button type="button">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="item-detail">
-                            <a href="#" class="item-name">Accent Chair SDF</a>
-                            <div class="item-price">
-                                <span class="new-price">$220.00</span>
-                                <span class="old-price">$275.60</span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore fugiat quod corporis
-                                delectus sequi laudantium molestias vero distinctio, qui numquam dolore, corrupti, enim
-                                consectetur cum?</p>
-                            <button type="button" class="add-btn btn">add to cart</button>
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

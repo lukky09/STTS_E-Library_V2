@@ -34,25 +34,6 @@ class UserController extends Controller
             //gagal masuk
             echo 'ga bisa masuk';
         }
-
-        // $user = user::where('user_email',$req->userlogin)->get();
-        // $count = count($user);
-        // // dump($count);
-        // // dump($user);
-        // $req->validate([
-        //     'userlogin'=>["required", new RegisteredUserRule($count)],
-        // ]);
-        // $user = $user[0];
-        // $req->validate([
-        //     'password'=>["required", new CorrectPasswordRule($user->user_pass)],
-        // ]);
-        // Session::put('login',$user->user_id);
-        // return redirect('/');
-    }
-
-    public function search(Request $req)
-    {
-        return view('customer.search',['search' => $req->isisearch]);
     }
 
     public function doRegis(Request $req)

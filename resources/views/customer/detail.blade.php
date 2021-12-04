@@ -96,6 +96,7 @@
             font-size: 0.8em;
             font-weight: 400;
         }
+
         /* end card-book */
 
         /* contain-detail */
@@ -154,6 +155,7 @@
         .main_contain .contain .product-details .rate a:hover {
             color: #fe6067;
         }
+
         /* end header-book */
 
         /* content */
@@ -175,6 +177,7 @@
             font-size: 14px;
             line-height: 1.6;
         }
+
         /* end content */
 
         /* input number & btn cart */
@@ -225,24 +228,25 @@
             border-radius: 0 45px 45px 0;
         }
 
-        .sec-control{
+        .sec-control {
             display: flex;
         }
 
-        .sec-control .btn{
+        .sec-control .btn {
             margin-left: 80px;
             margin-top: 30px;
             height: 50px;
         }
 
-        .sec-control .btn a{
+        .sec-control .btn a {
             text-decoration: none;
             color: #000;
         }
 
-        .sec-control .btn:hover a{
+        .sec-control .btn:hover a {
             color: #fff;
         }
+
         /* end input number & btn cart */
         /* end contain-detail */
 
@@ -389,7 +393,21 @@
 
         /* end-slider */
         /* end-recommendation */
+
     </style>
+
+    @php
+    $book = DB::table('books')
+        ->where('book_id', $id)
+        ->first();
+    $publisher = DB::table('publishers')
+        ->where('publisher_id', $book->publisher_id)
+        ->first();
+    $author = DB::table('authors')
+        ->where('author_id', $book->author_id)
+        ->first();
+    @endphp
+
     <div class="main_contain" data-scene>
         <div class="card" data-aos="zoom-out-up">
             <div class="imgBox">
@@ -398,20 +416,17 @@
             </div>
             <div class="details">
                 <div class="content">
-                    <h2>Catatan Tentang Hujan <br><span>Anindya Frista</span></h2> <br>
-                    <p>Dalam rinai kisah kita terlukiskan Kau yang tak lelah berjuang, kepada kerasku yang kaululuhkan
-                        Sekarang biarkan aku menjadi laut yang menyimpan dalam semua rahasia kita Seperti ombak di tengah
-                        samudra, biar aku yang berkelana jauh Lalu pulang, kembali ke pelukmu, sang tepian Fajar dan Senja
-                        saling jatuh cinta.</p>
+                    <h2>{{ $book->book_name }} <br><span>{{ $author->author_name }}</span></h2> <br>
+                    <p>{{ $book->book_synopsis }}</p>
                 </div>
             </div>
         </div>
         <div class="contain" data-aos="zoom-out-right">
             <div class="product-details">
                 <div class="header-details">
-                    <h3 class="title">Catatan Tentang Hujan</h3>
-                    <span class="colorCat">Anindya Frista</span>
-                    <p class="price"> Rp 92.000 </p>
+                    <h3 class="title">{{ $book->book_name }}</h3>
+                    <span class="colorCat">{{ $author->author_name }}</span>
+                    <p class="price">Rp. {{ number_format($book->shop_price, 2, ',', '.') }} </p>
                     <div class="rate">
                         <a href="#" class="active">★</a>
                         <a href="#" class="active">★</a>
@@ -426,7 +441,7 @@
                         <h5>ISBN</h5>
                         <p>9786230028113</p>
                         <h5>Penerbit</h5>
-                        <p>Elex Media Komputindo</p>
+                        <p>{{ $publisher->publisher_name }}</p>
                         <h5>Tanggal Terbit</h5>
                         <p>24 Nov 2021</p>
                     </div>
@@ -439,17 +454,19 @@
                         <p>Soft Cover</p>
                     </div>
                 </article>
-                <div class="sec-control">
-                    <div class="controls">
-                        <button id="decrement" onclick="stepper(this)"> - </button>
-                        <input type="number" min="1" max="100" step="1" value="1" id="my-input" readonly>
-                        <button id="increment" onclick="stepper(this)"> + </button>
-                    </div>
+                @if (getAuthUserType() == 'user')
+                    <div class="sec-control">
+                        <div class="controls">
+                            <button id="decrement" onclick="stepper(this)"> - </button>
+                            <input type="number" min="1" max="100" step="1" value="1" id="my-input" readonly>
+                            <button id="increment" onclick="stepper(this)"> + </button>
+                        </div>
 
-                    <button type="button" class="btn">
-                        <a href="#" class="fas fa-shopping-cart"></a>
-                    </button>
-                </div>
+                        <button type="button" class="btn">
+                            <a href="#" class="fas fa-shopping-cart"></a>
+                        </button>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Book;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class BooksTableSeeder extends Seeder
 {
