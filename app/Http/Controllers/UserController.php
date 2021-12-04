@@ -61,8 +61,8 @@ class UserController extends Controller
         $req->validate(
             [
                 'user_email' => ["required","email", new UniqueMail()],
-                'user_fname' => "required",
-                'user_lname' => "required",
+                'user_fname' => "required|alpha_num",
+                'user_lname' => "required|alpha_num",
                 'user_pass' => "required|min:8|confirmed",
             ]
         );
@@ -78,6 +78,33 @@ class UserController extends Controller
     public function doUpdateProfile(Request $req)
     {
         # code...
+        $user = getAuthUser();
+        if($req->user_email == $user->user_email){
+            $req->validate([
+                "user_fname"=>"required|alpha_num",
+                "user_lname"=>"required|alpha_num",
+                "user_pass"=>["required", new CorrectPasswordRule($user->user_pass)]
+            ]);
+            user::where('user_id','=',$user->user_id)->update([
+                "user_fname"=>$req->user_fname,
+                "user_lname"=>$req->user_lname
+            ]);
+        }else{
+            $req->validate([
+                "user_fname"=>"required|alpha_num",
+                "user_lname"=>"required|alpha_num",
+                "user_email"=>["required","email",new UniqueMail()],
+                "user_pass"=>["required", new CorrectPasswordRule($user->user_pass)]
+            ]);
+            user::where('user_id','=',$user->user_id)->update([
+                "user_fname"=>$req->user_fname,
+                "user_lname"=>$req->user_lname,
+                "user_email"=>$req->user_email
+            ]);
+        }
+        return redirect('/profile');
+
+
     }
     public function doLogout(Request $req){
         if(Auth::guard('user_provider')->check()){

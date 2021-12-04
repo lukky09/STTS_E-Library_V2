@@ -55,7 +55,7 @@ Route::middleware(['admin'])->group(function () {
 
 //session usertype = 0
 Route::middleware(['user'])->group(function () {
-
+    Route::post('/doEditProfile',[UserController::class, 'doUpdateProfile']);
 });
 
 //session usertype = 1

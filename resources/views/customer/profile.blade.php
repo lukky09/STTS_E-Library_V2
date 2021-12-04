@@ -121,16 +121,19 @@
         .edit-form {
             position: absolute;
             top: 10%;
-            left: 30%;
+            left: 40%;
+            margin-left: auto;
+            margin-right: auto;
             z-index: 999;
             text-align: center;
             padding: 60px 32px;
             width: 370px;
             transform: translate(-50%, -50%);
-            background: rgba(0, 100, 102, 0.479);
+            background: rgba(0, 100, 102, 0.979);
             box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
             border-radius: 45px;
             display: none;
+            visibility: hidden;
         }
 
         .edit-form.active{
@@ -140,7 +143,7 @@
         .edit-form #close-form{
             margin-bottom: 10%;
             margin-left: 90%;
-            color: #1B3A4B;
+            color: #2BBA9B;
         }
 
         .edit-form #close-form:hover{
@@ -189,13 +192,17 @@
         .pass-key:valid ~ .show{
             display: block;
         }
+
     </style>
 
     <div class="main_content" data-scene>
+        @php
+            $user = getAuthUser();
+        @endphp
         <div class="wrapper">
             <div class="left">
                 <img src="{{ url(URL::asset('rss/images/profile.png')) }}" width="100" alt="user">
-                <h4>Alex William</h4>
+                <h4>{{"$user->user_fname $user->user_lname"}}</h4>
                 <p>User</p>
             </div>
             <div class="right">
@@ -204,7 +211,7 @@
                     <div class="info_data">
                         <div class="data">
                             <h4>Email</h4>
-                            <p>alex@gmail.com</p>
+                            <p>{{$user->user_email}}</p>
                         </div>
                         <div class="data">
                             <h4>Password</h4>
@@ -219,7 +226,7 @@
                     <div class="projects_data">
                         <div class="data">
                             <h4>Balance</h4>
-                            <p>Rp 30.000</p>
+                            <p>Rp {{$user->user_saldo}}</p>
                         </div>
                         <div class="data">
                             <h4>Top Up</h4>
@@ -232,34 +239,70 @@
         </div>
     </div>
 
-    <div class="edit-form active" data-scene>
+    <div class="edit-form active" id="editting_form" data-scene>
         <div id="close-form" class="fas fa-times"></div>
-        <form action="">
+        <form action="/doEditProfile" method="POST">
+            @csrf
+            {{-- edit profile --}}
+            <h2 style="color: white; margin-bottom: 2vh">Edit Your Profile</h2>
             <div class="field">
+                @php
+                    $error = false;
+                @endphp
                 <span class="fa fa-user"></span>
-                <input type="text" name="">
+                <input type="text" name="user_fname" placeholder="first name">
+
             </div>
+            @error('user_fname')
+                    <span style="color: lightsalmon">{{$message}}</span>
+                    @php
+                        $error=true;
+                    @endphp
+                @enderror
             <div class="field space">
                 <span class="fa fa-user"></span>
-                <input type="text" name="">
+                <input type="text" name="user_lname" placeholder="last name">
+
             </div>
+            @error('user_lname')
+                    <span style="color: lightsalmon">{{$message}}</span>
+                    @php
+                        $error=true;
+                    @endphp
+                @enderror
             <div class="field space">
                 <span class="fa fa-envelope"></span>
-                <input type="text" name="">
+                <input type="text" name="user_email" placeholder="email">
+
             </div>
+            @error('user_email')
+                    <span style="color: lightsalmon">{{$message}}</span>
+
+                    @php
+                        $error=true;
+                    @endphp
+                @enderror
             <div class="field space">
                 <span class="fa fa-lock"></span>
-                <input type="password" class="pass-key" name="">
+                <input type="password" class="pass-key" name="user_pass" placeholder="input current password">
                 <span class="show">SHOW</span>
             </div>
+                @error('user_pass')
+                    <span style="color: lightsalmon">{{$message}}</span>
+                    @php
+                        $error=true;
+                    @endphp
+                @enderror
+                <br>
             <input type="submit" value="Edit" class="btn">
         </form>
     </div>
 
     <script>
-        let editForm = document.querySelector('.edit-form');
+        const editForm = document.querySelector('#editting_form');
 
-        document.querySelector('.edit-btn').onclick = () => {
+        document.querySelector('#edit-btn').onclick = () => {
+            editForm.style.visibility="visible";
             editForm.classList.add('active');
         }
 
@@ -278,8 +321,18 @@
             else {
                 pass_field.type = "password";
                 showBtn.textContent = "SHOW";
-                showBtn.style.color = "#222";
+                showBtn.style.color = "#fff";
             }
-        })
+        });
+
     </script>
+    @if ($error==true)
+        <script>
+            window.addEventListener("load", function(e){
+            editForm.style.visibility="visible";
+            // alert('no error');
+        });
+        </script>
+
+    @endif
 @endsection
