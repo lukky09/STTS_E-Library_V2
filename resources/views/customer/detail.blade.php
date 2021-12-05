@@ -460,13 +460,13 @@
                             @csrf
                             <div class="controls">
                                 <input type="hidden" value="{{ $id }}" name="id">
-                                <button id="decrement" onclick="stepper(this)"> - </button>
+                                <button type="button" id="decrement" onclick="stepper(this)"> - </button>
                                 <input type="number" name="qty" min="1" max="100" step="1" value="1" id="my-input" readonly>
-                                <button id="increment" onclick="stepper(this)"> + </button>
+                                <button type="button" id="increment" onclick="stepper(this)"> + </button>
                             </div>
 
                             <button type="submit" class="btn">
-                                <a href="#" class="fas fa-shopping-cart"></a>
+                                <a class="fas fa-shopping-cart"></a>
                             </button>
                         </form>
                     </div>

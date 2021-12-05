@@ -189,7 +189,12 @@
                     MY SHOPPING CART :
                 </div>
                 <div class="amount">
-                    <b>( {{ count(Session::get('cartids')) }} ) ITEMS</b>
+                    <b>(
+                    @if (Session::has('cartids'))
+                        {{ count(Session::get('cartids')) }}
+                    @else
+                        0
+                    @endif ) ITEMS</b>
                 </div>
 
             </div>
@@ -205,7 +210,7 @@
                         $author = DB::table('authors')
                             ->where('author_id', $book->author_id)
                             ->first();
-                        $price += $book->shop_price;
+                        $price += $book->shop_price*$c[1];
                     @endphp
                     <div class="product_wrap">
                         <div class="product_info">
