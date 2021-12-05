@@ -157,7 +157,7 @@
         text-decoration: underline;
     }
 
-    .header .login-form .role_user{
+    .header .login-form .role_user {
         color: #05636d;
         display: inline;
         margin-right: 5%;
@@ -290,19 +290,19 @@
     /* end search */
     /* end header */
 
-    .font-change{
+    .font-change {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         margin-left: 10px;
     }
 
     /* profile */
-    .action{
+    .action {
         position: fixed;
         top: 20px;
         right: 30px;
     }
 
-    .action .profile{
+    .action .profile {
         position: relative;
         width: 40px;
         height: 40px;
@@ -311,7 +311,7 @@
         cursor: pointer;
     }
 
-    .action .profile img{
+    .action .profile img {
         position: absolute;
         top: 0;
         left: 0;
@@ -320,27 +320,27 @@
         object-fit: cover;
     }
 
-    .action .menu{
+    .action .menu {
         position: absolute;
         top: 120px;
         right: 50px;
         padding: 10px 20px;
         background: #fff;
         width: 200px;
-        box-sizing: 0 5px 25px rgba(0,0,0,0.1);
+        box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
         border-radius: 15px;
         transition: 0.5s;
         visibility: hidden;
         opacity: 0;
     }
 
-    .action .menu.active{
+    .action .menu.active {
         top: 80px;
         visibility: visible;
         opacity: 1;
     }
 
-    .action .menu::before{
+    .action .menu::before {
         content: '';
         position: absolute;
         top: -5px;
@@ -351,7 +351,7 @@
         transform: rotate(45deg)
     }
 
-    .action .menu h3{
+    .action .menu h3 {
         width: 100%;
         text-align: center;
         font-size: 18px;
@@ -361,32 +361,32 @@
         line-height: 1.2em;
     }
 
-    .action .menu h3 span{
+    .action .menu h3 span {
         font-size: 14px;
         color: #212F45;
         font-weight: 400;
     }
 
-    .action .menu ul li{
+    .action .menu ul li {
         list-style: none;
         padding: 10px 0;
-        border-top: 1px solid rgba(0,0,0,0.05);
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
         display: flex;
         align-items: center;
     }
 
-    .action .menu ul li img{
+    .action .menu ul li img {
         max-width: 20px;
         margin-right: 10px;
         opacity: 0.5;
         transition: 0.5s;
     }
 
-    .action .menu ul li:hover img{
+    .action .menu ul li:hover img {
         opacity: 1;
     }
 
-    .action .menu ul li a{
+    .action .menu ul li a {
         display: inline-block;
         text-decoration: none;
         color: #555;
@@ -394,21 +394,23 @@
         transition: 0.5s;
     }
 
-    .action .menu ul li:hover a{
+    .action .menu ul li:hover a {
         color: #05636d;
     }
 
-    .search-form form button{
+    .search-form form button {
         background: transparent;
         border: none;
     }
+
     /* end-profile */
+
 </style>
 
 <!-- header -->
 <header class="header">
     <div class="logo">
-        <img src="{{ url( URL::asset('rss/images/logo.png')) }}">
+        <img src="{{ url(URL::asset('rss/images/logo.png')) }}">
     </div>
     <div class="left-menu navbar">
         <ul>
@@ -424,27 +426,35 @@
             <li>
                 <div id="menu-btn" class="fas fa-bars"></div>
             </li>
-            <li><a href="/cart" class="fas fa-shopping-cart"></a></li>
-            <li><a><div id="search-btn" class="fas fa-search"></div></a>
-            {{-- belum login --}}
-            @if (sudahLogin() == false)
+            @if (sudahLogin())
+                <li><a href="/cart" class="fas fa-shopping-cart"></a></li>
+            @endif
+            <li><a>
+                    <div id="search-btn" class="fas fa-search"></div>
+                </a>
+                {{-- belum login --}}
+                @if (sudahLogin() == false)
             <li><a href="#" class="far fa-user" id="login-btn"></i></a></li>
-            @else
-                @php
-                    $user = getAuthUser();
-                @endphp
-            <li onclick="menuToogle();"><a href="#" class="far fa-user" id="logged-btn"></i><span class="font-change">{{$user->user_fname}}</span></a> </li>
+        @else
+            @php
+                $user = getAuthUser();
+            @endphp
+            <li onclick="menuToogle();"><a href="#" class="far fa-user" id="logged-btn"></i><span
+                        class="font-change">{{ $user->user_fname }}</span></a> </li>
             <li>
                 <div class="action">
                     {{-- <div class="profile" onclick="menuToogle();">
                        <img src="{{ url(URL::asset('rss/images/profile.png')) }}">
                     </div> --}}
                     <div class="menu">
-                        <h3>{{$user->user_fname . ' ' . $user->user_lname . '\'s'}}<br><span>Profile</span></h3>
+                        <h3>{{ $user->user_fname . ' ' . $user->user_lname . '\'s' }}<br><span>Profile</span></h3>
                         <ul>
-                            <li><img src="{{ url(URL::asset('rss/icons/account.png')) }}"><a href="/profile">My Profile</a></li>
-                            <li><img src="{{ url(URL::asset('rss/icons/history.png')) }}"><a href="/history">History</a></li>
-                            <li><img src="{{ url(URL::asset('rss/icons/logout.png')) }}"><a href="/logoutUser">Logout</a></li>
+                            <li><img src="{{ url(URL::asset('rss/icons/account.png')) }}"><a href="/profile">My
+                                    Profile</a></li>
+                            <li><img src="{{ url(URL::asset('rss/icons/history.png')) }}"><a
+                                    href="/history">History</a></li>
+                            <li><img src="{{ url(URL::asset('rss/icons/logout.png')) }}"><a
+                                    href="/logoutUser">Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -459,11 +469,11 @@
         <h3>sign in</h3>
         <input type="text" name="userlogin" placeholder="enter your email" class="box">
         @error('userlogin')
-            {{$message}}
+            {{ $message }}
         @enderror
         <input type="password" name="password" placeholder="enter your password" class="box">
         @error('password')
-            {{$message}}
+            {{ $message }}
         @enderror
         <div class="remember">
             <input type="checkbox" name="" id="remember-me">
@@ -492,14 +502,16 @@
 </div>
 
 <script>
-    function doLogout(){
+    function doLogout() {
         document.querySelector("#logoutform").submit();
     }
-    function changeToUser(){
-        document.querySelector("#loginform").action="/loginUser";
+
+    function changeToUser() {
+        document.querySelector("#loginform").action = "/loginUser";
     }
-    function changeToSupp(){
-        document.querySelector("#loginform").action="/loginSupp";
+
+    function changeToSupp() {
+        document.querySelector("#loginform").action = "/loginSupp";
     }
 
     function menuToogle() {
@@ -507,4 +519,3 @@
         toggleMenu.classList.toggle('active');
     }
 </script>
-

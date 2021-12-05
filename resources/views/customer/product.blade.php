@@ -2,9 +2,10 @@
 
 @section('main')
     <style>
-        header{
+        header {
             background: #05636d;
         }
+
         /* header-slider */
         .header_slider {
             /* background: #05636d; */
@@ -126,7 +127,7 @@
             padding: 9px 25px;
             text-decoration: none;
             border-radius: 6px;
-            color: #6b6b6b ;
+            color: #6b6b6b;
             transition: all 0.5s;
         }
 
@@ -216,7 +217,7 @@
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
         }
 
-         .main_container .imgBx {
+        .main_container .imgBx {
             position: absolute;
             top: 0;
             left: 0;
@@ -366,6 +367,13 @@
         </div>
     </section>
 
+    @php
+    $genres = DB::table('genres')->get();
+    $books = DB::table('books')
+        ->where('shop_qty', '>', 0)
+        ->get();
+    @endphp
+
     <div class="main_container" data-scene>
         <!-- Filter Gallery -->
         <div class="container-fluid filterbox">
@@ -373,270 +381,281 @@
                 <div class="filter-sort">
                     <div class="navigation">
                         <a href="javascript:void(0)" data-filter="all" class="button active">All</a>
-                        <a href="javascript:void(0)" data-filter="Animation" class="button">Animation</a>
-                        <a href="javascript:void(0)" data-filter="Branding" class="button">Branding</a>
-                        <a href="javascript:void(0)" data-filter="Illustration" class="button">Illustration</a>
-                        <a href="javascript:void(0)" data-filter="Mobile" class="button">Mobile</a>
-                        <a href="javascript:void(0)" data-filter="Print" class="button">Print</a>
+                        @foreach ($genres as $genre)
+                            <a href="javascript:void(0)" data-filter="{{ $genre->genre_id }}"
+                                class="button active">{{ $genre->genre_name }}</a>
+                        @endforeach
                     </div>
                 </div>
             </div>
-            <div class="main-wrap wrap-inner" >
+            <div class="main-wrap wrap-inner">
                 <div id="content">
                     <div class="main-full" id="main">
                         <ol class="content">
-                            <li class="team shot-thumbnail Animation" data-aos="fade-up">
-                                <div class="multi-shot">
-                                    <div class="dribbble-img">
-                                        <a class="dribbble-link">
-                                            <picture>
-                                                <div class="card">
-                                                    <div class="imgBx">
-                                                        <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
-                                                    </div>
-                                                    <div class="content_card">
-                                                        <div class="details">
-                                                            <h2>Your Soul is a River <br>
-                                                                <span>Nikita Gill</span> <br>
-                                                                <span>Rp. 78.000</span>
-                                                            </h2>
-                                                            <ul class="sci">
-                                                                <li><button type="button">
-                                                                        <img
-                                                                            src="{{ url(URL::asset('rss/icons/cart.png')) }}">
-                                                                    </button></li>
-                                                                <li><button type="button">
-                                                                        <img
-                                                                            src="{{ url(URL::asset('rss/icons/loupe.png')) }}">
-                                                                    </button></li>
-                                                            </ul>
+                            @foreach ($books as $book)
+                                @php
+                                    $bauth = DB::table('authors')
+                                        ->where('author_id', '=', $book->author_id)
+                                        ->first();
+                                @endphp
+                                <li class="team shot-thumbnail {{ $book->genre_id }}" data-aos="fade-up">
+                                    <div class="multi-shot">
+                                        <div class="dribbble-img">
+                                            <a class="dribbble-link">
+                                                <picture>
+                                                    <div class="card">
+                                                        <div class="imgBx">
+                                                            <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
+                                                        </div>
+                                                        <div class="content_card">
+                                                            <div class="details">
+                                                                <h2>{{ $book->book_name }} <br>
+                                                                    <span>{{ $bauth->author_name }}</span> <br>
+                                                                    <span>Rp. {{ number_format($book->shop_price, 2, ',', '.') }}</span>
+                                                                </h2>
+                                                                <ul class="sci">
+                                                                    @if (getAuthUserType() == 'user')
+                                                                        <li><button type="button">
+                                                                                <img
+                                                                                    src="{{ url(URL::asset('rss/icons/cart.png')) }}">
+                                                                            </button></li>
+                                                                    @endif
+                                                                    <form action="{{ url('/detail/' . $book->book_id) }}"
+                                                                        method="GET">
+                                                                        <li><button type="submit">
+                                                                                <img
+                                                                                    src="{{ url(URL::asset('rss/icons/loupe.png')) }}">
+                                                                            </button></li>
+                                                                    </form>
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </picture>
-                                        </a>
-                                        <a class="dribbble-over" href="{{ url(URL::asset('rss/book/img1.jpg')) }}"
-                                            data-lightbox="mygallery" data-title="Dribbble">
-                                        </a>
+                                                </picture>
+                                            </a>
+                                            <a class="dribbble-over" href="{{ url(URL::asset('rss/book/img1.jpg')) }}"
+                                                data-lightbox="mygallery" data-title="Dribbble">
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="team shot-thumbnail Branding" data-aos="fade-up">
-                                <div class="multi-shot">
-                                    <div class="dribbble-img">
-                                        <a class="dribbble-link">
-                                            <picture>
-                                                <div class="card">
-                                                    <div class="imgBx">
-                                                        <img src="{{ url(URL::asset('rss/book/img4.jpg')) }}">
-                                                    </div>
-                                                    <div class="content_card">
-                                                        <div class="details">
-                                                            <h2>Your Soul is a River <br>
-                                                                <span>Nikita Gill</span> <br>
-                                                                <span>Rp. 78.000</span>
-                                                            </h2>
-                                                            <ul class="sci">
-                                                                <li><button type="button">
-                                                                        <img
-                                                                            src="{{ url(URL::asset('rss/icons/cart.png')) }}">
-                                                                    </button></li>
-                                                                <li><button type="button">
-                                                                        <img
-                                                                            src="{{ url(URL::asset('rss/icons/loupe.png')) }}">
-                                                                    </button></li>
-                                                            </ul>
+                                </li>
+                            @endforeach
+                            <!--<li class="team shot-thumbnail Branding" data-aos="fade-up">
+                                                        <div class="multi-shot">
+                                                            <div class="dribbble-img">
+                                                                <a class="dribbble-link">
+                                                                    <picture>
+                                                                        <div class="card">
+                                                                            <div class="imgBx">
+                                                                                <img src="{{ url(URL::asset('rss/book/img4.jpg')) }}">
+                                                                            </div>
+                                                                            <div class="content_card">
+                                                                                <div class="details">
+                                                                                    <h2>Your Soul is a River <br>
+                                                                                        <span>Nikita Gill</span> <br>
+                                                                                        <span>Rp. 78.000</span>
+                                                                                    </h2>
+                                                                                    <ul class="sci">
+                                                                                        <li><button type="button">
+                                                                                                <img
+                                                                                                    src="{{ url(URL::asset('rss/icons/cart.png')) }}">
+                                                                                            </button></li>
+                                                                                        <li><button type="button">
+                                                                                                <img
+                                                                                                    src="{{ url(URL::asset('rss/icons/loupe.png')) }}">
+                                                                                            </button></li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </picture>
+                                                                </a>
+                                                                <a class="dribbble-over" href="{{ url(URL::asset('rss/book/img4.jpg')) }}"
+                                                                    data-lightbox="mygallery" data-title="Dribbble">
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </picture>
-                                        </a>
-                                        <a class="dribbble-over" href="{{ url(URL::asset('rss/book/img4.jpg')) }}"
-                                            data-lightbox="mygallery" data-title="Dribbble">
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="team shot-thumbnail Illustration" data-aos="fade-up">
-                                <div class="multi-shot">
-                                    <div class="dribbble-img">
-                                        <a class="dribbble-link">
-                                            <picture>
-                                                <div class="card">
-                                                    <div class="imgBx">
-                                                        <img src="{{ url(URL::asset('rss/book/img5.jpg')) }}">
-                                                    </div>
-                                                    <div class="content_card">
-                                                        <div class="details">
-                                                            <h2>Your Soul is a River <br>
-                                                                <span>Nikita Gill</span> <br>
-                                                                <span>Rp. 78.000</span>
-                                                            </h2>
-                                                            <ul class="sci">
-                                                                <li><button type="button">
-                                                                        <img
-                                                                            src="{{ url(URL::asset('rss/icons/cart.png')) }}">
-                                                                    </button></li>
-                                                                <li><button type="button">
-                                                                        <img
-                                                                            src="{{ url(URL::asset('rss/icons/loupe.png')) }}">
-                                                                    </button></li>
-                                                            </ul>
+                                                    </li>
+                                                    <li class="team shot-thumbnail Illustration" data-aos="fade-up">
+                                                        <div class="multi-shot">
+                                                            <div class="dribbble-img">
+                                                                <a class="dribbble-link">
+                                                                    <picture>
+                                                                        <div class="card">
+                                                                            <div class="imgBx">
+                                                                                <img src="{{ url(URL::asset('rss/book/img5.jpg')) }}">
+                                                                            </div>
+                                                                            <div class="content_card">
+                                                                                <div class="details">
+                                                                                    <h2>Your Soul is a River <br>
+                                                                                        <span>Nikita Gill</span> <br>
+                                                                                        <span>Rp. 78.000</span>
+                                                                                    </h2>
+                                                                                    <ul class="sci">
+                                                                                        <li><button type="button">
+                                                                                                <img
+                                                                                                    src="{{ url(URL::asset('rss/icons/cart.png')) }}">
+                                                                                            </button></li>
+                                                                                        <li><button type="button">
+                                                                                                <img
+                                                                                                    src="{{ url(URL::asset('rss/icons/loupe.png')) }}">
+                                                                                            </button></li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </picture>
+                                                                </a>
+                                                                <a class="dribbble-over" href="{{ url(URL::asset('rss/book/img5.jpg')) }}"
+                                                                    data-lightbox="mygallery" data-title="Dribbble">
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </picture>
-                                        </a>
-                                        <a class="dribbble-over" href="{{ url(URL::asset('rss/book/img5.jpg')) }}"
-                                            data-lightbox="mygallery" data-title="Dribbble">
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="team shot-thumbnail Mobile" data-aos="fade-up">
-                                <div class="multi-shot">
-                                    <div class="dribbble-img">
-                                        <a class="dribbble-link">
-                                            <picture>
-                                                <div class="card">
-                                                    <div class="imgBx">
-                                                        <img src="{{ url(URL::asset('rss/book/img6.jpg')) }}">
-                                                    </div>
-                                                    <div class="content_card">
-                                                        <div class="details">
-                                                            <h2>Your Soul is a River <br>
-                                                                <span>Nikita Gill</span> <br>
-                                                                <span>Rp. 78.000</span>
-                                                            </h2>
-                                                            <ul class="sci">
-                                                                <li><button type="button">
-                                                                        <img
-                                                                            src="{{ url(URL::asset('rss/icons/cart.png')) }}">
-                                                                    </button></li>
-                                                                <li><button type="button">
-                                                                        <img
-                                                                            src="{{ url(URL::asset('rss/icons/loupe.png')) }}">
-                                                                    </button></li>
-                                                            </ul>
+                                                    </li>
+                                                    <li class="team shot-thumbnail Mobile" data-aos="fade-up">
+                                                        <div class="multi-shot">
+                                                            <div class="dribbble-img">
+                                                                <a class="dribbble-link">
+                                                                    <picture>
+                                                                        <div class="card">
+                                                                            <div class="imgBx">
+                                                                                <img src="{{ url(URL::asset('rss/book/img6.jpg')) }}">
+                                                                            </div>
+                                                                            <div class="content_card">
+                                                                                <div class="details">
+                                                                                    <h2>Your Soul is a River <br>
+                                                                                        <span>Nikita Gill</span> <br>
+                                                                                        <span>Rp. 78.000</span>
+                                                                                    </h2>
+                                                                                    <ul class="sci">
+                                                                                        <li><button type="button">
+                                                                                                <img
+                                                                                                    src="{{ url(URL::asset('rss/icons/cart.png')) }}">
+                                                                                            </button></li>
+                                                                                        <li><button type="button">
+                                                                                                <img
+                                                                                                    src="{{ url(URL::asset('rss/icons/loupe.png')) }}">
+                                                                                            </button></li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </picture>
+                                                                </a>
+                                                                <a class="dribbble-over" href="{{ url(URL::asset('rss/book/img6.jpg')) }}"
+                                                                    data-lightbox="mygallery" data-title="Dribbble">
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </picture>
-                                        </a>
-                                        <a class="dribbble-over" href="{{ url(URL::asset('rss/book/img6.jpg')) }}"
-                                            data-lightbox="mygallery" data-title="Dribbble">
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="team shot-thumbnail Illustration" data-aos="fade-up">
-                                <div class="multi-shot">
-                                    <div class="dribbble-img">
-                                        <a class="dribbble-link">
-                                            <picture>
-                                                <div class="card">
-                                                    <div class="imgBx">
-                                                        <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
-                                                    </div>
-                                                    <div class="content_card">
-                                                        <div class="details">
-                                                            <h2>Your Soul is a River <br>
-                                                                <span>Nikita Gill</span> <br>
-                                                                <span>Rp. 78.000</span>
-                                                            </h2>
-                                                            <ul class="sci">
-                                                                <li><button type="button">
-                                                                        <img
-                                                                            src="{{ url(URL::asset('rss/icons/cart.png')) }}">
-                                                                    </button></li>
-                                                                <li><button type="button">
-                                                                        <img
-                                                                            src="{{ url(URL::asset('rss/icons/loupe.png')) }}">
-                                                                    </button></li>
-                                                            </ul>
+                                                    </li>
+                                                    <li class="team shot-thumbnail Illustration" data-aos="fade-up">
+                                                        <div class="multi-shot">
+                                                            <div class="dribbble-img">
+                                                                <a class="dribbble-link">
+                                                                    <picture>
+                                                                        <div class="card">
+                                                                            <div class="imgBx">
+                                                                                <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
+                                                                            </div>
+                                                                            <div class="content_card">
+                                                                                <div class="details">
+                                                                                    <h2>Your Soul is a River <br>
+                                                                                        <span>Nikita Gill</span> <br>
+                                                                                        <span>Rp. 78.000</span>
+                                                                                    </h2>
+                                                                                    <ul class="sci">
+                                                                                        <li><button type="button">
+                                                                                                <img
+                                                                                                    src="{{ url(URL::asset('rss/icons/cart.png')) }}">
+                                                                                            </button></li>
+                                                                                        <li><button type="button">
+                                                                                                <img
+                                                                                                    src="{{ url(URL::asset('rss/icons/loupe.png')) }}">
+                                                                                            </button></li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </picture>
+                                                                </a>
+                                                                <a class="dribbble-over" href="{{ url(URL::asset('rss/book/img1.jpg')) }}"
+                                                                    data-lightbox="mygallery" data-title="Dribbble">
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </picture>
-                                        </a>
-                                        <a class="dribbble-over" href="{{ url(URL::asset('rss/book/img1.jpg')) }}"
-                                            data-lightbox="mygallery" data-title="Dribbble">
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="team shot-thumbnail Illustration" data-aos="fade-up">
-                                <div class="multi-shot">
-                                    <div class="dribbble-img">
-                                        <a class="dribbble-link">
-                                            <picture>
-                                                <div class="card">
-                                                    <div class="imgBx">
-                                                        <img src="{{ url(URL::asset('rss/book/img3.jpg')) }}">
-                                                    </div>
-                                                    <div class="content_card">
-                                                        <div class="details">
-                                                            <h2>Your Soul is a River <br>
-                                                                <span>Nikita Gill</span> <br>
-                                                                <span>Rp. 78.000</span>
-                                                            </h2>
-                                                            <ul class="sci">
-                                                                <li><button type="button">
-                                                                        <img
-                                                                            src="{{ url(URL::asset('rss/icons/cart.png')) }}">
-                                                                    </button></li>
-                                                                <li><button type="button">
-                                                                        <img
-                                                                            src="{{ url(URL::asset('rss/icons/loupe.png')) }}">
-                                                                    </button></li>
-                                                            </ul>
+                                                    </li>
+                                                    <li class="team shot-thumbnail Illustration" data-aos="fade-up">
+                                                        <div class="multi-shot">
+                                                            <div class="dribbble-img">
+                                                                <a class="dribbble-link">
+                                                                    <picture>
+                                                                        <div class="card">
+                                                                            <div class="imgBx">
+                                                                                <img src="{{ url(URL::asset('rss/book/img3.jpg')) }}">
+                                                                            </div>
+                                                                            <div class="content_card">
+                                                                                <div class="details">
+                                                                                    <h2>Your Soul is a River <br>
+                                                                                        <span>Nikita Gill</span> <br>
+                                                                                        <span>Rp. 78.000</span>
+                                                                                    </h2>
+                                                                                    <ul class="sci">
+                                                                                        <li><button type="button">
+                                                                                                <img
+                                                                                                    src="{{ url(URL::asset('rss/icons/cart.png')) }}">
+                                                                                            </button></li>
+                                                                                        <li><button type="button">
+                                                                                                <img
+                                                                                                    src="{{ url(URL::asset('rss/icons/loupe.png')) }}">
+                                                                                            </button></li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </picture>
+                                                                </a>
+                                                                <a class="dribbble-over" href="{{ url(URL::asset('rss/book/img3.jpg')) }}"
+                                                                    data-lightbox="mygallery" data-title="Dribbble">
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </picture>
-                                        </a>
-                                        <a class="dribbble-over" href="{{ url(URL::asset('rss/book/img3.jpg')) }}"
-                                            data-lightbox="mygallery" data-title="Dribbble">
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="team shot-thumbnail Print" data-aos="fade-up">
-                                <div class="multi-shot">
-                                    <div class="dribbble-img">
-                                        <a class="dribbble-link">
-                                            <picture>
-                                                <div class="card">
-                                                    <div class="imgBx">
-                                                        <img src="{{ url(URL::asset('rss/book/img2.jpg')) }}">
-                                                    </div>
-                                                    <div class="content_card">
-                                                        <div class="details">
-                                                            <h2>Your Soul is a River <br>
-                                                                <span>Nikita Gill</span> <br>
-                                                                <span>Rp. 78.000</span>
-                                                            </h2>
-                                                            <ul class="sci">
-                                                                <li><button type="button">
-                                                                        <img
-                                                                            src="{{ url(URL::asset('rss/icons/cart.png')) }}">
-                                                                    </button></li>
-                                                                <li><button type="button">
-                                                                        <img
-                                                                            src="{{ url(URL::asset('rss/icons/loupe.png')) }}">
-                                                                    </button></li>
-                                                            </ul>
+                                                    </li>
+                                                    <li class="team shot-thumbnail Print" data-aos="fade-up">
+                                                        <div class="multi-shot">
+                                                            <div class="dribbble-img">
+                                                                <a class="dribbble-link">
+                                                                    <picture>
+                                                                        <div class="card">
+                                                                            <div class="imgBx">
+                                                                                <img src="{{ url(URL::asset('rss/book/img2.jpg')) }}">
+                                                                            </div>
+                                                                            <div class="content_card">
+                                                                                <div class="details">
+                                                                                    <h2>Your Soul is a River <br>
+                                                                                        <span>Nikita Gill</span> <br>
+                                                                                        <span>Rp. 78.000</span>
+                                                                                    </h2>
+                                                                                    <ul class="sci">
+                                                                                        <li><button type="button">
+                                                                                                <img
+                                                                                                    src="{{ url(URL::asset('rss/icons/cart.png')) }}">
+                                                                                            </button></li>
+                                                                                        <li><button type="button">
+                                                                                                <img
+                                                                                                    src="{{ url(URL::asset('rss/icons/loupe.png')) }}">
+                                                                                            </button></li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </picture>
+                                                                </a>
+                                                                <a class="dribbble-over" href="{{ url(URL::asset('rss/book/img2.jpg')) }}"
+                                                                    data-lightbox="mygallery" data-title="Dribbble">
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </picture>
-                                        </a>
-                                        <a class="dribbble-over" href="{{ url(URL::asset('rss/book/img2.jpg')) }}"
-                                            data-lightbox="mygallery" data-title="Dribbble">
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
+                                                    </li>-->
                         </ol>
                     </div>
                 </div>
