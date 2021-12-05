@@ -130,27 +130,27 @@
             width: 370px;
             transform: translate(-50%, -50%);
             background: rgba(0, 100, 102, 0.979);
-            box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+            box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.75);
             border-radius: 45px;
             display: none;
             visibility: hidden;
         }
 
-        .edit-form.active{
+        .edit-form.active {
             display: block;
         }
 
-        .edit-form #close-form{
+        .edit-form #close-form {
             margin-bottom: 10%;
             margin-left: 90%;
             color: #2BBA9B;
         }
 
-        .edit-form #close-form:hover{
+        .edit-form #close-form:hover {
             color: #95D5B2;
         }
 
-        .field{
+        .field {
             position: relative;
             height: 45px;
             width: 100%;
@@ -159,13 +159,13 @@
             border-radius: 45px;
         }
 
-        .field span{
+        .field span {
             color: #fff;
             width: 40px;
             line-height: 45px;
         }
 
-        .field input{
+        .field input {
             height: 100%;
             width: 100%;
             background: transparent;
@@ -175,11 +175,11 @@
             font-size: 16px;
         }
 
-        .space{
+        .space {
             margin-top: 16px;
         }
 
-        .show{
+        .show {
             position: absolute;
             right: 13px;
             font-size: 13px;
@@ -189,7 +189,7 @@
             cursor: pointer;
         }
 
-        .pass-key:valid ~ .show{
+        .pass-key:valid~.show {
             display: block;
         }
 
@@ -202,7 +202,7 @@
         <div class="wrapper">
             <div class="left">
                 <img src="{{ url(URL::asset('rss/images/profile.png')) }}" width="100" alt="user">
-                <h4>{{"$user->user_fname $user->user_lname"}}</h4>
+                <h4>{{ "$user->user_fname $user->user_lname" }}</h4>
                 <p>User</p>
             </div>
             <div class="right">
@@ -211,7 +211,7 @@
                     <div class="info_data">
                         <div class="data">
                             <h4>Email</h4>
-                            <p>{{$user->user_email}}</p>
+                            <p>{{ $user->user_email }}</p>
                         </div>
                         <div class="data">
                             <h4>Password</h4>
@@ -222,18 +222,21 @@
                 </div>
 
                 <div class="projects">
-                    <h3>Top Up</h3>
-                    <div class="projects_data">
-                        <div class="data">
-                            <h4>Balance</h4>
-                            <p>Rp {{$user->user_saldo}}</p>
+                    <form action="{{ url('topup') }}" method="POST">
+                        @csrf
+                        <h3>Top Up</h3>
+                        <div class="projects_data">
+                            <div class="data">
+                                <h4>Balance</h4>
+                                <p>Rp {{ number_format($user->user_saldo, 2, ',', '.') }}</p>
+                            </div>
+                            <div class="data">
+                                <h4>Top Up</h4>
+                                <input type="number" min="0" name="topup" value="0">
+                            </div>
                         </div>
-                        <div class="data">
-                            <h4>Top Up</h4>
-                            <input type="number" min="0" name="topup">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn">Top Up</button>
+                        <button type="submit" class="btn">Top Up</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -254,46 +257,46 @@
 
             </div>
             @error('user_fname')
-                    <span style="color: lightsalmon">{{$message}}</span>
-                    @php
-                        $error=true;
-                    @endphp
-                @enderror
+                <span style="color: lightsalmon">{{ $message }}</span>
+                @php
+                    $error = true;
+                @endphp
+            @enderror
             <div class="field space">
                 <span class="fa fa-user"></span>
                 <input type="text" name="user_lname" placeholder="last name">
 
             </div>
             @error('user_lname')
-                    <span style="color: lightsalmon">{{$message}}</span>
-                    @php
-                        $error=true;
-                    @endphp
-                @enderror
+                <span style="color: lightsalmon">{{ $message }}</span>
+                @php
+                    $error = true;
+                @endphp
+            @enderror
             <div class="field space">
                 <span class="fa fa-envelope"></span>
                 <input type="text" name="user_email" placeholder="email">
 
             </div>
             @error('user_email')
-                    <span style="color: lightsalmon">{{$message}}</span>
+                <span style="color: lightsalmon">{{ $message }}</span>
 
-                    @php
-                        $error=true;
-                    @endphp
-                @enderror
+                @php
+                    $error = true;
+                @endphp
+            @enderror
             <div class="field space">
                 <span class="fa fa-lock"></span>
                 <input type="password" class="pass-key" name="user_pass" placeholder="input current password">
                 <span class="show">SHOW</span>
             </div>
-                @error('user_pass')
-                    <span style="color: lightsalmon">{{$message}}</span>
-                    @php
-                        $error=true;
-                    @endphp
-                @enderror
-                <br>
+            @error('user_pass')
+                <span style="color: lightsalmon">{{ $message }}</span>
+                @php
+                    $error = true;
+                @endphp
+            @enderror
+            <br>
             <input type="submit" value="Edit" class="btn">
         </form>
     </div>
@@ -302,7 +305,7 @@
         const editForm = document.querySelector('#editting_form');
 
         document.querySelector('#edit-btn').onclick = () => {
-            editForm.style.visibility="visible";
+            editForm.style.visibility = "visible";
             editForm.classList.add('active');
         }
 
@@ -313,25 +316,23 @@
         const pass_field = document.querySelector(".pass-key");
         const showBtn = document.querySelector(".show");
         showBtn.addEventListener("click", function() {
-            if(pass_field.type === "password") {
+            if (pass_field.type === "password") {
                 pass_field.type = "text";
                 showBtn.textContent = "HIDE";
                 showBtn.style.color = "#fff";
-            }
-            else {
+            } else {
                 pass_field.type = "password";
                 showBtn.textContent = "SHOW";
                 showBtn.style.color = "#fff";
             }
         });
-
     </script>
-    @if ($error==true)
+    @if ($error == true)
         <script>
-            window.addEventListener("load", function(e){
-            editForm.style.visibility="visible";
-            // alert('no error');
-        });
+            window.addEventListener("load", function(e) {
+                editForm.style.visibility = "visible";
+                // alert('no error');
+            });
         </script>
 
     @endif

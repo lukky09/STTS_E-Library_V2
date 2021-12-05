@@ -257,15 +257,17 @@
                             <div class="item-img">
                                 <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
                                 <div class="icon-list">
-                                    <a href="/detail/{{$b->book_id}}">
+                                    <a href="/detail/{{ $b->book_id }}">
                                         <button type="button">
                                             <i class="fas fa-search"></i>
                                         </button>
                                     </a>
                                     @if (getAuthUserType() == 'user')
-                                        <button type="button">
-                                            <i class="fas fa-shopping-cart"></i>
-                                        </button>
+                                        <a href="/addCart/{{ $b->book_id }}">
+                                            <button type="button">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </a>
                                     @endif
                                 </div>
                             </div>

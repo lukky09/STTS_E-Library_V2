@@ -26,30 +26,33 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('register');
 });
-Route::post('/registerUser',[UserController::class, 'doRegis']);
-Route::post('/loginUser',[UserController::class, 'doLogin']);
-Route::get('/logoutUser',[UserController::class, 'doLogout']);
-Route::post('/registerSupp',[SupplierController::class, 'doRegis']);
-Route::post('/loginSupp',[SupplierController::class, 'doLogin']);
+Route::post('/registerUser', [UserController::class, 'doRegis']);
+Route::post('/loginUser', [UserController::class, 'doLogin']);
+Route::get('/logoutUser', [UserController::class, 'doLogout']);
+Route::post('/registerSupp', [SupplierController::class, 'doRegis']);
+Route::post('/loginSupp', [SupplierController::class, 'doLogin']);
 
 Route::get('/product', function () {
     return view('customer.product');
 });
-Route::get('/search',[ShopController::class, 'search']);
+Route::get('/search', [ShopController::class, 'search']);
 Route::get('/detail/{id}', [ShopController::class, 'detail']);
-Route::get('/cart', function () {
-    return view('customer.cart');
-});
-Route::get('/profile', function () {
-    return view('customer.profile');
-});
-Route::get('/history', function () {
-    return view('customer.history');
-});
 
 //session usertype = 0
 Route::middleware(['user'])->group(function () {
-    Route::post('/doEditProfile',[UserController::class, 'doUpdateProfile']);
+    Route::post('/doEditProfile', [UserController::class, 'doUpdateProfile']);
+    Route::get('/addCart/{id}', [UserController::class, 'addToCart']);
+    Route::post('/addCartA', [UserController::class, 'addToCart']);
+    Route::post('/topup', [UserController::class, 'topUp']);
+    Route::get('/cart', function () {
+        return view('customer.cart');
+    });
+    Route::get('/profile', function () {
+        return view('customer.profile');
+    });
+    Route::get('/history', function () {
+        return view('customer.history');
+    });
 });
 
 //session usertype = 1
@@ -65,5 +68,4 @@ Route::middleware(['supplier'])->group(function () {
 
 //session usertype = 2
 Route::middleware(['shop'])->group(function () {
-
 });

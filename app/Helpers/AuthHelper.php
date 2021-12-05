@@ -4,21 +4,21 @@ use Illuminate\Support\Facades\Auth;
 
 function sudahLogin()
 {
-    if(Auth::guard('user_provider')->check() || Auth::guard('supplier_provider')->check()){
+    if (Auth::guard('user_provider')->check() || Auth::guard('supplier_provider')->check()) {
         return true;
-    }else{
+    } else {
         return false;
     }
 }
 
 function getAuthUser()
 {
-    if(sudahLogin() == false){
+    if (sudahLogin() == false) {
         return false;
-    }else{
-        if(Auth::guard('user_provider')->check()){
+    } else {
+        if (Auth::guard('user_provider')->check()) {
             return Auth::guard('user_provider')->user();
-        }else{
+        } else {
             return Auth::guard('supplier_provider')->user();
         }
     }
@@ -26,15 +26,25 @@ function getAuthUser()
 
 function getAuthUserType()
 {
-    if(sudahLogin() == false){
+    if (sudahLogin() == false) {
         return "none";
-    }else{
-        if(Auth::guard('supplier_provider')->check()){
+    } else {
+        if (Auth::guard('supplier_provider')->check()) {
             return "supp";
-        }else if(Auth::guard('user_provider')->user()->isadmin == 0){
+        } else if (Auth::guard('user_provider')->user()->isadmin == 0) {
             return "user";
-        }else{
+        } else {
             return "shop";
         }
+    }
+}
+
+function AuthLogout()
+{
+    $type = getAuthUserType();
+    if ($type == "supp") {
+        Auth::guard('supplier_provider')->logout();
+    } else if ($type == "user" || $type == "shop") {
+        Auth::guard('user_provider')->logout();
     }
 }

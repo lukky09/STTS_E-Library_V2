@@ -171,14 +171,15 @@
             cursor: pointer;
         }
 
-        .main_contain .checkout a{
+        .main_contain .checkout a {
             color: #000;
             text-decoration: none;
         }
 
-        .main_contain .checkout:hover a{
+        .main_contain .checkout:hover a {
             color: #fff;
         }
+
     </style>
 
     <div class="main_contain" data-scene>
@@ -188,73 +189,94 @@
                     MY SHOPPING CART :
                 </div>
                 <div class="amount">
-                    <b>( 2 ) ITEMS</b>
+                    <b>( {{ count(Session::get('cartids')) }} ) ITEMS</b>
                 </div>
 
             </div>
-            <div class="product_wrap">
-                <div class="product_info">
-                    <div class="product_img">
-                        <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
-                    </div>
-                    <div class="product_data">
-                        <div class="description">
-                            <h3> Catatan Tentang Hujan </h3>
-                            <h5> Anindya Frista </h5>
-                        </div>
-                        <div class="qty">
-                            <div class="controls">
-                                <button id="decrement" onclick="stepper(this)"> - </button>
-                                <input type="number" min="1" max="100" step="1" value="1" id="my-input" readonly>
-                                <button id="increment" onclick="stepper(this)"> + </button>
+            @php
+                $price = 0;
+            @endphp
+            @if (Session::has('cartids'))
+                @foreach (Session::get('cartids') as $c)
+                    @php
+                        $book = DB::table('books')
+                            ->where('book_id', $c[0])
+                            ->first();
+                        $author = DB::table('authors')
+                            ->where('author_id', $book->author_id)
+                            ->first();
+                        $price += $book->shop_price;
+                    @endphp
+                    <div class="product_wrap">
+                        <div class="product_info">
+                            <div class="product_img">
+                                <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
+                            </div>
+                            <div class="product_data">
+                                <div class="description">
+                                    <h3> {{ $book->book_name }} </h3>
+                                    <h5> {{ $author->author_name }} </h5>
+                                </div>
+                                <div class="qty">
+                                    <div class="controls">
+                                        <button id="decrement" onclick="stepper(this)"> - </button>
+                                        <input type="number" min="1" max="100" step="1" value="{{ $c[1] }}"
+                                            id="my-input" readonly>
+                                        <button id="increment" onclick="stepper(this)"> + </button>
+                                    </div>
+                                </div>
+                                <div class="price"> Rp {{ number_format($book->shop_price, 2, ',', '.') }} </div>
                             </div>
                         </div>
-                        <div class="price"> Rp 92.000  </div>
                     </div>
-                </div>
-            </div>
-            <div class="product_wrap">
-                <div class="product_info">
-                    <div class="product_img">
-                        <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
-                    </div>
-                    <div class="product_data">
-                        <div class="description">
-                            <h3> Catatan Tentang Hujan </h3>
-                            <h5> Anindya Frista </h5>
-                        </div>
-                        <div class="qty">
-                            <div class="controls">
-                                <button id="decrement" onclick="stepper(this)"> - </button>
-                                <input type="number" min="1" max="100" step="1" value="1" id="my-input" readonly>
-                                <button id="increment" onclick="stepper(this)"> + </button>
-                            </div>
-                        </div>
-                        <div class="price"> Rp 92.000  </div>
-                    </div>
-                </div>
-            </div>
+                @endforeach
+            @endif
+            <!--<div class="product_wrap">
+                                    <div class="product_info">
+                                        <div class="product_img">
+                                            <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
+                                        </div>
+                                        <div class="product_data">
+                                            <div class="description">
+                                                <h3> Catatan Tentang Hujan </h3>
+                                                <h5> Anindya Frista </h5>
+                                            </div>
+                                            <div class="qty">
+                                                <div class="controls">
+                                                    <button id="decrement" onclick="stepper(this)"> - </button>
+                                                    <input type="number" min="1" max="100" step="1" value="1" id="my-input" readonly>
+                                                    <button id="increment" onclick="stepper(this)"> + </button>
+                                                </div>
+                                            </div>
+                                            <div class="price"> Rp 92.000 </div>
+                                        </div>
+                                    </div>
+                                </div>-->
         </div>
 
         <div class="wrapper_amount" data-aos="zoom-out-left">
             <div class="header_title">
                 <div class="title"> TOTAL PRICE DETAILS: </div>
-                <div class="amount"> <b> Rp 184.000</b> </div>
+                <div class="amount"> <b> Rp {{ number_format($price, 2, ',', '.') }}</b> </div>
             </div>
             <div class="price_details">
                 <div class="item">
-                    <p>Bag Total :</p> <p>Rp 184.000</p>
+                    <p>Bag Total :</p>
+                    <p>Rp {{ number_format($price, 2, ',', '.') }}</p>
                 </div>
                 <div class="item">
-                    <p>Order Total :</p> <p>Rp 184.000</p>
+                    <p>Order Total :</p>
+                    <p>Rp {{ number_format($price, 2, ',', '.') }}</p>
                 </div>
                 <div class="item">
                     <p>Delivery Charges :</p>
-                    <p><span style="text-decoration: line-through;"></span>Rp 20.000 <span class="green">FREE</span>
+                    <p><span style="text-decoration: line-through;"></span>Rp 20.000 <span
+                            class="green">FREE</span>
                     </p>
                 </div>
                 <div class="total">
-                    <p>Total :</p> <p>Rp 184.000</p>
+                    <p>Total :</p>
+                    <p>Rp 184.000</p>
                 </div>
             </div>
             <div class="checkout"> <a href="#" class="btn">Place Order</a> </div>
