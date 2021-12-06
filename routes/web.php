@@ -41,6 +41,7 @@ Route::get('/detail/{id}', [ShopController::class, 'detail']);
 //session usertype = 0
 Route::middleware(['user'])->group(function () {
     Route::post('/doEditProfile', [UserController::class, 'doUpdateProfile']);
+    Route::get('/editCart', [UserController::class, 'ajaxUpdateCart']);
     Route::get('/addCart/{id}', [UserController::class, 'addToCart']);
     Route::post('/addCartA', [UserController::class, 'addToCart']);
     Route::post('/topup', [UserController::class, 'topUp']);

@@ -188,18 +188,20 @@
                 <div class="title">
                     MY SHOPPING CART :
                 </div>
-                <div class="amount">
+                <div class="itemamount">
                     <b>(
-                    @if (Session::has('cartids'))
-                        {{ count(Session::get('cartids')) }}
-                    @else
-                        0
-                    @endif ) ITEMS</b>
+                        @if (Session::has('cartids'))
+                            {{ count(Session::get('cartids')) }}
+                        @else
+                            0
+                        @endif ) ITEMS
+                    </b>
                 </div>
 
             </div>
             @php
                 $price = 0;
+                $index = -1;
             @endphp
             @if (Session::has('cartids'))
                 @foreach (Session::get('cartids') as $c)
@@ -210,7 +212,8 @@
                         $author = DB::table('authors')
                             ->where('author_id', $book->author_id)
                             ->first();
-                        $price += $book->shop_price*$c[1];
+                        $price += $book->shop_price * $c[1];
+                        $index += 1;
                     @endphp
                     <div class="product_wrap">
                         <div class="product_info">
@@ -224,10 +227,12 @@
                                 </div>
                                 <div class="qty">
                                     <div class="controls">
-                                        <button class="decrement" onclick="stepper('{{$c[0]}}', 'decrement')"> - </button>
-                                        <input type="number" min="1" max="100" step="1" value="{{ $c[1] }}"
-                                            id="{{$c[0]}}" readonly>
-                                        <button class="increment" onclick="stepper('{{$c[0]}}', 'increment')"> + </button>
+                                        <button class="decrement"
+                                            onclick="stepper('{{ $c[0] }}', 'decrement')"> - </button>
+                                        <input type="number" min="1" max="100" step="1" index="{{ $index }}"
+                                            value="{{ $c[1] }}" id="{{ $c[0] }}" readonly>
+                                        <button class="increment"
+                                            onclick="stepper('{{ $c[0] }}', 'increment')"> + </button>
                                     </div>
                                 </div>
                                 <div class="price"> Rp {{ number_format($book->shop_price, 2, ',', '.') }} </div>
@@ -237,26 +242,26 @@
                 @endforeach
             @endif
             <!--<div class="product_wrap">
-                                    <div class="product_info">
-                                        <div class="product_img">
-                                            <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
-                                        </div>
-                                        <div class="product_data">
-                                            <div class="description">
-                                                <h3> Catatan Tentang Hujan </h3>
-                                                <h5> Anindya Frista </h5>
-                                            </div>
-                                            <div class="qty">
-                                                <div class="controls">
-                                                    <button id="decrement" onclick="stepper(this)"> - </button>
-                                                    <input type="number" min="1" max="100" step="1" value="1" id="my-input" readonly>
-                                                    <button id="increment" onclick="stepper(this)"> + </button>
-                                                </div>
-                                            </div>
-                                            <div class="price"> Rp 92.000 </div>
-                                        </div>
-                                    </div>
-                                </div>-->
+                                                        <div class="product_info">
+                                                            <div class="product_img">
+                                                                <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
+                                                            </div>
+                                                            <div class="product_data">
+                                                                <div class="description">
+                                                                    <h3> Catatan Tentang Hujan </h3>
+                                                                    <h5> Anindya Frista </h5>
+                                                                </div>
+                                                                <div class="qty">
+                                                                    <div class="controls">
+                                                                        <button id="decrement" onclick="stepper(this)"> - </button>
+                                                                        <input type="number" min="1" max="100" step="1" value="1" id="my-input" readonly>
+                                                                        <button id="increment" onclick="stepper(this)"> + </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="price"> Rp 92.000 </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>-->
         </div>
 
         <div class="wrapper_amount" data-aos="zoom-out-left">
@@ -267,7 +272,7 @@
             <div class="price_details">
                 <div class="item">
                     <p>Bag Total :</p>
-                    <p>Rp {{ number_format($price, 2, ',', '.') }}</p>
+                    <p class="ajax2">Rp {{ number_format($price, 2, ',', '.') }}</p>
                 </div>
                 <div class="item">
                     <p>Delivery Charges :</p>
@@ -277,7 +282,7 @@
                 </div>
                 <div class="total">
                     <p>Total :</p>
-                    <p>Rp {{ number_format($price-20000, 2, ',', '.') }}</p>
+                    <p class="ajax3">Rp {{ number_format($price - 20000, 2, ',', '.') }}</p>
                 </div>
             </div>
             <div class="checkout"> <a href="#" class="btn">Place Order</a> </div>
@@ -289,6 +294,7 @@
             let type = typeIn
             const myInput = document.getElementById(id);
             let min = myInput.getAttribute("min");
+            let indexe = myInput.getAttribute("index");
             let max = myInput.getAttribute("max");
             let step = myInput.getAttribute("step");
             let val = myInput.getAttribute("value");
@@ -296,7 +302,21 @@
             let newValue = parseInt(val) + calcStep;
 
             if (newValue >= min && newValue <= max) {
-                myInput.setAttribute("value", newValue);
+                $.ajax({
+                    type: 'GET',
+                    url: '/editCart',
+                    data: {
+                        newval: newValue,
+                        index: indexe
+                    },
+                    success: function(data) {
+                        $(".amount").html("<b> Rp. " + data.tot + "</b>");
+                        $(".ajax2").html("Rp. " + data.tot);
+                        $(".ajax3").html("Rp. " + data.jum);
+                        myInput.setAttribute("value", data.newval);
+                    }
+                });
+
             }
         }
     </script>

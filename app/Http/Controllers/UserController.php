@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\user;
 use App\Rules\CorrectPasswordRule;
 use App\Rules\RegisteredUserRule;
@@ -93,7 +94,7 @@ class UserController extends Controller
         $ada = false;
         if (Session::has('cartids')) {
             $temp = Session::get('cartids');
-            for ($i=0; $i < count($temp); $i++) {
+            for ($i = 0; $i < count($temp); $i++) {
                 if ($temp[$i][0] == $req->id) {
                     $ada = true;
                     if (isset($req->qty)) {
@@ -127,6 +128,19 @@ class UserController extends Controller
             Session::push('cartids', $array);
         }
         return redirect('cart');
+    }
+
+    public function ajaxUpdateCart(Request $req)
+    {
+        $book = Book::find(Session::get('cartids.' . $req->index . '.0'));
+        if ($req->newval <= $book->shop_qty) {
+            Session::put('cartids.' . $req->index . '.1', $req->newval);
+        }
+        $total = 0;
+        foreach (Session::get('cartids') as $c) {
+            $total += Book::find($c[0])->shop_price * $c[1];
+        }
+        return response()->json(["jum" => number_format($total - 20000, 2, ',', '.'), "tot" => number_format($total, 2, ',', '.'), "newval" => Session::get('cartids.' . $req->index . '.1')]);
     }
 
     public function topUp(Request $req)
