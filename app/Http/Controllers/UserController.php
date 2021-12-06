@@ -89,14 +89,33 @@ class UserController extends Controller
 
     public function addToCart(Request $req)
     {
+        // Session::forget('cartids');
         $ada = false;
         if (Session::has('cartids')) {
-            foreach (Session::get('cartids') as $c) {
-                if ($c[0] == $req->id) {
+            $temp = Session::get('cartids');
+            for ($i=0; $i < count($temp); $i++) {
+                if ($temp[$i][0] == $req->id) {
                     $ada = true;
+                    if (isset($req->qty)) {
+                        $temp[$i][1] = $req->qty;
+                    } else {
+                        $temp[$i][1] = 1;
+                    }
+
+                    Session::forget('cartids');
+                    foreach ($temp as $c) {
+                        Session::push('cartids', $c);
+                    }
+
                     break;
                 }
             }
+            // foreach (Session::get('cartids') as $c) {
+            //     if ($c[0] == $req->id) {
+            //         $ada = true;
+            //         break;
+            //     }
+            // }
         }
         if (!$ada) {
             $array[] = $req->id;
@@ -123,5 +142,10 @@ class UserController extends Controller
         AuthLogout();
         Session::forget('cartids');
         return redirect('/');
+    }
+
+    public function doOrder(Request $req)
+    {
+        // if(getAuthUser()->user_saldo < )
     }
 }

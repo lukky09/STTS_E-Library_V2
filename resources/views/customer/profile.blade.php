@@ -253,7 +253,7 @@
                     $error = false;
                 @endphp
                 <span class="fa fa-user"></span>
-                <input type="text" name="user_fname" placeholder="first name">
+                <input type="text" name="user_fname" placeholder="first name" value="{{ $user->user_fname }}">
 
             </div>
             @error('user_fname')
@@ -264,7 +264,7 @@
             @enderror
             <div class="field space">
                 <span class="fa fa-user"></span>
-                <input type="text" name="user_lname" placeholder="last name">
+                <input type="text" name="user_lname" placeholder="last name" value="{{ $user->user_lname }}">
 
             </div>
             @error('user_lname')
@@ -275,7 +275,7 @@
             @enderror
             <div class="field space">
                 <span class="fa fa-envelope"></span>
-                <input type="text" name="user_email" placeholder="email">
+                <input type="text" name="user_email" placeholder="email" value="{{ $user->user_email }}">
 
             </div>
             @error('user_email')

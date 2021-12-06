@@ -139,12 +139,12 @@
             cursor: pointer;
         }
 
-        .main_contain .controls #decrement {
+        .main_contain .controls .decrement {
             padding-left: 5px;
             border-radius: 45px 0 0 45px;
         }
 
-        .main_contain .controls #increment {
+        .main_contain .controls .increment {
             padding-right: 5px;
             border-radius: 0 45px 45px 0;
         }
@@ -224,10 +224,10 @@
                                 </div>
                                 <div class="qty">
                                     <div class="controls">
-                                        <button id="decrement" onclick="stepper(this)"> - </button>
+                                        <button class="decrement" onclick="stepper('{{$c[0]}}', 'decrement')"> - </button>
                                         <input type="number" min="1" max="100" step="1" value="{{ $c[1] }}"
-                                            id="my-input" readonly>
-                                        <button id="increment" onclick="stepper(this)"> + </button>
+                                            id="{{$c[0]}}" readonly>
+                                        <button class="increment" onclick="stepper('{{$c[0]}}', 'increment')"> + </button>
                                     </div>
                                 </div>
                                 <div class="price"> Rp {{ number_format($book->shop_price, 2, ',', '.') }} </div>
@@ -270,10 +270,6 @@
                     <p>Rp {{ number_format($price, 2, ',', '.') }}</p>
                 </div>
                 <div class="item">
-                    <p>Order Total :</p>
-                    <p>Rp {{ number_format($price, 2, ',', '.') }}</p>
-                </div>
-                <div class="item">
                     <p>Delivery Charges :</p>
                     <p><span style="text-decoration: line-through;"></span>Rp 20.000 <span
                             class="green">FREE</span>
@@ -281,7 +277,7 @@
                 </div>
                 <div class="total">
                     <p>Total :</p>
-                    <p>Rp 184.000</p>
+                    <p>Rp {{ number_format($price-20000, 2, ',', '.') }}</p>
                 </div>
             </div>
             <div class="checkout"> <a href="#" class="btn">Place Order</a> </div>
@@ -289,15 +285,14 @@
     </div>
 
     <script>
-        const myInput = document.getElementById("my-input");
-
-        function stepper(btn) {
-            let id = btn.getAttribute("id");
+        function stepper(id, typeIn) {
+            let type = typeIn
+            const myInput = document.getElementById(id);
             let min = myInput.getAttribute("min");
             let max = myInput.getAttribute("max");
             let step = myInput.getAttribute("step");
             let val = myInput.getAttribute("value");
-            let calcStep = (id == "increment") ? (step * 1) : (step * -1);
+            let calcStep = (type == "increment") ? (step * 1) : (step * -1);
             let newValue = parseInt(val) + calcStep;
 
             if (newValue >= min && newValue <= max) {
