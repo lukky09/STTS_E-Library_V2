@@ -26,6 +26,9 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('register');
 });
+Route::get('/admin', function () {
+    return view('admin.home');
+});
 Route::post('/registerUser', [UserController::class, 'doRegis']);
 Route::post('/loginUser', [UserController::class, 'doLogin']);
 Route::get('/logoutUser', [UserController::class, 'doLogout']);
