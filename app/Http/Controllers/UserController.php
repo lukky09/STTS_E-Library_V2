@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\user;
+use App\Models\UserTrans;
 use App\Rules\CorrectPasswordRule;
 use App\Rules\RegisteredUserRule;
 use App\Rules\UniqueMail;
@@ -160,6 +161,29 @@ class UserController extends Controller
 
     public function doOrder(Request $req)
     {
-        // if(getAuthUser()->user_saldo < )
+        $price = 0;
+        foreach (Session::get('cartids') as $c){
+            $book = Book::where('book_id', $c[0])->first();
+            $price += $book->shop_price * $c[1];
+        }
+        if(getAuthUser()->user_saldo >= $price){
+            User::where('user_id', getAuthUser()->user_id)
+            ->update(['user_saldo' => getAuthUser()->user_saldo - $price]);
+
+            $result = UserTrans::create([
+                'user_id' => getAuthUser()->user_id,
+                'subtotal' => $price
+            ]);
+
+            foreach (Session::get('cartids') as $c){
+                $book = Book::find($c[0]);
+                $result->Books()->attach($book, ["qty"=>$c[1]]);
+            }
+
+            Session::forget('cartids');
+            return back()->with("message", "Pembelian berhasil");
+        } else {
+            return back()->with("message", "Saldo tidak cukup");
+        }
     }
 }

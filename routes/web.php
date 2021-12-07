@@ -45,6 +45,7 @@ Route::middleware(['user'])->group(function () {
     Route::get('/addCart/{id}', [UserController::class, 'addToCart']);
     Route::post('/addCartA', [UserController::class, 'addToCart']);
     Route::post('/topup', [UserController::class, 'topUp']);
+    Route::get('/doOrder', [UserController::class, 'doOrder']);
     Route::get('/cart', function () {
         return view('customer.cart');
     });

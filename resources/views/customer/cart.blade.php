@@ -188,7 +188,7 @@
                 <div class="title">
                     MY SHOPPING CART :
                 </div>
-                <div class="itemamount">
+                <div class="amount">
                     <b>(
                         @if (Session::has('cartids'))
                             {{ count(Session::get('cartids')) }}
@@ -274,18 +274,18 @@
                     <p>Bag Total :</p>
                     <p class="ajax2">Rp {{ number_format($price, 2, ',', '.') }}</p>
                 </div>
-                <div class="item">
+                {{-- <div class="item">
                     <p>Delivery Charges :</p>
                     <p><span style="text-decoration: line-through;"></span>Rp 20.000 <span
                             class="green">FREE</span>
                     </p>
-                </div>
+                </div> --}}
                 <div class="total">
                     <p>Total :</p>
-                    <p class="ajax3">Rp {{ number_format($price - 20000, 2, ',', '.') }}</p>
+                    <p class="ajax3">Rp {{ number_format($price, 2, ',', '.') }}</p>
                 </div>
             </div>
-            <div class="checkout"> <a href="#" class="btn">Place Order</a> </div>
+            <div class="checkout"> <a href="{{url('doOrder')}}" class="btn">Place Order</a> </div>
         </div>
     </div>
 
@@ -316,7 +316,6 @@
                         myInput.setAttribute("value", data.newval);
                     }
                 });
-
             }
         }
     </script>
