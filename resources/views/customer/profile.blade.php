@@ -120,8 +120,8 @@
         /* edit-form */
         .edit-form {
             position: absolute;
-            top: 10%;
-            left: 40%;
+            top: 5%;
+            left: 35%;
             margin-left: auto;
             margin-right: auto;
             z-index: 999;
