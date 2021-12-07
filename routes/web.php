@@ -63,6 +63,9 @@ Route::middleware(['supplier'])->group(function () {
         Route::get('/', [SupplierController::class, 'toSuppHome']);
         Route::get('/add', [SupplierController::class, 'toSuppAdd']);
         Route::post('/doAddBook', [SupplierController::class, 'doAdd']);
+        Route::get('/viewBooks', function () {
+            return view('supplier.booklist');
+        });
     });
 });
 // Route::get('supphome', [SupplierController::class, 'toSuppHome']);

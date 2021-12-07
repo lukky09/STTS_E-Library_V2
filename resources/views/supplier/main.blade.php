@@ -28,8 +28,8 @@
 
     * {
         font-family: "Poppins", sans-serif;
-        margin: 0;
-        padding: 0;
+        /* margin: 0;
+        padding: 0; */
         outline: none;
     }
 

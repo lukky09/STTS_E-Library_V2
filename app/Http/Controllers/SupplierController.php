@@ -65,7 +65,7 @@ class SupplierController extends Controller
         Supplier::create([
             "supplier_name"=>$req->supplier_name,
             "supplier_email"=>$req->supplier_email,
-            "supplier_pass"=>Hash::make($req->supplier_name),
+            "supplier_pass"=>Hash::make($req->supplier_pass),
         ]);
 
         return redirect('');
