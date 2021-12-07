@@ -31,7 +31,7 @@
         }
 
         .collapsible {
-            max-width: 450px;
+            max-width: 1200pc;
             overflow: hidden;
             font-weight: 500;
         }
@@ -74,6 +74,7 @@
             top: -100%;
             opacity: 0.5;
             transition: all 0.3s ease;
+            padding: 2%;
         }
 
         .collapsible .all-item .collapsible-text{
