@@ -433,12 +433,12 @@
                     <div id="search-btn" class="fas fa-search"></div>
                 </a>
                 {{-- belum login --}}
-                @if (sudahLogin() == false)
-            <li><a href="#" class="far fa-user" id="login-btn"></i></a></li>
-        @else
-            @php
-                $user = getAuthUser();
-            @endphp
+            @if (sudahLogin() == false)
+                <li><a href="#" class="far fa-user" id="login-btn"></i></a></li>
+            @else
+                @php
+                    $user = getAuthUser();
+                @endphp
             <li onclick="menuToogle();"><a href="#" class="far fa-user" id="logged-btn"></i><span
                         class="font-change">{{ $user->user_fname }}</span></a> </li>
             <li>
