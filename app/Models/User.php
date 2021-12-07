@@ -34,4 +34,8 @@ class user extends Authenticatable
         return $this->user_pass;
     }
 
+    public function UserTrans()
+    {
+        return $this->hasMany(UserTrans::class, 'user_id', 'user_id');
+    }
 }
