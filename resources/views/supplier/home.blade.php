@@ -400,11 +400,11 @@
     <!-- header-banner -->
     <div class="header-landing" data-scene>
         <div class="content">
-            @if (Session::has('login'))
+            @if (sudahLogin())
                 @php
-                    $user = DB::table('users')->where('user_id',Session::get('login'))->first();
+                    $user = DB::table('suppliers')->where('supplier_id',getAuthUser()->supplier_id)->first();
                 @endphp
-                <small>Welcome, {{$user->user_fname}}, to our</small>
+                <small>Welcome, {{$user->supplier_name}}, to our</small>
                 <h1>Book's<br> Creative Store</h1>
             @else
                 <small>Welcome, to our</small>

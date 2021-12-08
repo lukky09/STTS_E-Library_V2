@@ -6,8 +6,8 @@
         background-color: #3E1F47;
         width: 100%;
         margin: 0;
-
     }
+
     .addform{
         color: white;
         /* width: 100vw; */
@@ -15,19 +15,41 @@
         margin-right: auto;
         background-size: cover;
         background-position: center;
+        height: 100vh;
         position: relative;
         overflow: hidden;
     }
+
+    #overlaylayer{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:linear-gradient(to bottom, rgba(20,5,10, 0.52), rgba(117, 19, 93, 0.2));
+        z-index: -1;
+    }
+
+    .formmodal{
+        z-index: 1;
+    }
+
     .addform form{
         width: 50vw;
         margin-left: auto;
         margin-right: auto;
         margin-top: 100px;
         border-radius: 20px;
-        border: 5px solid white;
+        /* border: 5px solid white; */
         padding: 20px;
-        /* background-color: black; */
+        background-color: rgba(0, 0, 0, 0.7);
     }
+
+    .addform form h1{
+        margin-top: 10px;
+        margin-bottom: 0px;
+    }
+
     .forminputs{
         height: 5vh;
         width: 100%;
@@ -39,6 +61,10 @@
     }
     .row{
         margin-top: 2vh;
+    }
+
+    #btnAdd{
+        margin-top: 50px;
     }
 
 
@@ -78,9 +104,9 @@
         }
 
         .content h1 {
-            font-size: 80px;
-            margin: 10px 0 30px;
-            line-height: 80px;
+            /* font-size: 80px;
+            margin: 10px 0 10px;
+            line-height: 50px; */
         }
 
         .bubbles img {
@@ -436,13 +462,17 @@
 
         /* end-news */
 </style>
-<div class="addform" data-scene>
-    <form action="{{url('supplier/doAddBook')}}" method="POST" class="" style="">
+<div class="addform" data-scene style="background-image: url({{URL::asset('webres/pexels-pixabay-159711.jpg')}})">
+    <div id="overlaylayer"></div>
+    <form action="{{url('supplier/doAddBook')}}" method="POST" class="formmodal" style="">
         @csrf
         <h1>Add Book</h1>
-        <div class="row mt-2">
+        <div class="row">
             <label for="form-title">Title</label>
             <input type="text" name="booktitle" placeholder="title" class="form-control forminputs" id="form-title">
+            @error('booktitle')
+                <div class="err">{{$message}}</div>
+            @enderror
         </div>
         @php
             $genres = DB::table('genres')->get();
@@ -456,6 +486,9 @@
                     <option value="{{$genre->genre_id}}">{{$genre->genre_name}}</option>
                 @endforeach
             </select>
+            @error('bookgenre')
+                <div class="err">{{$message}}</div>
+            @enderror
         </div>
         <div class="row mt-2">
             <label for="form-publisher">Publisher</label>
@@ -465,7 +498,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="row mt-2">
+        <div class="row">
             <label for="form-author">Author</label>
             <select name="bookauthor" id="" class="form-control forminputs" id="form-author">
                 @foreach ($authors as $author)
@@ -473,10 +506,17 @@
                 @endforeach
             </select>
         </div>
+        <div class="row">
+            <label for="form-cover">Cover</label>
+            <input type="file" name="photo" id="form-cover" class="form-control">
+        </div>
+        @error("photo")
+            {{$message}}<br>
+        @enderror
         @if(session('message'))
             <small>{{session('message')}}</small><br>
         @endif
-        <button class="btn">Add</button>
+        <button class="btn" id="btnAdd">Add</button>
     </form>
 </div>
 @endsection

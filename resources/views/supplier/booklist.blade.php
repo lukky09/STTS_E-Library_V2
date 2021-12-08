@@ -441,6 +441,12 @@
 
 
         /* end-news */
+
+
+        table td{
+            border-left: 2px solid white;
+            margin-top: 0px;
+        }
 </style>
 <div class="addform" data-scene>
 
@@ -457,7 +463,7 @@
             @php
                 $author = DB::table('authors')->where('author_id',$book->author_id)->first()->author_name;
             @endphp
-            <tr style="margin-top: 20px; border: 2px solid white">
+            <tr>
                 <td>{{$book->book_name}}</td>
                 <td>{{$author}}</td>
             </tr>

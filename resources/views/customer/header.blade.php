@@ -63,6 +63,7 @@
     .header .right-menu {
         float: right;
         margin-right: 80px;
+        /* background-color: aquamarine; */
     }
 
     /* login form */
@@ -432,6 +433,7 @@
             <li><a>
                     <div id="search-btn" class="fas fa-search"></div>
                 </a>
+            </li>
                 {{-- belum login --}}
             @if (sudahLogin() == false)
                 <li><a href="#" class="far fa-user" id="login-btn"></i></a></li>

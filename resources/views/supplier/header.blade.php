@@ -63,6 +63,8 @@
     .header .right-menu {
         float: right;
         margin-right: 80px;
+        /* background-color: aquamarine; */
+        height: fit-content;
     }
 
     /* login form */
@@ -429,6 +431,9 @@
                 <div id="menu-btn" class="fas fa-bars"></div>
             </li>
             {{-- <li><a href="#" class="fas fa-shopping-cart"></a></li> --}}
+            <li><a>
+                <div id="search-btn" class="fas fa-search"></div>
+            </a></li>
             {{-- belum login --}}
             @if (sudahLogin() == false)
                 <li><a href="#" class="far fa-user" id="login-btn"></i></a></li>
@@ -460,12 +465,8 @@
 
             @endif
 
-            <li><a>
-                    <div id="search-btn" class="fas fa-search"></div>
-                </a></li>
-                <form action="/logoutUser" id="logoutform" method="get" style="width:0px; height: 0px;">
-                    {{-- @csrf --}}
-                </form>
+
+
         </ul>
     </div>
     {{-- login --}}
