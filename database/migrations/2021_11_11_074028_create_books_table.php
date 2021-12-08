@@ -22,6 +22,7 @@ class CreateBooksTable extends Migration
             $table->integer("genre_id");
             $table->integer("publisher_id");
             $table->integer("author_id");
+            $table->string('book_dir');
             $table->timestamps();
             $table->softDeletes();
         });

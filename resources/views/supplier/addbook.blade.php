@@ -464,7 +464,7 @@
 </style>
 <div class="addform" data-scene style="background-image: url({{URL::asset('webres/pexels-pixabay-159711.jpg')}})">
     <div id="overlaylayer"></div>
-    <form action="{{url('supplier/doAddBook')}}" method="POST" class="formmodal" style="">
+    <form action="{{url('supplier/doAddBook')}}" method="POST" class="formmodal" style="" enctype="multipart/form-data">
         @csrf
         <h1>Add Book</h1>
         <div class="row">
@@ -508,9 +508,9 @@
         </div>
         <div class="row">
             <label for="form-cover">Cover</label>
-            <input type="file" name="photo" id="form-cover" class="form-control">
+            <input type="file" name="photocover" id="form-cover" class="form-control">
         </div>
-        @error("photo")
+        @error("photocover")
             {{$message}}<br>
         @enderror
         @if(session('message'))

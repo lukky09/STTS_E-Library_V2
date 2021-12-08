@@ -24,7 +24,8 @@ class BookFactory extends Factory
             'genre_id' => $this->faker->randomElement(Genre::all()->pluck('genre_id')),
             'publisher_id' => $this->faker->randomElement(Publisher::all()->pluck('publisher_id')),
             'author_id' => $this->faker->randomElement(Author::all()->pluck('author_id')),
-            'book_synopsis' => $this->faker->sentence(10, true)
+            'book_synopsis' => $this->faker->sentence(10, true),
+            'book_dir'=> "Test"
         ];
     }
 }

@@ -18,8 +18,12 @@ class Book extends Model
 
     protected $fillable = [
         'book_name',
+        'shop_qty',
+        'shop_price',
+        'book_synopsis',
         'genre_id',
         'publisher_id',
-        'author_id'
+        'author_id',
+        'book_dir'
     ];
 }

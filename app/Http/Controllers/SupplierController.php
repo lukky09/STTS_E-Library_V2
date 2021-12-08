@@ -86,14 +86,25 @@ class SupplierController extends Controller
             "booktitle"=>"required|string",
             "bookgenre"=>"required",
             "bookpublisher"=>"required",
-            "bookauthor"=>"required"
+            "bookauthor"=>"required",
+            "photocover" => "required|mimes:png,jpg,jpeg|max:5120"
         ]);
+
+        dump($req->file('photocover'));
+
+        $namafile = strtolower(trim($req->input('booktitle'), " ")).".".$req->file('photocover')->getClientOriginalExtension();
+        $namafolder = "covers";
+        $req->file('photocover')->storeAs($namafolder,$namafile,'public');
 
         Book::create([
             "book_name" => $req->booktitle,
+            "shop_qty" => 0,
+            "shop_price" => 8888,
+            "book_synopsis"=>"Test",
             "genre_id" => $req->bookgenre,
             "publisher_id" => $req->bookpublisher,
-            "author_id" => $req->bookauthor
+            "author_id" => $req->bookauthor,
+            "book_dir" => "/covers/$namafile"
         ]);
 
         return redirect('/supplier/add')->with('message',"Success inserting new book \"$req->booktitle\"");

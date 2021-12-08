@@ -458,6 +458,7 @@
         <tr>
             <th>TITLE</th>
             <th>AUTHOR</th>
+            <th>COVER</th>
         </tr>
         @foreach ($books as $book)
             @php
@@ -466,6 +467,7 @@
             <tr>
                 <td>{{$book->book_name}}</td>
                 <td>{{$author}}</td>
+                <td><img src="{{asset('storage'.$book->book_dir)}}" alt=""></td>
             </tr>
         @endforeach
 
