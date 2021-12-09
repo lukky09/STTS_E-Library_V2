@@ -255,7 +255,11 @@
                     @foreach ($books as $b)
                         <div class="item" data-aos="zoom-out-up">
                             <div class="item-img">
-                                <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
+                                @if ($b->book_dir != 'Test')
+                                    <img src="{{ asset('storage' . $b->book_dir) }}">
+                                @else
+                                    <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
+                                @endif
                                 <div class="icon-list">
                                     <a href="/detail/{{ $b->book_id }}">
                                         <button type="button">
