@@ -58,13 +58,13 @@
 
     .header .left-menu {
         width: 60%;
+
     }
 
     .header .right-menu {
         float: right;
         margin-right: 80px;
         /* background-color: aquamarine; */
-        height: fit-content;
     }
 
     /* login form */
@@ -422,6 +422,7 @@
             </li>
             <li><a href="/supplier/">Home</a></li>
             <li><a href="/supplier/add">Add</a></li>
+            <li><a href="/supplier/supply">Supply</a></li>
             <li><a href="/supplier/viewBooks/">Books</a></li>
         </ul>
     </div>

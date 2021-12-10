@@ -411,8 +411,13 @@
     <div class="main_contain" data-scene>
         <div class="card" data-aos="zoom-out-up">
             <div class="imgBox">
-                <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
-                <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
+                @if ($book->book_dir != 'Test')
+                    <img src="{{ asset('storage' . $book->book_dir) }}">
+                    <img src="{{ asset('storage' . $book->book_dir) }}">
+                @else
+                    <img src=" {{ url(URL::asset('rss/book/img1.jpg')) }}">
+                    <img src=" {{ url(URL::asset('rss/book/img1.jpg')) }}">
+                @endif
             </div>
             <div class="details">
                 <div class="content">

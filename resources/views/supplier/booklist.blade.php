@@ -447,6 +447,11 @@
             border-left: 2px solid white;
             margin-top: 0px;
         }
+
+        .imgbooklist img{
+            max-width: 200px;
+            max-height: 200px;
+        }
 </style>
 <div class="addform" data-scene>
 
@@ -467,7 +472,7 @@
             <tr>
                 <td>{{$book->book_name}}</td>
                 <td>{{$author}}</td>
-                <td><img src="{{asset('storage'.$book->book_dir)}}" alt=""></td>
+                <td class="imgbooklist"><img src="{{asset('storage'.$book->book_dir)}}" alt=""></td>
             </tr>
         @endforeach
 

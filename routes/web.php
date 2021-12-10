@@ -3,6 +3,7 @@
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
+use App\Models\Supplier;
 use Facade\FlareClient\View;
 use Illuminate\Support\Facades\Route;
 
@@ -78,6 +79,7 @@ Route::middleware(['supplier'])->group(function () {
         Route::get('/', [SupplierController::class, 'toSuppHome']);
         Route::get('/add', [SupplierController::class, 'toSuppAdd']);
         Route::post('/doAddBook', [SupplierController::class, 'doAdd']);
+        Route::get('/supply', [SupplierController::class, 'toSupply']);
         Route::get('/viewBooks', function () {
             return view('supplier.booklist');
         });

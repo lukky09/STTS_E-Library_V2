@@ -29,4 +29,8 @@ class Supplier extends Authenticatable
     {
         return $this->supplier_pass;
     }
+    public function SupplierBooks()
+    {
+        return $this->belongsToMany(Book::class,'supplierbooks','supplier_id','book_id')->withPivot(['qty','price']);
+    }
 }

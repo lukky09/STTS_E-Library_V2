@@ -26,4 +26,10 @@ class Book extends Model
         'author_id',
         'book_dir'
     ];
+    public function Suppliers()
+    {
+        return $this->belongsToMany(Supplier::class,'supplierbooks','book_id','supplier_id')->withPivot(['qty','price']);
+    }
+
+    
 }
