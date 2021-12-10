@@ -82,12 +82,18 @@ class SupplierController extends Controller
 
     public function doAdd(Request $req)
     {
+        $customMessage = [
+            "booktitle.required"=>"Title required",
+            "bookdesc.required"=>"Description must be filled",
+            "photocover.required"=>"Please submit cover photo"
+        ];
         $req->validate([
             "booktitle"=>"required|string",
             "bookgenre"=>"required",
             "bookpublisher"=>"required",
             "bookauthor"=>"required",
-            "photocover" => "required|mimes:png,jpg,jpeg|max:5120"
+            "photocover" => "required|mimes:png,jpg,jpeg|max:5120",
+            "bookdesc"=>"required|string"
         ]);
 
         dump($req->file('photocover'));
@@ -99,8 +105,8 @@ class SupplierController extends Controller
         Book::create([
             "book_name" => $req->booktitle,
             "shop_qty" => 0,
-            "shop_price" => 8888,
-            "book_synopsis"=>"Test",
+            "shop_price" => $req->bookprice,
+            "book_synopsis"=>$req->bookdesc,
             "genre_id" => $req->bookgenre,
             "publisher_id" => $req->bookpublisher,
             "author_id" => $req->bookauthor,
@@ -108,5 +114,11 @@ class SupplierController extends Controller
         ]);
 
         return redirect('/supplier/add')->with('message',"Success inserting new book \"$req->booktitle\"");
+    }
+
+    public function toSupply(Request $req)
+    {
+        $books = Book::where('deleted_at',NULL)->get();
+        return view('supplier.supplybook',["books"=>$books]);
     }
 }

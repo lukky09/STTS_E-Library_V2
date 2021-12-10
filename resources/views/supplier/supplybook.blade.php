@@ -468,77 +468,21 @@
         @csrf
 
         @php
+            // dump($books);
             $genres = DB::table('genres')->get();
             $publishers = DB::table('publishers')->get();
             $authors = DB::table('authors')->get();
         @endphp
-        <h2 style="margin: 0">Add Book</h2>
+        <h2 style="margin: 0">Supply Book</h2>
         <div class="row">
             <label for="form-title">Title</label>
-            <input type="text" name="booktitle" placeholder="title" class="form-control forminputs" id="form-title">
-            @error('booktitle')
-                <div class="err">{{$message}}</div>
-            @enderror
-        </div>
-        <div class="" style="display: flex;">
-            <div class="row" style="width: 30%;">
-                <label for="form-genres">Genre</label>
-                <select name="bookgenre" id="" class="form-control forminputs" id="form-genres">
-                    @foreach ($genres as $genre)
-                        <option value="{{$genre->genre_id}}">{{$genre->genre_name}}</option>
-                    @endforeach
-                </select>
-                @error('bookgenre')
-                    <div class="err">{{$message}}</div>
-                @enderror
-            </div>
-            <div class="row" style="width: 70%; padding-left: 1vw;">
-                <label for="form-publisher">Publisher</label>
-                <select name="bookpublisher" id="" class="form-control forminputs" id="form-publisher">
-                    @foreach ($publishers as $publisher)
-                        <option value="{{$publisher->publisher_id}}">{{$publisher->publisher_name}}</option>
-                    @endforeach
-                </select>
-            </div>
+            <select name="bookid" id="" class="form-control forminputs">
+                @foreach ($books as $book)
+                    <option value="{{$book->book_id}}">{{$book->book_name}}</option>
+                @endforeach
+            </select>
         </div>
 
-        {{-- <div class="row" style="display: flex;"> --}}
-            {{-- <div class="row" style="width: 30%">
-                <label for="form-price">Price</label>
-                <style>
-                    input::-webkit-outer-spin-button,
-                    input::-webkit-inner-spin-button {
-                        -webkit-appearance: none;
-                        margin: 0;
-                    }
-                </style>
-                <input type="number" class="form-control forminputs" name="bookprice" id="form-price">
-            </div> --}}
-            <div class="row">
-                <label for="form-author">Author</label>
-                <select name="bookauthor" id="" class="form-control forminputs" id="form-author" style="margin: 0; height: 62%;">
-                    @foreach ($authors as $author)
-                        <option value="{{$author->author_id}}">{{$author->author_name}}</option>
-                    @endforeach
-                </select>
-            </div>
-
-        {{-- </div> --}}
-
-        <div class="row" style="margin-top: 2vh;">
-            <label for="form-cover">Cover</label>
-            <input type="file" name="photocover" id="form-cover" class="form-control">
-        </div>
-        @error("photocover")
-            {{$message}}<br>
-        @enderror
-        <div class="row">
-            <label for="form-desc">Description</label>
-            <textarea name="bookdesc" id="form-desc" cols="30" rows="4" style="border-radius: 10px; width: 100%"></textarea>
-        </div>
-        @error("bookdesc")
-            {{$message}}<br>
-        @enderror
         @if(session('message'))
             <small>{{session('message')}}</small><br>
         @endif

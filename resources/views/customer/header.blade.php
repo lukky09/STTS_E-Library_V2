@@ -63,7 +63,7 @@
     .header .right-menu {
         float: right;
         margin-right: 80px;
-        /* background-color: aquamarine; */
+        background-color: aquamarine;
     }
 
     /* login form */
