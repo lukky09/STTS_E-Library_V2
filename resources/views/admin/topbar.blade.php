@@ -42,8 +42,8 @@
     }
 
     .search label ion-icon {
+        margin-top: 10px;
         position: absolute;
-        top: 0;
         left: 10px;
         font-size: 1.2em;
     }

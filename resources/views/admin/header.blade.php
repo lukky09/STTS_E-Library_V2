@@ -1,5 +1,6 @@
 <style>
     .container {
+        margin-left: -20px;
         position: relative;
         width: 100%;
     }
@@ -124,7 +125,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/admin">
                     <span class="icon">
                         <ion-icon name="home-outline"></ion-icon>
                     </span>
@@ -132,7 +133,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/admin/customer">
                     <span class="icon">
                         <ion-icon name="people-outline"></ion-icon>
                     </span>
@@ -140,7 +141,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/admin/book">
                     <span class="icon">
                         <ion-icon name="bookmark-outline"></ion-icon>
                     </span>
@@ -148,7 +149,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/admin/supplier">
                     <span class="icon">
                         <ion-icon name="pricetags-outline"></ion-icon>
                     </span>
@@ -156,7 +157,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/admin/shop">
                     <span class="icon">
                         <ion-icon name="cash-outline"></ion-icon>
                     </span>
@@ -164,15 +165,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <span class="icon">
-                        <ion-icon name="settings-outline"></ion-icon>
-                    </span>
-                    <span class="title">Setting</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
+                <a href="/">
                     <span class="icon">
                         <ion-icon name="log-out-outline"></ion-icon>
                     </span>

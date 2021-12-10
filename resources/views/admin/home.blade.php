@@ -2,9 +2,10 @@
 
 @section('main')
     <style>
-        .main_container{
+        .main_container {
             box-sizing: border-box;
         }
+
         .cardBox {
             position: relative;
             width: 100%;

@@ -29,6 +29,18 @@ Route::get('/register', function () {
 Route::get('/admin', function () {
     return view('admin.home');
 });
+Route::get('/admin/customer', function () {
+    return view('admin.customer');
+});
+Route::get('/admin/book', function () {
+    return view('admin.book');
+});
+Route::get('/admin/supplier', function () {
+    return view('admin.supplier');
+});
+Route::get('/admin/shop', function () {
+    return view('admin.shop');
+});
 Route::post('/registerUser', [UserController::class, 'doRegis']);
 Route::post('/loginUser', [UserController::class, 'doLogin']);
 Route::get('/logoutUser', [UserController::class, 'doLogout']);
