@@ -260,6 +260,9 @@
                         <div class="col-sm-8 add_flex">
                             <div class="form-group searchInput">
                                 <input type="search" class="form-control" id="filterbox" placeholder=" Search" />
+                                <span class="actionCust">
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </span>
                             </div>
                         </div>
                     </div>

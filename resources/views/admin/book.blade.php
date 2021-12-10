@@ -258,6 +258,9 @@
                         <div class="col-sm-8 add_flex">
                             <div class="form-group searchInput">
                                 <input type="search" class="form-control" id="filterbox" placeholder=" Search" />
+                                <span class="actionCust">
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -288,7 +291,7 @@
                                     <td><span class="mode mode_on">Active</span></td>
                                     <td>
                                         <span class="actionCust">
-                                            <a href="#"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a href="/admin/book/{id}/edit"><i class="fa fa-pencil-square-o"></i></a>
                                         </span>
                                         <span class="actionCust">
                                             <a href="#"><i class="fa fa-trash"></i></a>
@@ -306,7 +309,7 @@
                                     <td><span class="mode mode_on">Active</span></td>
                                     <td>
                                         <span class="actionCust">
-                                            <a href="#"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a href="/admin/book/{id}/edit"><i class="fa fa-pencil-square-o"></i></a>
                                         </span>
                                         <span class="actionCust">
                                             <a href="#"><i class="fa fa-trash"></i></a>
@@ -324,7 +327,7 @@
                                     <td><span class="mode mode_on">Active</span></td>
                                     <td>
                                         <span class="actionCust">
-                                            <a href="#"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a href="/admin/book/{id}/edit"><i class="fa fa-pencil-square-o"></i></a>
                                         </span>
                                         <span class="actionCust">
                                             <a href="#"><i class="fa fa-trash"></i></a>
@@ -342,7 +345,7 @@
                                     <td><span class="mode mode_on">Active</span></td>
                                     <td>
                                         <span class="actionCust">
-                                            <a href="#"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a href="/admin/book/{id}/edit"><i class="fa fa-pencil-square-o"></i></a>
                                         </span>
                                         <span class="actionCust">
                                             <a href="#"><i class="fa fa-trash"></i></a>
@@ -360,7 +363,7 @@
                                     <td><span class="mode mode_on">Active</span></td>
                                     <td>
                                         <span class="actionCust">
-                                            <a href="#"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a href="/admin/book/{id}/edit"><i class="fa fa-pencil-square-o"></i></a>
                                         </span>
                                         <span class="actionCust">
                                             <a href="#"><i class="fa fa-trash"></i></a>
@@ -378,7 +381,7 @@
                                     <td><span class="mode mode_on">Active</span></td>
                                     <td>
                                         <span class="actionCust">
-                                            <a href="#"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a href="/admin/book/{id}/edit"><i class="fa fa-pencil-square-o"></i></a>
                                         </span>
                                         <span class="actionCust">
                                             <a href="#"><i class="fa fa-trash"></i></a>

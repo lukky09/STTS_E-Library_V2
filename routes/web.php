@@ -36,6 +36,9 @@ Route::get('/admin/customer', function () {
 Route::get('/admin/book', function () {
     return view('admin.book');
 });
+Route::get('/admin/book/{id}/edit', function () {
+    return view('admin.editbook');
+});
 Route::get('/admin/supplier', function () {
     return view('admin.supplier');
 });
