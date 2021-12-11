@@ -219,28 +219,6 @@
             float: right !important;
         }
 
-        .container_table .mode {
-            padding: 4px 10px;
-            line-height: 13px;
-            color: #fff;
-            font-weight: 400;
-            border-radius: 1rem;
-            -webkit-border-radius: 1rem;
-            -moz-border-radius: 1rem;
-            -ms-border-radius: 1rem;
-            -o-border-radius: 1rem;
-            font-size: 11px;
-            letter-spacing: 0.4px;
-        }
-
-        .container_table .mode_on {
-            background-color: #09922d;
-        }
-
-        .container_table .mode_off {
-            background-color: #8b9096;
-        }
-
         .container_table h3 {
             font-weight: 800;
         }
@@ -276,14 +254,13 @@
                         <table id="filtertable" class="table cust-datatable dataTable no-footer table-sortable">
                             <thead>
                                 <tr>
-                                    <th style="min-width: 50px">ID</th>
-                                    <th style="min-width: 100px">Judul</th>
+                                    <th style="min-width: 20px">ID</th>
+                                    <th style="min-width: 100px">Title</th>
                                     <th style="min-width: 50px">Genre</th>
-                                    <th style="min-width: 50px">Penerbit</th>
+                                    <th style="min-width: 50px">Publisher</th>
                                     <th style="min-width: 50px">Author</th>
-                                    <th style="min-width: 50px">Harga</th>
-                                    <th style="min-width: 50px">Stok</th>
-                                    <th style="min-width: 50px">Status</th>
+                                    <th style="min-width: 50px">Price</th>
+                                    <th style="min-width: 50px">Stock</th>
                                     <th style="min-width: 50px">Action</th>
                                 </tr>
                             </thead>
@@ -296,13 +273,12 @@
                                     <td>Author1</td>
                                     <td>Rp. 50.000</td>
                                     <td>100</td>
-                                    <td><span class="mode mode_on">Active</span></td>
                                     <td>
                                         <span class="actionCust">
-                                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                                            <input type="number" min="0" max="100" placeholder="0"/>
                                         </span>
                                         <span class="actionCust">
-                                            <input type="number" min="0" max="100" placeholder="0"/>
+                                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
                                         </span>
                                     </td>
                                 </tr>
@@ -314,13 +290,12 @@
                                     <td>Author1</td>
                                     <td>Rp. 50.000</td>
                                     <td>100</td>
-                                    <td><span class="mode mode_on">Active</span></td>
                                     <td>
                                         <span class="actionCust">
-                                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                                            <input type="number" min="0" max="100" placeholder="0"/>
                                         </span>
                                         <span class="actionCust">
-                                            <input type="number" min="0" max="100" placeholder="0"/>
+                                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
                                         </span>
                                     </td>
                                 </tr>
@@ -341,7 +316,7 @@
                     bSortable: false,
                     aTargets: ["nosort"],
                 }, ],
-                aoColumns: [null, null, null, null, null, null, null, null, null],
+                aoColumns: [null, null, null, null, null, null, null, null],
                 order: false,
                 bLengthChange: false,
                 dom: '<"top">ct<"top"p><"clear">',

@@ -91,5 +91,11 @@ Route::middleware(['shop'])->group(function () {
         Route::get('/shop', function () {
             return view('admin.shop');
         });
+        Route::get('/jual', function () {
+            return view('admin.jual');
+        });
+        Route::get('/beli', function () {
+            return view('admin.beli');
+        });
     });
 });

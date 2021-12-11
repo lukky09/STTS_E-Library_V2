@@ -116,11 +116,11 @@
             justify-content: center;
             flex-direction: column;
             border-radius: 5px;
-            border: 2px dashed #6990F2;
+            border: 2px dashed #05636d;
         }
 
         .container_upload :where(i, p) {
-            color: #6990F2;
+            color: #05636d;
         }
 
         .container_upload i {
@@ -144,7 +144,7 @@
         }
 
         .container_upload section .row i {
-            color: #6990F2;
+            color: #05636d;
             font-size: 30px;
         }
 
@@ -175,7 +175,7 @@
         .container_upload .content .progress-bar .progress {
             height: 100%;
             width: 0%;
-            background: #6990F2;
+            background: #05636d;
             border-radius: inherit;
         }
 

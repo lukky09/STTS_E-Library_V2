@@ -40,7 +40,7 @@
     }
 
     .navigation ul li:nth-child(1) {
-        margin-bottom: 40px;
+        margin-bottom: 15px;
         pointer-events: none;
     }
 
@@ -143,7 +143,7 @@
             <li>
                 <a href="/admin/book">
                     <span class="icon">
-                        <ion-icon name="bookmark-outline"></ion-icon>
+                        <ion-icon name="library-outline"></ion-icon>
                     </span>
                     <span class="title">Book</span>
                 </a>
@@ -151,7 +151,7 @@
             <li>
                 <a href="/admin/supplier">
                     <span class="icon">
-                        <ion-icon name="pricetags-outline"></ion-icon>
+                        <ion-icon name="bookmark-outline"></ion-icon>
                     </span>
                     <span class="title">Supplier</span>
                 </a>
@@ -159,9 +159,25 @@
             <li>
                 <a href="/admin/shop">
                     <span class="icon">
-                        <ion-icon name="cash-outline"></ion-icon>
+                        <ion-icon name="cart-outline"></ion-icon>
                     </span>
                     <span class="title">Shop</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/jual">
+                    <span class="icon">
+                        <ion-icon name="cash-outline"></ion-icon>
+                    </span>
+                    <span class="title">Sales Report</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/beli">
+                    <span class="icon">
+                        <ion-icon name="pricetags-outline"></ion-icon>
+                    </span>
+                    <span class="title">Purchase Report</span>
                 </a>
             </li>
             <li>

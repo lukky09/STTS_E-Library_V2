@@ -7,12 +7,12 @@
 
     <style>
         /* .navigation {
-                margin-left: -20px;
-            }
+                                margin-left: -20px;
+                            }
 
-            .topbar .search ion-icon {
-                margin-top: 10px;
-            } */
+                            .topbar .search ion-icon {
+                                margin-top: 10px;
+                            } */
 
         .container_table {
             min-height: 100vh;
@@ -108,8 +108,8 @@
             margin-bottom: 0px;
             border-radius: 50px;
             background: #ffffff;
-            border: 1px solid #007bff;
-            color: #007bff;
+            border: 1px solid #05636d;
+            color: #05636d;
             transition: all 0.4s ease;
         }
 
@@ -175,7 +175,7 @@
             background: #f9f9f9;
         }
 
-        .container_table .main-datatable .actionCust a {
+        /* .container_table .main-datatable .actionCust a {
             display: inline-block;
             color: #8a8a8a;
             font-size: 12px;
@@ -189,7 +189,7 @@
         .container_table .main-datatable .actionCust a i {
             color: #8e8e8e;
             margin: 2px;
-        }
+        } */
 
         .container_table .main-datatable .dataTables_wrapper .dataTables_paginate .paginate_button {
             color: #999999 !important;
@@ -202,7 +202,7 @@
         .container_table .main-datatable .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
             color: #fff !important;
             border: 1px solid #3d96f5 !important;
-            background: #4da3ff !important;
+            background: #05636d !important;
             box-shadow: none;
         }
 
@@ -210,7 +210,7 @@
         .container_table .main-datatable .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
             color: #fff !important;
             border-color: transparent !important;
-            background: #007bff !important;
+            background: #05636d !important;
         }
 
         .container_table .main-datatable .dataTables_paginate {
@@ -245,6 +245,52 @@
             font-weight: 800;
         }
 
+        .btn-group.open .dropdown-toggle {
+            box-shadow: none;
+        }
+
+        .main-datatable .dropdown_icon {
+            display: inline-block;
+            color: #8a8a8a;
+            font-size: 12px;
+            border: 1px solid #d4d4d4;
+            padding: 10px 11px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .main-datatable .btn-group i {
+            color: #8e8e8e;
+            margin: 2px;
+        }
+
+        .main-datatable .dropdown-menu li a:hover,
+        .main-datatable .dropdown-menu li a:hover i {
+            background: #05636d;
+            color: #fff;
+        }
+
+        .main-datatable .dropdown-menu i{
+            color: #05636d;
+            margin-right: 10px;
+        }
+
+        .container_table .main-datatable .actionCust a {
+            display: inline-block;
+            color: #8a8a8a;
+            font-size: 12px;
+            border: 1px solid #d4d4d4;
+            padding: 10px 11px;
+            margin: 2px 3px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .container_table .main-datatable .actionCust a i {
+            color: #8e8e8e;
+            margin: 2px;
+        }
+
     </style>
 
     <div class="container_table" data-scene>
@@ -253,7 +299,7 @@
                 <div class="card_body">
                     <div class="row d-flex">
                         <div class="col-sm-4 createSegment">
-                            <h3>Master Buku</h3>
+                            <h3>Master Book</h3>
                         </div>
                         <div class="col-sm-8 add_flex">
                             <div class="form-group searchInput">
@@ -271,15 +317,15 @@
                         <table id="filtertable" class="table cust-datatable dataTable no-footer table-sortable">
                             <thead>
                                 <tr>
-                                    <th style="min-width: 50px">ID</th>
-                                    <th style="min-width: 100px">Judul</th>
-                                    <th style="min-width: 50px">Genre</th>
-                                    <th style="min-width: 50px">Penerbit</th>
-                                    <th style="min-width: 50px">Author</th>
-                                    <th style="min-width: 50px">Harga</th>
-                                    <th style="min-width: 50px">Stok</th>
-                                    <th style="min-width: 50px">Status</th>
-                                    <th style="min-width: 100px">Action</th>
+                                    <th style="width: 20px">ID</th>
+                                    <th style="width: 50px">Action</th>
+                                    <th style="width: 100px">Title</th>
+                                    <th style="width: 60px">Genre</th>
+                                    <th style="width: 80px">Publisher</th>
+                                    <th style="width: 80px">Author</th>
+                                    <th style="width: 70px">Price</th>
+                                    <th style="width: 20px">Stock</th>
+                                    <th style="width: 60px">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -287,31 +333,41 @@
                                     <tr>
                                         @php
                                             $genre = DB::table('genres')
-                                            ->where('genre_id', $book->genre_id)
-                                            ->first()->genre_name;
+                                                ->where('genre_id', $book->genre_id)
+                                                ->first()->genre_name;
                                             $author = DB::table('authors')
-                                            ->where('author_id', $book->author_id)
-                                            ->first()->author_name;
+                                                ->where('author_id', $book->author_id)
+                                                ->first()->author_name;
                                             $publisher = DB::table('publishers')
-                                            ->where('publisher_id', $book->publisher_id)
-                                            ->first()->publisher_name;
+                                                ->where('publisher_id', $book->publisher_id)
+                                                ->first()->publisher_name;
                                         @endphp
                                         <td>{{ $book->book_id }}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a class="dropdown-toggle dropdown_icon" data-toggle="dropdown">
+                                                    <i class="fa fa-ellipsis-h"></i>
+                                                </a>
+                                                <ul class="dropdown-menu dropdown_more">
+                                                    <li>
+                                                        <a href="/admin/book/{id}/edit" target="_black">
+                                                            <i class="fa fa-pencil-square-o"></i>Edit</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" target="_black"> <i class="fa fa-trash"></i> Delete
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
                                         <td>{{ $book->book_name }}</td>
                                         <td>{{ $genre }}</td>
                                         <td>{{ $publisher }}</td>
                                         <td>{{ $author }}</td>
-                                        <td>Rp. {{number_format($book->shop_price, 2, ',', '.')}}</td>
+                                        <td>Rp. {{ number_format($book->shop_price, 2, ',', '.') }}</td>
                                         <td>{{ $book->shop_qty }}</td>
                                         <td><span class="mode mode_on">Active</span></td>
-                                        <td>
-                                            <span class="actionCust">
-                                                <a href="/admin/book/{id}/edit"><i class="fa fa-pencil-square-o"></i></a>
-                                            </span>
-                                            <span class="actionCust">
-                                                <a href="#"><i class="fa fa-trash"></i></a>
-                                            </span>
-                                        </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>
