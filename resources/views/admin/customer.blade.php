@@ -267,6 +267,11 @@
                         </div>
                     </div>
                     <div>
+                        @php
+                            $users = DB::table('users')
+                            ->where('user_isadmin', 0)
+                            ->get();
+                        @endphp
                         <table id="filtertable" class="table cust-datatable dataTable no-footer table-sortable">
                             <thead>
                                 <tr>
@@ -279,11 +284,12 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($users as $user)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Dummy1</td>
-                                    <td>user@gmail.com</td>
-                                    <td>17-Apr-2020</td>
+                                    <td>{{$user->user_id}}</td>
+                                    <td>{{$user->user_fname}} {{$user->user_lname}}</td>
+                                    <td>{{$user->user_email}}</td>
+                                    <td>{{date('d-M-Y', strtotime($user->created_at))}}</td>
                                     <td><span class="mode mode_on">Active</span></td>
                                     <td>
                                         <span class="actionCust">
@@ -294,7 +300,8 @@
                                         </span>
                                     </td>
                                 </tr>
-                                <tr>
+                                @endforeach
+                                {{-- <tr>
                                     <td>2</td>
                                     <td>Dummy2</td>
                                     <td>user@gmail.com</td>
@@ -308,7 +315,7 @@
                                             <a href="#"><i class="fa fa-trash"></i></a>
                                         </span>
                                     </td>
-                                </tr>
+                                </tr> --}}
                             </tbody>
                         </table>
                     </div>

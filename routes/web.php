@@ -27,24 +27,7 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('register');
 });
-Route::get('/admin', function () {
-    return view('admin.home');
-});
-Route::get('/admin/customer', function () {
-    return view('admin.customer');
-});
-Route::get('/admin/book', function () {
-    return view('admin.book');
-});
-Route::get('/admin/book/{id}/edit', function () {
-    return view('admin.editbook');
-});
-Route::get('/admin/supplier', function () {
-    return view('admin.supplier');
-});
-Route::get('/admin/shop', function () {
-    return view('admin.shop');
-});
+
 Route::post('/registerUser', [UserController::class, 'doRegis']);
 Route::post('/loginUser', [UserController::class, 'doLogin']);
 Route::get('/logoutUser', [UserController::class, 'doLogout']);
@@ -57,7 +40,6 @@ Route::get('/product', function () {
 Route::get('/search', [ShopController::class, 'search']);
 Route::get('/detail/{id}', [ShopController::class, 'detail']);
 
-//session usertype = 0
 Route::middleware(['user'])->group(function () {
     Route::post('/doEditProfile', [UserController::class, 'doUpdateProfile']);
     Route::get('/editCart', [UserController::class, 'ajaxUpdateCart']);
@@ -76,7 +58,6 @@ Route::middleware(['user'])->group(function () {
     });
 });
 
-//session usertype = 1
 Route::middleware(['supplier'])->group(function () {
     Route::prefix('supplier')->group(function () {
         Route::get('/', [SupplierController::class, 'toSuppHome']);
@@ -91,6 +72,25 @@ Route::middleware(['supplier'])->group(function () {
 // Route::get('supphome', [SupplierController::class, 'toSuppHome']);
 // Route::get('suppadd', [SupplierController::class, 'toSuppAdd']);
 
-//session usertype = 2
 Route::middleware(['shop'])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('/', function () {
+            return view('admin.home');
+        });
+        Route::get('/customer', function () {
+            return view('admin.customer');
+        });
+        Route::get('/book', function () {
+            return view('admin.book');
+        });
+        Route::get('/book/{id}/edit', function () {
+            return view('admin.editbook');
+        });
+        Route::get('/supplier', function () {
+            return view('admin.supplier');
+        });
+        Route::get('/shop', function () {
+            return view('admin.shop');
+        });
+    });
 });

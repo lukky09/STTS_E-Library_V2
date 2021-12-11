@@ -31,7 +31,7 @@ function getAuthUserType()
     } else {
         if (Auth::guard('supplier_provider')->check()) {
             return "supp";
-        } else if (Auth::guard('user_provider')->user()->isadmin == 0) {
+        } else if (Auth::guard('user_provider')->user()->user_isadmin == 0) {
             return "user";
         } else {
             return "shop";

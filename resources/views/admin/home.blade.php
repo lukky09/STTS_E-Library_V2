@@ -218,7 +218,7 @@
 
     <!-- card -->
     <div class="cardBox" data-scene>
-        <div class="card">
+        {{-- <div class="card">
             <div>
                 <div class="numbers">1, 504</div>
                 <div class="cardName">Daily Views</div>
@@ -226,7 +226,7 @@
             <div class="iconBx">
                 <ion-icon name="eye-outline"></ion-icon>
             </div>
-        </div>
+        </div> --}}
         <div class="card">
             <div>
                 <div class="numbers">80</div>
@@ -236,7 +236,7 @@
                 <ion-icon name="cart-outline"></ion-icon>
             </div>
         </div>
-        <div class="card">
+        {{-- <div class="card">
             <div>
                 <div class="numbers">284</div>
                 <div class="cardName">Comments</div>
@@ -244,7 +244,7 @@
             <div class="iconBx">
                 <ion-icon name="chatbubbles-outline"></ion-icon>
             </div>
-        </div>
+        </div> --}}
         <div class="card">
             <div>
                 <div class="numbers">$7,242</div>

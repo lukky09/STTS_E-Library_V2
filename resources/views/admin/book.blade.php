@@ -7,12 +7,12 @@
 
     <style>
         /* .navigation {
-            margin-left: -20px;
-        }
+                margin-left: -20px;
+            }
 
-        .topbar .search ion-icon {
-            margin-top: 10px;
-        } */
+            .topbar .search ion-icon {
+                margin-top: 10px;
+            } */
 
         .container_table {
             min-height: 100vh;
@@ -265,6 +265,9 @@
                         </div>
                     </div>
                     <div>
+                        @php
+                            $books = DB::table('books')->get();
+                        @endphp
                         <table id="filtertable" class="table cust-datatable dataTable no-footer table-sortable">
                             <thead>
                                 <tr>
@@ -280,114 +283,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Dummy1</td>
-                                    <td>Action</td>
-                                    <td>Elex Media</td>
-                                    <td>Author1</td>
-                                    <td>Rp. 50.000</td>
-                                    <td>100</td>
-                                    <td><span class="mode mode_on">Active</span></td>
-                                    <td>
-                                        <span class="actionCust">
-                                            <a href="/admin/book/{id}/edit"><i class="fa fa-pencil-square-o"></i></a>
-                                        </span>
-                                        <span class="actionCust">
-                                            <a href="#"><i class="fa fa-trash"></i></a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Dummy2</td>
-                                    <td>Action</td>
-                                    <td>Elex Media</td>
-                                    <td>Author1</td>
-                                    <td>Rp. 50.000</td>
-                                    <td>100</td>
-                                    <td><span class="mode mode_on">Active</span></td>
-                                    <td>
-                                        <span class="actionCust">
-                                            <a href="/admin/book/{id}/edit"><i class="fa fa-pencil-square-o"></i></a>
-                                        </span>
-                                        <span class="actionCust">
-                                            <a href="#"><i class="fa fa-trash"></i></a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Dummy1</td>
-                                    <td>Action</td>
-                                    <td>Elex Media</td>
-                                    <td>Author1</td>
-                                    <td>Rp. 50.000</td>
-                                    <td>100</td>
-                                    <td><span class="mode mode_on">Active</span></td>
-                                    <td>
-                                        <span class="actionCust">
-                                            <a href="/admin/book/{id}/edit"><i class="fa fa-pencil-square-o"></i></a>
-                                        </span>
-                                        <span class="actionCust">
-                                            <a href="#"><i class="fa fa-trash"></i></a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Dummy2</td>
-                                    <td>Action</td>
-                                    <td>Elex Media</td>
-                                    <td>Author1</td>
-                                    <td>Rp. 50.000</td>
-                                    <td>100</td>
-                                    <td><span class="mode mode_on">Active</span></td>
-                                    <td>
-                                        <span class="actionCust">
-                                            <a href="/admin/book/{id}/edit"><i class="fa fa-pencil-square-o"></i></a>
-                                        </span>
-                                        <span class="actionCust">
-                                            <a href="#"><i class="fa fa-trash"></i></a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Dummy1</td>
-                                    <td>Action</td>
-                                    <td>Elex Media</td>
-                                    <td>Author1</td>
-                                    <td>Rp. 50.000</td>
-                                    <td>100</td>
-                                    <td><span class="mode mode_on">Active</span></td>
-                                    <td>
-                                        <span class="actionCust">
-                                            <a href="/admin/book/{id}/edit"><i class="fa fa-pencil-square-o"></i></a>
-                                        </span>
-                                        <span class="actionCust">
-                                            <a href="#"><i class="fa fa-trash"></i></a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Dummy2</td>
-                                    <td>Action</td>
-                                    <td>Elex Media</td>
-                                    <td>Author1</td>
-                                    <td>Rp. 50.000</td>
-                                    <td>100</td>
-                                    <td><span class="mode mode_on">Active</span></td>
-                                    <td>
-                                        <span class="actionCust">
-                                            <a href="/admin/book/{id}/edit"><i class="fa fa-pencil-square-o"></i></a>
-                                        </span>
-                                        <span class="actionCust">
-                                            <a href="#"><i class="fa fa-trash"></i></a>
-                                        </span>
-                                    </td>
-                                </tr>
+                                @foreach ($books as $book)
+                                    <tr>
+                                        @php
+                                            $genre = DB::table('genres')
+                                            ->where('genre_id', $book->genre_id)
+                                            ->first()->genre_name;
+                                            $author = DB::table('authors')
+                                            ->where('author_id', $book->author_id)
+                                            ->first()->author_name;
+                                            $publisher = DB::table('publishers')
+                                            ->where('publisher_id', $book->publisher_id)
+                                            ->first()->publisher_name;
+                                        @endphp
+                                        <td>{{ $book->book_id }}</td>
+                                        <td>{{ $book->book_name }}</td>
+                                        <td>{{ $genre }}</td>
+                                        <td>{{ $publisher }}</td>
+                                        <td>{{ $author }}</td>
+                                        <td>Rp. {{number_format($book->shop_price, 2, ',', '.')}}</td>
+                                        <td>{{ $book->shop_qty }}</td>
+                                        <td><span class="mode mode_on">Active</span></td>
+                                        <td>
+                                            <span class="actionCust">
+                                                <a href="/admin/book/{id}/edit"><i class="fa fa-pencil-square-o"></i></a>
+                                            </span>
+                                            <span class="actionCust">
+                                                <a href="#"><i class="fa fa-trash"></i></a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

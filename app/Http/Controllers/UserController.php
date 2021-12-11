@@ -30,8 +30,11 @@ class UserController extends Controller
         ];
 
         if (Auth::guard('user_provider')->attempt($credential)) {
-            // dd(getAuthUser());
-            return redirect('/');
+            if(getAuthUser()->user_isadmin ==1){
+                return redirect('/admin');
+            }else{
+                return redirect('/');
+            }
         } else {
             //gagal masuk
             echo 'ga bisa masuk';
