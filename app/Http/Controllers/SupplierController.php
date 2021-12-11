@@ -9,6 +9,7 @@ use App\Rules\RegisteredUserRule;
 use App\Rules\UniqueMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -73,7 +74,9 @@ class SupplierController extends Controller
 
     public function toSuppHome(Request $req)
     {
-        return view('supplier.home');
+        $books = Book::withoutTrashed()->inRandomOrder()->limit(6)->get();
+        $booksadd = Book::where('book_id','104')->first();
+        return view('supplier.home',["books"=>$books,"booksadd"=>$booksadd]);
     }
     public function toSuppAdd(Request $req)
     {
@@ -98,14 +101,14 @@ class SupplierController extends Controller
 
         dump($req->file('photocover'));
 
-        $namafile = strtolower(trim($req->input('booktitle'), " ")).".".$req->file('photocover')->getClientOriginalExtension();
+        $namafile = strtolower(trim($req->input('booktitle'), ' ')).".".$req->file('photocover')->getClientOriginalExtension();
         $namafolder = "covers";
         $req->file('photocover')->storeAs($namafolder,$namafile,'public');
 
         Book::create([
             "book_name" => $req->booktitle,
             "shop_qty" => 0,
-            "shop_price" => $req->bookprice,
+            "shop_price" => 8888,
             "book_synopsis"=>$req->bookdesc,
             "genre_id" => $req->bookgenre,
             "publisher_id" => $req->bookpublisher,
@@ -120,5 +123,25 @@ class SupplierController extends Controller
     {
         $books = Book::where('deleted_at',NULL)->get();
         return view('supplier.supplybook',["books"=>$books]);
+    }
+
+    public function doSupply(Request $req)
+    {
+        $req->validate([
+            "bookprice"=>"required|numeric|min:5000",
+            "bookamount"=>"required|numeric|min:5"
+        ]);
+        $user = getAuthUser();
+        $book = Book::where('book_id', $req->bookid)->first();
+        DB::table('supplierbooks')->insert([
+            "book_id"=>$req->bookid,
+            "supplier_id"=>$user->supplier_id,
+            "price"=>$req->bookprice,
+            "qty"=>$req->bookamount
+        ]);
+
+        return redirect('supplier/supply')->with('message', "Supplied $req->bookamount copies of \"$book->book_name\"");
+
+
     }
 }

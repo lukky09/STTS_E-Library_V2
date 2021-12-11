@@ -18,9 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('customer.home');
-});
+Route::get('/', [UserController::class,'toHomeView']);
 Route::get('/login', function () {
     return view('login');
 });
@@ -64,6 +62,7 @@ Route::middleware(['supplier'])->group(function () {
         Route::get('/add', [SupplierController::class, 'toSuppAdd']);
         Route::post('/doAddBook', [SupplierController::class, 'doAdd']);
         Route::get('/supply', [SupplierController::class, 'toSupply']);
+        Route::post('/doSupply', [SupplierController::class, 'doSupply']);
         Route::get('/viewBooks', function () {
             return view('supplier.booklist');
         });

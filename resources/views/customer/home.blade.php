@@ -395,6 +395,16 @@
 
         /* end-news */
 
+        .randombook{
+            width: 100%;
+            height: 100%;
+            /* padding: 2vh; */
+            padding-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
     <!-- header-banner -->
     <div class="header-landing" data-scene>
@@ -449,17 +459,30 @@
     </section>
 
     <section class="sec2 left-right-sec" data-scene>
+        @php
+            $randombook = DB::table('books')->inRandomorder()->first();
+        @endphp
         <div class="container">
             <div class="sec2-inner">
-                <div class="img" data-aos="zoom-out-up"><img src={{ url(URL::asset('rss/book/img1.jpg')) }}>
+                <div class="img" data-aos="zoom-out-up">
+                    @if ($randombook->book_dir == "Test")
+                        @php
+                            $rand = rand(40,80) . rand(40,90) . rand(40,60);
+                        @endphp
+                        <div class="randombook" style="display: block; background-color: #{{$rand}} ;">
+                            <div style="color: white; font-family: 'Times New Roman', Times, serif; border:solid white 2px;
+                                font-size: 50px; height: 400px; margin: 10px 20px;">
+                                {{$randombook->book_name}}
+                            </div>
+                        </div>
+                    @else
+                        <img src="{{asset('storage'.$randombook->book_dir) }}">
+                    @endif
                 </div>
                 <div class="text" data-aos="zoom-out-left">
-                    <h2>LiT: Catatan Tentang Hujan</h2>
+                    <h2>{{$randombook->book_name}}</h2>
                     <div class="text-inner">
-                        <p>Dalam rinai kisah kita terlukiskan Kau yang tak lelah berjuang, kepada kerasku yang kaululuhkan
-                            Sekarang biarkan aku menjadi laut yang menyimpan dalam semua rahasia kita Seperti ombak di
-                            tengah samudra, biar aku yang berkelana jauh Lalu pulang, kembali ke pelukmu, sang tepian Fajar
-                            dan Senja saling jatuh cinta.</p>
+                        <p>{{$randombook->book_synopsis}}</p>
                         <a href="#" class="btn">Learn More</a>
                     </div>
                 </div>
@@ -472,7 +495,41 @@
             <div class="sec3-inner" data-aos="zoom-out-left">
                 <h2>Popular Book</h2>
                 <div class="sec3-slider">
-                    <div class="card">
+
+                    @foreach ($books as $book)
+                        <div class="card">
+                            <div class="front">
+                                @if ($book->book_dir == "Test")
+                                    @php
+                                        $rand = rand(10,50) . rand(10,50) . rand(10,50);
+                                    @endphp
+                                    <div class="randombook" style="display: block; background-color: #{{$rand}} ;">
+                                        <div style="color: white; font-family: 'Times New Roman', Times, serif; border:solid white 2px;
+                                            font-size: 50px; height: 90%; margin: 10px 20px;">
+                                            {{$book->book_name}}
+                                        </div>
+                                    </div>
+                                @else
+                                    <img src="{{ url(URL::asset('storage'.$book->book_dir)) }}">
+                                @endif
+
+                            </div>
+                            <div class="back">
+                                <div class="back-content middle">
+                                    <h2>{{$book->book_name}}</h2>
+                                    <span>{{$book->Authors->author_name}}</span>
+                                    <div class="sm">
+                                        <a href="#"><img src={{ url(URL::asset('rss/icons/cart.png')) }}></a>
+                                        <a href="#"><img src={{ url(URL::asset('rss/icons/loupe.png')) }}></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+
+
+                    {{-- <div class="card">
                         <div class="front">
                             <img src={{ url(URL::asset('rss/book/img3.jpg')) }}>
                         </div>
@@ -561,7 +618,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

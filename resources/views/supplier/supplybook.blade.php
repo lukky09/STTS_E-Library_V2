@@ -464,7 +464,7 @@
 </style>
 <div class="addform" data-scene style="background-image: url({{URL::asset('webres/pexels-pixabay-159711.jpg')}})">
     <div id="overlaylayer"></div>
-    <form action="{{url('supplier/doAddBook')}}" method="POST" class="formmodal" style="" enctype="multipart/form-data">
+    <form action="{{url('supplier/doSupply')}}" method="POST" class="formmodal" style="">
         @csrf
 
         @php
@@ -483,10 +483,35 @@
             </select>
         </div>
 
+        <div class="row">
+            <style>
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+                input[type=number] {
+                -moz-appearance: textfield;
+                }
+            </style>
+            <label for="form-price">Price</label>
+            <input type="number" class="form-control forminputs" name="bookprice" id="form-price" value="{{old('bookprice')}}">
+            @error('bookprice')
+                {{$message}}
+            @enderror
+        </div>
+        <div class="row">
+            <label for="form-amount">Amount</label>
+            <input type="number" class="form-control forminputs" name="bookamount" id="form-amount" value="{{old('bookamount')}}">
+            @error('bookamount')
+                {{$message}}
+            @enderror
+        </div>
+
         @if(session('message'))
             <small>{{session('message')}}</small><br>
         @endif
-        <button class="btn" id="btnAdd">Add</button>
+        <button class="btn" id="btnAdd">Supply</button>
     </form>
 </div>
 @endsection
