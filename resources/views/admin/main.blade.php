@@ -101,6 +101,10 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
+    {{-- toast --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css"/>
+
     <script>
         const r = rolly({
             view: document.querySelector('.app'),
@@ -184,6 +188,16 @@
 
                 sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
             });
+        });
+    </script>
+
+    {{-- toast --}}
+    <script>
+        $(function(){
+            toastr.success("Success Message")
+            toastr.info("Info Message")
+            toastr.warning("Warning Message")
+            toastr.error("error message")
         });
     </script>
 </body>

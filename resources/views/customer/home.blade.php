@@ -165,7 +165,7 @@
 
         .sec2-inner .text {
             width: 50%;
-            margin-left: -65px;
+            margin-left: 55px;
             z-index: 9;
         }
 
@@ -185,7 +185,7 @@
         }
 
         .left-right-sec:nth-child(odd) .text {
-            margin-right: -65px;
+            margin-right: 55px;
             text-align: right;
         }
 

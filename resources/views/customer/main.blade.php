@@ -21,7 +21,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 
     <!-- galery-filter -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" />
+
+    {{-- toast --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css" />
 </head>
 <style>
     @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;1,100;1,300&display=swap");
@@ -246,6 +249,34 @@
             duration: 1500 //global duration
         });
     </script>
+
+    {{-- toast --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <script>
+        $(function() {
+            // Display a warning toast, with no title
+            toastr.warning('Warning Message')
+
+            toastr.info('Info Message');
+
+            // Display a success toast, with a title
+            toastr.success('Success', 'Message')
+
+            // Display an error toast, with a title
+            toastr.error('Error message')
+
+            // // Immediately remove current toasts without using animation
+            // toastr.remove()
+
+            // // Remove current toasts using animation
+            // toastr.clear()
+
+            // // Override global options
+            // toastr.success('We do have the Kapua suite available.', 'Turtle Bay Resort', {
+            //     timeOut: 5000
+            // })
+        });
+    </script> --}}
 </body>
 
 </html>

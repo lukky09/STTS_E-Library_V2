@@ -241,32 +241,12 @@
                     </div>
                 @endforeach
             @endif
-            <!--<div class="product_wrap">
-                                                        <div class="product_info">
-                                                            <div class="product_img">
-                                                                <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
-                                                            </div>
-                                                            <div class="product_data">
-                                                                <div class="description">
-                                                                    <h3> Catatan Tentang Hujan </h3>
-                                                                    <h5> Anindya Frista </h5>
-                                                                </div>
-                                                                <div class="qty">
-                                                                    <div class="controls">
-                                                                        <button id="decrement" onclick="stepper(this)"> - </button>
-                                                                        <input type="number" min="1" max="100" step="1" value="1" id="my-input" readonly>
-                                                                        <button id="increment" onclick="stepper(this)"> + </button>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="price"> Rp 92.000 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
+
         </div>
 
         <div class="wrapper_amount" data-aos="zoom-out-left">
             <div class="header_title">
-                <div class="title"> TOTAL PRICE DETAILS: </div>
+                <div class="title"> CURRENT BALANCE: </div>
                 <div class="amount"> <b> Rp {{ number_format($price, 2, ',', '.') }}</b> </div>
             </div>
             <div class="price_details">
@@ -274,21 +254,19 @@
                     <p>Bag Total :</p>
                     <p class="ajax2">Rp {{ number_format($price, 2, ',', '.') }}</p>
                 </div>
-                {{-- <div class="item">
-                    <p>Delivery Charges :</p>
-                    <p><span style="text-decoration: line-through;"></span>Rp 20.000 <span
-                            class="green">FREE</span>
-                    </p>
-                </div> --}}
                 <div class="total">
                     <p>Total :</p>
                     <p class="ajax3">Rp {{ number_format($price, 2, ',', '.') }}</p>
                 </div>
             </div>
-            <div class="checkout"> <a href="{{url('doOrder')}}" class="btn">Place Order</a> </div>
+            <div class="checkout" id="checkout" onclick="toastMessage()">
+                <a href="{{ url('doOrder') }}" class="btn">Place Order</a>
+                {{-- <a class="btn">Place Order</a> --}}
+            </div>
         </div>
     </div>
 
+    {{-- stepper --}}
     <script>
         function stepper(id, typeIn) {
             let type = typeIn
@@ -317,6 +295,35 @@
                     }
                 });
             }
+        }
+    </script>
+
+    {{-- toast --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <script>
+        function toastMessage() {
+            // Display a warning toast, with no title
+            toastr.warning('you dont have enough money','Warning')
+
+            toastr.info('Please Top Up First');
+
+            // Display a success toast, with a title
+            toastr.success('Success Buy', 'Message')
+
+            // Display an error toast, with a title
+            //toastr.error('Error message')
+
+            // // Immediately remove current toasts without using animation
+            // toastr.remove()
+
+            // // Remove current toasts using animation
+            // toastr.clear()
+
+            // // Override global options
+            // toastr.success('We do have the Kapua suite available.', 'Turtle Bay Resort', {
+            //     timeOut: 5000
+            // })
         }
     </script>
 @endsection

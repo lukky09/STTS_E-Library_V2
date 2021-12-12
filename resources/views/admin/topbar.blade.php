@@ -19,7 +19,7 @@
         cursor: pointer;
     }
 
-    .search {
+    /* .search {
         position: relative;
         width: 400px;
         margin: 0 10px;
@@ -46,7 +46,7 @@
         position: absolute;
         left: 10px;
         font-size: 1.2em;
-    }
+    } */
 
     .user {
         position: relative;
@@ -74,12 +74,12 @@
         <ion-icon name="menu-outline"></ion-icon>
     </div>
     <!-- search -->
-    <div class="search">
+    {{-- <div class="search">
         <label>
             <input type="text" placeholder="Search here">
             <ion-icon name="search-outline"></ion-icon>
         </label>
-    </div>
+    </div> --}}
     <!-- user img -->
     <div class="user">
         <img src="{{ url(URL::asset('rss/images/profile.png')) }}">
