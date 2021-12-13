@@ -121,8 +121,10 @@ class SupplierController extends Controller
 
     public function toSupply(Request $req)
     {
+        $user = getAuthUser()->supplier_id;
         $books = Book::where('deleted_at',NULL)->get();
-        return view('supplier.supplybook',["books"=>$books]);
+        $listSupplied = DB::table('supplierbooks')->where('supplier_id',$user)->get();
+        return view('supplier.supplybook',["books"=>$books,'listSupplied'=>$listSupplied]);
     }
 
     public function doSupply(Request $req)

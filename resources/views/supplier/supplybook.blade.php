@@ -11,13 +11,14 @@
     .addform{
         color: white;
         /* width: 100vw; */
-        margin-left: auto;
-        margin-right: auto;
         background-size: cover;
         background-position: center;
-        height: 100vh;
+        background-attachment: scroll;
+        width:100vw;
+        height: 100%;
         position: relative;
-        overflow: hidden;
+        /* overflow: hidden; */
+        z-index: -1;
     }
 
     #overlaylayer{
@@ -27,12 +28,14 @@
         width: 100%;
         height: 100%;
         background-image:linear-gradient(to bottom, rgba(20,5,10, 0.52), rgba(117, 19, 93, 0.2));
-        z-index: -1;
+        z-index: -2;
     }
 
     .formmodal{
         z-index: 1;
     }
+
+
 
     .addform form{
         width: 50vw;
@@ -68,6 +71,15 @@
     }
 
 
+    .list{
+        width: 50vw;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        border-radius: 20px;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
 
     .header-landing {
             width: 100%;
@@ -513,5 +525,31 @@
         @endif
         <button class="btn" id="btnAdd">Supply</button>
     </form>
+
+    <div class="list">
+        <h2>Supplied</h2>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Copies</th>
+                <th>Price</th>
+            </tr>
+            @foreach ($listSupplied as $eachSupplied)
+                @php
+                    $booktitle = $books->pluck('book_id')->search($eachSupplied->book_id);
+                    // dump($booktitle);
+                @endphp
+                <tr>
+                    <td>{{$books[$booktitle]->book_name}}</td>
+                    <td>{{$eachSupplied->qty}}</td>
+                    <td>{{$eachSupplied->price}}</td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
+
+</div>
+<div class="forms">
+
 </div>
 @endsection
