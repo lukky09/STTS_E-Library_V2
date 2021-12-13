@@ -20,16 +20,13 @@ class UserController extends Controller
     public function toHomeView()
     {
         $books = Book::withoutTrashed()->inRandomOrder()->limit(6)->get();
-        if(sudahLogin()){
-
-            if(Auth::guard('user_provider')->check()){
-
-            }else{
-                return redirect('supplier/');
-            }
+        if(getAuthUserType() == "supp"){
+            return redirect('supplier/');
+        }else if(getAuthUserType() == "shop"){
+            return redirect('admin/');
         }
-        // $booksadd = Book::where('book_id','104')->first();
         return view('customer.home',["books"=>$books]);
+        // $booksadd = Book::where('book_id','104')->first();
     }
 
     public function doLogin(Request $req)
@@ -45,7 +42,7 @@ class UserController extends Controller
         ];
 
         if (Auth::guard('user_provider')->attempt($credential)) {
-            if(getAuthUser()->user_isadmin ==1){
+            if(getAuthUser()->user_isadmin == 1){
                 return redirect('/admin');
             }else{
                 return redirect('/');
@@ -155,11 +152,12 @@ class UserController extends Controller
         if ($req->newval <= $book->shop_qty) {
             Session::put('cartids.' . $req->index . '.1', $req->newval);
         }
+        $saldo = getAuthUser()->user_saldo;
         $total = 0;
         foreach (Session::get('cartids') as $c) {
             $total += Book::find($c[0])->shop_price * $c[1];
         }
-        return response()->json(["jum" => number_format($total - 20000, 2, ',', '.'), "tot" => number_format($total, 2, ',', '.'), "newval" => Session::get('cartids.' . $req->index . '.1')]);
+        return response()->json(["jum" => number_format($total, 2, ',', '.'), "tot" => number_format($saldo - $total, 2, ',', '.'), "newval" => Session::get('cartids.' . $req->index . '.1')]);
     }
 
     public function topUp(Request $req)

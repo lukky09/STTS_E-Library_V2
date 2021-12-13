@@ -215,7 +215,7 @@
             font-weight: 800;
         }
 
-        .container_table .actionCust input{
+        .container_table .actionCust input {
             width: 50px;
             border-radius: 20%;
             border: none;
@@ -223,6 +223,7 @@
             text-align: center;
             background: transparent;
         }
+
     </style>
 
     <div class="container_table" data-scene>
@@ -243,36 +244,36 @@
                         </div>
                     </div>
                     <div>
+                        @php
+                            $trans = DB::table('usertrans')->get();
+                        @endphp
                         <table id="filtertable" class="table cust-datatable dataTable no-footer table-sortable">
                             <thead>
                                 <tr>
-                                    <th style="min-width: 20px">ID</th>
-                                    <th style="min-width: 100px">ID Customer</th>
-                                    <th style="min-width: 100px">Total</th>
+                                    <th style="min-width: 20px">ID Transaksi</th>
+                                    <th style="min-width: 100px">Customer</th>
+                                    <th style="min-width: 100px">Subtotal</th>
                                     <th style="min-width: 100px">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Dummy1</td>
-                                    <td>Rp. 20.000</td>
-                                    <td>
-                                        <span class="actionCust">
-                                            <a href="#"><i class="fa fa-bookmark"></i></i></a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Dummy2</td>
-                                    <td>Rp 50.000</td>
-                                    <td>
-                                        <span class="actionCust">
-                                            <a href="#"><i class="fa fa-bookmark"></i></a>
-                                        </span>
-                                    </td>
-                                </tr>
+                                @foreach ($trans as $t)
+                                    <tr>
+                                        <td>{{ $t->trans_id }}</td>
+                                        @php
+                                            $u = DB::table('users')
+                                                ->where('user_id', $t->user_id)
+                                                ->first();
+                                        @endphp
+                                        <td>{{ $u->user_fname . ' ' . $u->user_lname }}</td>
+                                        <td>Rp. {{ number_format($t->subtotal, 2, ',', '.') }}</td>
+                                        <td>
+                                            <span class="actionCust">
+                                                <a href="#"><i class="fa fa-bookmark"></i></i></a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

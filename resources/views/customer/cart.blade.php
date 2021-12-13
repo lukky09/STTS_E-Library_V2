@@ -247,7 +247,7 @@
         <div class="wrapper_amount" data-aos="zoom-out-left">
             <div class="header_title">
                 <div class="title"> CURRENT BALANCE: </div>
-                <div class="amount"> <b> Rp {{ number_format($price, 2, ',', '.') }}</b> </div>
+                <div class="amount"> <b> Rp {{ number_format(getAuthUser()->user_saldo, 2, ',', '.') }}</b> </div>
             </div>
             <div class="price_details">
                 <div class="item">
@@ -255,8 +255,8 @@
                     <p class="ajax2">Rp {{ number_format($price, 2, ',', '.') }}</p>
                 </div>
                 <div class="total">
-                    <p>Total :</p>
-                    <p class="ajax3">Rp {{ number_format($price, 2, ',', '.') }}</p>
+                    <p>Result Balance :</p>
+                    <p class="ajax3">Rp {{ number_format( getAuthUser()->user_saldo - $price, 2, ',', '.') }}</p>
                 </div>
             </div>
             <div class="checkout" id="checkout" onclick="toastMessage()">
@@ -288,9 +288,8 @@
                         index: indexe
                     },
                     success: function(data) {
-                        $(".amount").html("<b> Rp. " + data.tot + "</b>");
-                        $(".ajax2").html("Rp. " + data.tot);
-                        $(".ajax3").html("Rp. " + data.jum);
+                        $(".ajax2").html("Rp. " + data.jum);
+                        $(".ajax3").html("Rp. " + data.tot);
                         myInput.setAttribute("value", data.newval);
                     }
                 });

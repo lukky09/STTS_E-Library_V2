@@ -367,7 +367,6 @@
                                         <td>Rp. {{ number_format($book->shop_price, 2, ',', '.') }}</td>
                                         <td>{{ $book->shop_qty }}</td>
                                         <td><span class="mode mode_on">Active</span></td>
-
                                     </tr>
                                 @endforeach
                             </tbody>
