@@ -133,14 +133,29 @@ class SupplierController extends Controller
             "bookprice"=>"required|numeric|min:5000",
             "bookamount"=>"required|numeric|min:5"
         ]);
+
+
+
         $user = getAuthUser();
-        $book = Book::where('book_id', $req->bookid)->first();
-        DB::table('supplierbooks')->insert([
-            "book_id"=>$req->bookid,
-            "supplier_id"=>$user->supplier_id,
-            "price"=>$req->bookprice,
-            "qty"=>$req->bookamount
-        ]);
+        $existed = DB::table('supplierbooks')->where('book_id',$req->bookid)->where('supplier_id',$user->supplier_id)->get();
+        if(count($existed) == 0){
+            $book = Book::where('book_id', $req->bookid)->first();
+            DB::table('supplierbooks')->insert([
+                "book_id"=>$req->bookid,
+                "supplier_id"=>$user->supplier_id,
+                "price"=>$req->bookprice,
+                "qty"=>$req->bookamount
+            ]);
+        }else{
+            $book = Book::where('book_id', $req->bookid)->first();
+            DB::table('supplierbooks')->where('book_id',$req->bookid)->where('supplier_id',$user->supplier_id)->update([
+                "book_id"=>$req->bookid,
+                "supplier_id"=>$user->supplier_id,
+                "price"=>$req->bookprice,
+                "qty"=>$req->bookamount + $existed[0]->qty
+            ]);
+        }
+
 
         return redirect('supplier/supply')->with('message', "Supplied $req->bookamount copies of \"$book->book_name\"");
 

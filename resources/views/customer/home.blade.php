@@ -501,9 +501,18 @@
                             <div class="front">
                                 @if ($book->book_dir == "Test")
                                     @php
-                                        $rand = rand(10,50) . rand(10,50) . rand(10,50);
+                                        $r = rand(10,50);
+                                        $g = rand(10,50);
+                                        $b = rand(10,50);
+                                        $rand = $r . $g . $b;
+                                        $chance = rand(1,3);
+                                        if($chance == 1){
+                                            $rand2 = dechex(rand(50,200)) . dechex(rand(50,200)) . dechex(rand(50,200));
+                                        }else{
+                                            $rand2 = $r+49 . $g+49 . $b+49;
+                                        }
                                     @endphp
-                                    <div class="randombook" style="display: block; background-color: #{{$rand}} ;">
+                                    <div class="randombook" style="display: block; background: linear-gradient(to bottom, #{{$rand}}, #{{$rand2}});">
                                         <div style="color: white; font-family: 'Times New Roman', Times, serif; border:solid white 2px;
                                             font-size: 50px; height: 90%; margin: 10px 20px;">
                                             {{$book->book_name}}

@@ -20,6 +20,14 @@ class UserController extends Controller
     public function toHomeView()
     {
         $books = Book::withoutTrashed()->inRandomOrder()->limit(6)->get();
+        if(sudahLogin()){
+
+            if(Auth::guard('user_provider')->check()){
+
+            }else{
+                return redirect('supplier/');
+            }
+        }
         // $booksadd = Book::where('book_id','104')->first();
         return view('customer.home',["books"=>$books]);
     }

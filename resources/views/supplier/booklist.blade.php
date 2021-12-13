@@ -11,21 +11,21 @@
     .addform{
         color: white;
         /* width: 100vw; */
-        margin-left: auto;
-        margin-right: auto;
+        /* background: green; */
         background-size: cover;
         background-position: center;
         position: relative;
-        overflow: hidden;
+        /* overflow: hidden; */
     }
-    .addform form{
+    .addform table{
         width: 50vw;
         margin-left: auto;
         margin-right: auto;
         margin-top: 100px;
         border-radius: 20px;
-        border: 5px solid white;
+        /* border: 5px solid white; */
         padding: 20px;
+
         /* background-color: black; */
     }
     .forminputs{
@@ -444,19 +444,29 @@
 
 
         table td{
-            border-left: 2px solid white;
-            margin-top: 0px;
+            /* border-left: 2px solid white; */
+            height: 100px;
+        }
+
+        table tr{
+            background-color: rgb(100,50,90);
         }
 
         .imgbooklist img{
-            max-width: 200px;
-            max-height: 200px;
+            max-width: 100px;
+            max-height: 100px;
+        }
+        .grey-data{
+            background-color: rgb(45, 45, 45);
+        }
+        .black-data{
+            background-color: rgb(25, 25, 25);
         }
 </style>
 <div class="addform" data-scene>
 
 
-    <table class="table">
+    <table class="table" cellspacing="0" cellpadding="0">
         @php
             $books = DB::table('books')->get();
         @endphp
@@ -465,15 +475,28 @@
             <th>AUTHOR</th>
             <th>COVER</th>
         </tr>
+        @php
+            $i=0;
+        @endphp
         @foreach ($books as $book)
             @php
                 $author = DB::table('authors')->where('author_id',$book->author_id)->first()->author_name;
+                $i++;
             @endphp
-            <tr>
-                <td>{{$book->book_name}}</td>
-                <td>{{$author}}</td>
-                <td class="imgbooklist"><img src="{{asset('storage'.$book->book_dir)}}" alt=""></td>
-            </tr>
+            @if ($i%2==0)
+                <tr class="grey-data">
+                    <td>{{$book->book_name}}</td>
+                    <td>{{$author}}</td>
+                    <td class="imgbooklist"><img src="{{asset('storage'.$book->book_dir)}}" alt=""></td>
+                </tr>
+            @else
+                <tr class="black-data">
+                    <td>{{$book->book_name}}</td>
+                    <td>{{$author}}</td>
+                    <td class="imgbooklist"><img src="{{asset('storage'.$book->book_dir)}}" alt=""></td>
+                </tr>
+            @endif
+
         @endforeach
 
     </table>

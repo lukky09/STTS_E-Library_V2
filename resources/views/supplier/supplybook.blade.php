@@ -15,10 +15,12 @@
         background-position: center;
         background-attachment: scroll;
         width:100vw;
-        height: 100%;
+        height: 80vh;
+        padding-top: 20vh;
         position: relative;
+        margin: 0px;
         /* overflow: hidden; */
-        z-index: -1;
+        z-index: 0;
     }
 
     #overlaylayer{
@@ -38,10 +40,11 @@
 
 
     .addform form{
-        width: 50vw;
+        width: 38vw;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 100px;
+        /* margin-top: 100px; */
+        /* padding-top: 100px; */
         border-radius: 20px;
         /* border: 5px solid white; */
         padding: 20px;
@@ -72,7 +75,7 @@
 
 
     .list{
-        width: 50vw;
+        width: 38vw;
         margin-left: auto;
         margin-right: auto;
         margin-top: 20px;
@@ -473,80 +476,87 @@
         }
 
         /* end-news */
+
+        .contain{
+            display: flex;
+        }
 </style>
-<div class="addform" data-scene style="background-image: url({{URL::asset('webres/pexels-pixabay-159711.jpg')}})">
+<div class="addform" data-scene style="background-image: url({{URL::asset('webres/pexels-pixabay-159711.jpg')}});">
     <div id="overlaylayer"></div>
-    <form action="{{url('supplier/doSupply')}}" method="POST" class="formmodal" style="">
-        @csrf
+    <div class="contain">
+        <form action="{{url('supplier/doSupply')}}" method="POST" class="formmodal" style="">
+            @csrf
 
-        @php
-            // dump($books);
-            $genres = DB::table('genres')->get();
-            $publishers = DB::table('publishers')->get();
-            $authors = DB::table('authors')->get();
-        @endphp
-        <h2 style="margin: 0">Supply Book</h2>
-        <div class="row">
-            <label for="form-title">Title</label>
-            <select name="bookid" id="" class="form-control forminputs">
-                @foreach ($books as $book)
-                    <option value="{{$book->book_id}}">{{$book->book_name}}</option>
-                @endforeach
-            </select>
-        </div>
+            @php
+                // dump($books);
+                $genres = DB::table('genres')->get();
+                $publishers = DB::table('publishers')->get();
+                $authors = DB::table('authors')->get();
+            @endphp
+            <h2 style="margin: 0">Supply Book</h2>
+            <div class="row">
+                <label for="form-title">Title</label>
+                <select name="bookid" id="" class="form-control forminputs">
+                    @foreach ($books as $book)
+                        <option value="{{$book->book_id}}">{{$book->book_name}}</option>
+                    @endforeach
+                </select>
+            </div>
 
-        <div class="row">
-            <style>
-                input::-webkit-outer-spin-button,
-                input::-webkit-inner-spin-button {
-                    -webkit-appearance: none;
-                    margin: 0;
-                }
-                input[type=number] {
-                -moz-appearance: textfield;
-                }
-            </style>
-            <label for="form-price">Price</label>
-            <input type="number" class="form-control forminputs" name="bookprice" id="form-price" value="{{old('bookprice')}}">
-            @error('bookprice')
-                {{$message}}
-            @enderror
-        </div>
-        <div class="row">
-            <label for="form-amount">Amount</label>
-            <input type="number" class="form-control forminputs" name="bookamount" id="form-amount" value="{{old('bookamount')}}">
-            @error('bookamount')
-                {{$message}}
-            @enderror
-        </div>
+            <div class="row">
+                <style>
+                    input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                    input[type=number] {
+                    -moz-appearance: textfield;
+                    }
+                </style>
+                <label for="form-price">Price</label>
+                <input type="number" class="form-control forminputs" name="bookprice" id="form-price" value="{{old('bookprice')}}">
+                @error('bookprice')
+                    {{$message}}
+                @enderror
+            </div>
+            <div class="row">
+                <label for="form-amount">Amount</label>
+                <input type="number" class="form-control forminputs" name="bookamount" id="form-amount" value="{{old('bookamount')}}">
+                @error('bookamount')
+                    {{$message}}
+                @enderror
+            </div>
 
-        @if(session('message'))
-            <small>{{session('message')}}</small><br>
-        @endif
-        <button class="btn" id="btnAdd">Supply</button>
-    </form>
+            @if(session('message'))
+                <small>{{session('message')}}</small><br>
+            @endif
+            <button class="btn" id="btnAdd">Supply</button>
+        </form>
 
-    <div class="list">
-        <h2>Supplied</h2>
-        <table>
-            <tr>
-                <th>Title</th>
-                <th>Copies</th>
-                <th>Price</th>
-            </tr>
-            @foreach ($listSupplied as $eachSupplied)
-                @php
-                    $booktitle = $books->pluck('book_id')->search($eachSupplied->book_id);
-                    // dump($booktitle);
-                @endphp
+        <div class="list">
+            <h2>Supplied</h2>
+            <table>
                 <tr>
-                    <td>{{$books[$booktitle]->book_name}}</td>
-                    <td>{{$eachSupplied->qty}}</td>
-                    <td>{{$eachSupplied->price}}</td>
+                    <th>Title</th>
+                    <th>Copies</th>
+                    <th>Price</th>
                 </tr>
-            @endforeach
-        </table>
+                @foreach ($listSupplied as $eachSupplied)
+                    @php
+                        $booktitle = $books->pluck('book_id')->search($eachSupplied->book_id);
+                        // dump($booktitle);
+                    @endphp
+                    <tr>
+                        <td>{{$books[$booktitle]->book_name}}</td>
+                        <td>{{$eachSupplied->qty}}</td>
+                        <td>{{$eachSupplied->price}}</td>
+                    </tr>
+                @endforeach
+            </table>
+        </div>
     </div>
+
 
 </div>
 <div class="forms">

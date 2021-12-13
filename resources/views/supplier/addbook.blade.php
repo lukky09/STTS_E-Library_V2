@@ -516,7 +516,7 @@
             </div> --}}
             <div class="row">
                 <label for="form-author">Author</label>
-                <select name="bookauthor" id="" class="form-control forminputs" id="form-author" style="margin: 0; height: 62%;">
+                <select name="bookauthor" id="" class="form-control forminputs" id="form-author" style="margin: 0;">
                     @foreach ($authors as $author)
                         <option value="{{$author->author_id}}">{{$author->author_name}}</option>
                     @endforeach

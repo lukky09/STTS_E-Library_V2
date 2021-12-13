@@ -6,12 +6,21 @@
         .header-landing {
             width: 100%;
             height: 100vh;
-            /* background-image: url({{ URL::asset('rss/images/background.png') }}); */
+            background-image: url({{ URL::asset('webres/oli-dale-xjSkI_seiZY-unsplash.jpg') }});
             background-color: #312244;
             background-size: cover;
             background-position: center;
             position: relative;
             overflow: hidden;
+        }
+        #overlaylayer{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:linear-gradient(to bottom, rgba(20,20,20, 0.72), rgba(200, 200, 200, 0));
+            z-index: -1;
         }
 
         .logo {
@@ -30,6 +39,7 @@
 
         .content {
             color: #fbfcfd;
+            /* color: black; */
             position: absolute;
             top: 50%;
             left: 8%;
@@ -410,6 +420,8 @@
     </style>
     <!-- header-banner -->
     <div class="header-landing" data-scene>
+        <div id="overlaylayer"></div>
+
         <div class="content">
             @if (sudahLogin())
                 @php
@@ -502,12 +514,22 @@
                     @endphp
                     @foreach ($books as $book)
                         <div class="card">
+
                             <div class="front">
                                 @if ($book->book_dir == "Test")
                                     @php
-                                        $rand = rand(10,50) . rand(10,50) . rand(10,50);
+                                        $r = rand(10,50);
+                                        $g = rand(10,50);
+                                        $b = rand(10,50);
+                                        $rand = $r . $g . $b;
+                                        $chance = rand(1,3);
+                                        if($chance == 1){
+                                            $rand2 = dechex(rand(50,200)) . dechex(rand(50,200)) . dechex(rand(50,200));
+                                        }else{
+                                            $rand2 = $r+49 . $g+49 . $b+49;
+                                        }
                                     @endphp
-                                    <div class="randombook" style="display: block; background-color: #{{$rand}} ;">
+                                    <div class="randombook" style="display: block; background: linear-gradient(to bottom, #{{$rand}}, #{{$rand2}});">
                                         <div style="color: white; font-family: 'Times New Roman', Times, serif; border:solid white 2px;
                                             font-size: 50px; height: 90%; margin: 10px 20px;">
                                             {{$book->book_name}}
@@ -530,7 +552,7 @@
                             </div>
                         </div>
                     @endforeach
-                    <div class="card">
+                    {{-- <div class="card">
                         <div class="front">
                             @if ($booksadd->book_dir == "Test")
                                 @php
@@ -543,7 +565,6 @@
                                     </div>
                                 </div>
                             @else
-                                {{-- <img src={{ url(URL::asset('storage'.$booksadd->book_dir)) }}> --}}
                                 <img src="{{asset('storage'.$booksadd->book_dir)}}" alt="">
                             @endif
 
@@ -558,7 +579,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
 
                     {{-- <div class="card">
