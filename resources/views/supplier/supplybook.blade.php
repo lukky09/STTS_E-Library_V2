@@ -39,8 +39,10 @@
 
 
 
+
     .addform form{
         width: 38vw;
+        height: 70vh;
         margin-left: auto;
         margin-right: auto;
         /* margin-top: 100px; */
@@ -70,18 +72,40 @@
     }
 
     #btnAdd{
-        margin-top: 2vh;
+        position: relative;
     }
 
 
     .list{
         width: 38vw;
+        height: 70vh;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 20px;
+        /* margin-top: 20px; */
         border-radius: 20px;
         padding: 20px;
         background-color: rgba(0, 0, 0, 0.7);
+    }
+    .list .table-place{
+        margin-top: 15px;
+        overflow-y: scroll;
+        height: 60vh;
+    }
+    .list table{
+        /* height: 5vh; */
+        /* overflow: scroll; */
+        border: 4px solid rgb(200, 120, 190);
+        /* background-color: purple; */
+    }
+    .list table th{
+        border: 3px solid rgb(200, 120, 190);
+        padding: 5px;
+        margin: 0;
+    }
+    .list table td{
+        border: 3px solid rgb(200, 120, 190);
+        padding: 5px;
+        margin: 0;
     }
 
     .header-landing {
@@ -479,6 +503,7 @@
 
         .contain{
             display: flex;
+            height: 60vh;
         }
 </style>
 <div class="addform" data-scene style="background-image: url({{URL::asset('webres/pexels-pixabay-159711.jpg')}});">
@@ -535,25 +560,27 @@
         </form>
 
         <div class="list">
-            <h2>Supplied</h2>
-            <table>
-                <tr>
-                    <th>Title</th>
-                    <th>Copies</th>
-                    <th>Price</th>
-                </tr>
-                @foreach ($listSupplied as $eachSupplied)
-                    @php
-                        $booktitle = $books->pluck('book_id')->search($eachSupplied->book_id);
-                        // dump($booktitle);
-                    @endphp
+            <h2 style="margin: 0;">Supplied</h2>
+            <div class="table-place">
+                <table cellspacing="0" cellpadding="0">
                     <tr>
-                        <td>{{$books[$booktitle]->book_name}}</td>
-                        <td>{{$eachSupplied->qty}}</td>
-                        <td>{{$eachSupplied->price}}</td>
+                        <th>Title</th>
+                        <th>Copies</th>
+                        <th>Price</th>
                     </tr>
-                @endforeach
-            </table>
+                    @foreach ($listSupplied as $eachSupplied)
+                        @php
+                            $booktitle = $books->pluck('book_id')->search($eachSupplied->book_id);
+                            // dump($booktitle);
+                        @endphp
+                        <tr>
+                            <td>{{$books[$booktitle]->book_name}}</td>
+                            <td>{{$eachSupplied->qty}}</td>
+                            <td>{{$eachSupplied->price}}</td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
         </div>
     </div>
 

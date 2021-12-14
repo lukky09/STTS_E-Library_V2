@@ -36,7 +36,7 @@
     }
 
     header ul li a:hover {
-        color: #081c15;
+        color: rgb(240, 150, 199);
     }
 
     .header.active {

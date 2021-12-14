@@ -10,23 +10,29 @@
     }
     .addform{
         color: white;
-        /* width: 100vw; */
+        width: 100vw;
         /* background: green; */
         background-size: cover;
         background-position: center;
         position: relative;
+        display: flex;
+        justify-content: center;
         /* overflow: hidden; */
     }
     .addform table{
         width: 50vw;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 100px;
+        /* margin-top: 100px; */
         border-radius: 20px;
         /* border: 5px solid white; */
-        padding: 20px;
+        /* padding: 20px; */
 
         /* background-color: black; */
+    }
+    .addform table .table-header{
+        position: sticky;
+        top: 0;
     }
     .forminputs{
         height: 5vh;
@@ -434,7 +440,7 @@
             background-color: #05636d;
         }
         .table{
-            margin-top: 10vh;
+            /* margin-top: 10vh; */
         }
 
 
@@ -442,10 +448,24 @@
 
         /* end-news */
 
+        .place{
+            overflow-y: scroll;
+            height: 80vh;
+            /* background-color: aquamarine; */
+            margin-top: 10vh;
+            width: min-content;
+        }
+        .overflow-place{
+            /* overflow-y: scroll; */
 
+        }
         table td{
             /* border-left: 2px solid white; */
             height: 100px;
+            padding: 10px;
+        }
+        table th{
+            padding: 10px;
         }
 
         table tr{
@@ -466,39 +486,43 @@
 <div class="addform" data-scene>
 
 
-    <table class="table" cellspacing="0" cellpadding="0">
-        @php
-            $books = DB::table('books')->get();
-        @endphp
-        <tr>
-            <th>TITLE</th>
-            <th>AUTHOR</th>
-            <th>COVER</th>
-        </tr>
-        @php
-            $i=0;
-        @endphp
-        @foreach ($books as $book)
+    <div class="place">
+        <table class="table" cellspacing="0" cellpadding="0">
             @php
-                $author = DB::table('authors')->where('author_id',$book->author_id)->first()->author_name;
-                $i++;
+                $books = DB::table('books')->get();
             @endphp
-            @if ($i%2==0)
-                <tr class="grey-data">
-                    <td>{{$book->book_name}}</td>
-                    <td>{{$author}}</td>
-                    <td class="imgbooklist"><img src="{{asset('storage'.$book->book_dir)}}" alt=""></td>
-                </tr>
-            @else
-                <tr class="black-data">
-                    <td>{{$book->book_name}}</td>
-                    <td>{{$author}}</td>
-                    <td class="imgbooklist"><img src="{{asset('storage'.$book->book_dir)}}" alt=""></td>
-                </tr>
-            @endif
+            <tr class="table-header">
+                <th>TITLE</th>
+                <th style="background-color: blueviolet">AUTHOR</th>
+                <th>COVER</th>
+            </tr>
+            @php
+                $i=0;
+            @endphp
+            <div class="overflow-place">
+                @foreach ($books as $book)
+                    @php
+                        $author = DB::table('authors')->where('author_id',$book->author_id)->first()->author_name;
+                        $i++;
+                    @endphp
+                    @if ($i%2==0)
+                        <tr class="grey-data">
+                            <td>{{$book->book_name}}</td>
+                            <td>{{$author}}</td>
+                            <td class="imgbooklist"><img src="{{asset('storage'.$book->book_dir)}}" alt=""></td>
+                        </tr>
+                    @else
+                        <tr class="black-data">
+                            <td>{{$book->book_name}}</td>
+                            <td>{{$author}}</td>
+                            <td class="imgbooklist"><img src="{{asset('storage'.$book->book_dir)}}" alt=""></td>
+                        </tr>
+                    @endif
 
-        @endforeach
+                @endforeach
+            </div>
 
-    </table>
+        </table>
+    </div>
 </div>
 @endsection
