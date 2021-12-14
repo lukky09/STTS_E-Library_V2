@@ -27,7 +27,7 @@ class SupplierController extends Controller
             'supplier_email' => $req->userlogin,
             'password' => $req->password
         ];
-        if(getAuthUserType() == "supp"){
+        if(Auth::guard('supplier_provider')->attempt($credential)){
             return redirect('/supplier');
         }else{
             return redirect('/');
