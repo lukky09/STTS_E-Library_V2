@@ -218,6 +218,15 @@
 
     <!-- card -->
     <div class="cardBox" data-scene>
+        @php
+            $money = DB::table('usertrans')->get();
+            $saldo = 0;
+            $jum = 0;
+            foreach ($money as $m) {
+                $saldo += $m->subtotal;
+                $jum++;
+            }
+        @endphp
         {{-- <div class="card">
             <div>
                 <div class="numbers">1, 504</div>
@@ -229,7 +238,7 @@
         </div> --}}
         <div class="card">
             <div>
-                <div class="numbers">80</div>
+                <div class="numbers">{{$jum}}</div>
                 <div class="cardName">Sales</div>
             </div>
             <div class="iconBx">
@@ -247,7 +256,7 @@
         </div> --}}
         <div class="card">
             <div>
-                <div class="numbers">$7,242</div>
+                <div class="numbers">Rp. {{ number_format($saldo, 0, '', '.') }}</div>
                 <div class="cardName">Earning</div>
             </div>
             <div class="iconBx">
