@@ -25,6 +25,9 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('register');
 });
+Route::get('/teams', function () {
+    return view('customer.teams');
+});
 
 Route::post('/registerUser', [UserController::class, 'doRegis']);
 Route::post('/loginUser', [UserController::class, 'doLogin']);
