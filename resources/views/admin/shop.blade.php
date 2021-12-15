@@ -254,7 +254,7 @@
                         <table id="filtertable" class="table cust-datatable dataTable no-footer table-sortable">
                             <thead>
                                 <tr>
-                                    <th style="min-width: 20px">ID</th>
+                                    <th style="min-width: 50px">Supplier</th>
                                     <th style="min-width: 100px">Title</th>
                                     <th style="min-width: 50px">Genre</th>
                                     <th style="min-width: 50px">Publisher</th>
@@ -266,7 +266,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1</td>
+                                    <td>Supplier1</td>
                                     <td>Dummy1</td>
                                     <td>Action</td>
                                     <td>Elex Media</td>
@@ -283,7 +283,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>2</td>
+                                    <td>Supplier2</td>
                                     <td>Dummy2</td>
                                     <td>Action</td>
                                     <td>Elex Media</td>

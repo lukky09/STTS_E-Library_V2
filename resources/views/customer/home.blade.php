@@ -415,11 +415,11 @@
                 @elseif (getAuthUserType() == "supp")
                     <small>Welcome, {{getAuthUser()->supplier_name}}, to our</small>
                 @endif
-                <h1>Book's<br> Creative Store</h1>
+                <h1>Book's<br> Biblichor Store</h1>
                 <button type="button" class="btn">Take a tour</button>
             @else
                 <small>Welcome, to our</small>
-                <h1>Book's<br> Creative Store</h1>
+                <h1>Book's<br> Biblichor Store</h1>
                 <button type="button" class="btn">Take a tour</button>
             @endif
         </div>

@@ -288,7 +288,7 @@
                         </div>
                         <div class="col-sm-8 add_flex">
                             <div class="form-group searchInput">
-                                <input type="search" class="form-control" id="filterbox" placeholder=" Search" />
+                                <input type="search" class="form-control" id="filterbox1" placeholder=" Search" />
                                 <span class="actionCust">
                                     <a href="#"><i class="fa fa-search"></i></a>
                                 </span>
@@ -299,7 +299,7 @@
                         @php
                             $books = DB::table('books')->get();
                         @endphp
-                        <table id="filtertable" class="table cust-datatable dataTable no-footer table-sortable">
+                        <table id="filtertable1" class="table cust-datatable dataTable no-footer table-sortable">
                             <thead>
                                 <tr>
                                     <th style="min-width: 20px">ID</th>
@@ -343,6 +343,20 @@
             });
             $("#filterbox").keyup(function() {
                 dataTable.search(this.value).draw();
+            });
+            var dataTable1 = $("#filtertable1").DataTable({
+                pageLength: 5,
+                aoColumnDefs: [{
+                    bSortable: false,
+                    aTargets: ["nosort"],
+                }, ],
+                aoColumns: [null, null, null, null, null],
+                order: false,
+                bLengthChange: false,
+                dom: '<"top">ct<"top"p><"clear">',
+            });
+            $("#filterbox1").keyup(function() {
+                dataTable1.search(this.value).draw();
             });
         });
     </script>

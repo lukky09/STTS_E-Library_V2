@@ -91,13 +91,18 @@
             top: 0;
         }
 
-        .contain_date{
+        .contain_date, .subtotal{
             text-align: right;
             margin: 10px;
         }
 
+        .subtotal {
+            font-size: 20px;
+            color: #1c1c6b;
+        }
+
         /* detail */
-        .header-details .star-widget input {
+        /* .header-details .star-widget input {
             display: none;
         }
 
@@ -107,7 +112,7 @@
             padding: 10px;
             float: right;
             transition: all 0.2s ease;
-        }
+        } */
 
         .header-details input:not(:checked)~label:hover,
         .header-details input:not(:checked)~label:hover~label {
@@ -130,6 +135,13 @@
             text-align: center;
             justify-content: center;
         }
+
+        .product-details .header-details .price{
+            margin-right: 10px;
+            text-align: right;
+            display: block;
+            margin-top: -20px;
+        }
     </style>
 
     <section class="main_contain" data-scene>
@@ -138,15 +150,17 @@
                 <div class="main-title" id="main_title" data-aos="fade-up"><h2>History Shop List</h2></div>
                 <div class="container-item">
                     <div class="collapsible">
-                        <label class="contain_head" id="contain_head">Nomer Nota</label>
-                        <div class="all-item">
+                        <label class="contain_head" onclick="openContain(0)">Nomer Nota</label>
+                        <div class="all-item all-item0">
                             <div class="collapsible-text">
                                 <div class="contain_date">07/12/2021</div>
                                 <div class="product-details">
                                     <div class="header-details">
                                         <h3 class="title">Nama Buku</h3>
+                                        <p class="jum">5x</p>
                                         <p class="price">Rp. 12.000 </p>
-                                        <div class="star-widget">
+                                        <p class="subtotal">Rp. 12.000</p>
+                                        {{-- <div class="star-widget">
                                             <input type="radio" name="rate" id="rate-5">
                                             <label for="rate-5" class="fas fa-star"></label>
                                             <input type="radio" name="rate" id="rate-4">
@@ -157,7 +171,7 @@
                                             <label for="rate-2" class="fas fa-star"></label>
                                             <input type="radio" name="rate" id="rate-1">
                                             <label for="rate-1" class="fas fa-star"></label>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -166,19 +180,9 @@
                                 <div class="product-details">
                                     <div class="header-details">
                                         <h3 class="title">Nama Buku</h3>
+                                        <p class="jum">5x</p>
                                         <p class="price">Rp. 12.000 </p>
-                                        <div class="star-widget">
-                                            <input type="radio" name="rate" id="rate-5">
-                                            <label for="rate-5" class="fas fa-star"></label>
-                                            <input type="radio" name="rate" id="rate-4">
-                                            <label for="rate-4" class="fas fa-star"></label>
-                                            <input type="radio" name="rate" id="rate-3">
-                                            <label for="rate-3" class="fas fa-star"></label>
-                                            <input type="radio" name="rate" id="rate-2">
-                                            <label for="rate-2" class="fas fa-star"></label>
-                                            <input type="radio" name="rate" id="rate-1">
-                                            <label for="rate-1" class="fas fa-star"></label>
-                                        </div>
+                                        <p class="subtotal">Rp. 12.000</p>
                                     </div>
                                 </div>
                             </div>
@@ -187,26 +191,16 @@
                 </div>
                 <div class="container-item">
                     <div class="collapsible">
-                        <label class="contain_head" id="contain_head">Nomer Nota</label>
-                        <div class="all-item">
+                        <label class="contain_head" onclick="openContain(1)">Nomer Nota</label>
+                        <div class="all-item all-item1">
                             <div class="collapsible-text">
                                 <div class="contain_date">07/12/2021</div>
                                 <div class="product-details">
                                     <div class="header-details">
                                         <h3 class="title">Nama Buku</h3>
+                                        <p class="jum">5x</p>
                                         <p class="price">Rp. 12.000 </p>
-                                        <div class="star-widget">
-                                            <input type="radio" name="rate" id="rate-5">
-                                            <label for="rate-5" class="fas fa-star"></label>
-                                            <input type="radio" name="rate" id="rate-4">
-                                            <label for="rate-4" class="fas fa-star"></label>
-                                            <input type="radio" name="rate" id="rate-3">
-                                            <label for="rate-3" class="fas fa-star"></label>
-                                            <input type="radio" name="rate" id="rate-2">
-                                            <label for="rate-2" class="fas fa-star"></label>
-                                            <input type="radio" name="rate" id="rate-1">
-                                            <label for="rate-1" class="fas fa-star"></label>
-                                        </div>
+                                        <p class="subtotal">Rp. 12.000</p>
                                     </div>
                                 </div>
                             </div>
@@ -215,19 +209,9 @@
                                 <div class="product-details">
                                     <div class="header-details">
                                         <h3 class="title">Nama Buku</h3>
+                                        <p class="jum">5x</p>
                                         <p class="price">Rp. 12.000 </p>
-                                        <div class="star-widget">
-                                            <input type="radio" name="rate" id="rate-5">
-                                            <label for="rate-5" class="fas fa-star"></label>
-                                            <input type="radio" name="rate" id="rate-4">
-                                            <label for="rate-4" class="fas fa-star"></label>
-                                            <input type="radio" name="rate" id="rate-3">
-                                            <label for="rate-3" class="fas fa-star"></label>
-                                            <input type="radio" name="rate" id="rate-2">
-                                            <label for="rate-2" class="fas fa-star"></label>
-                                            <input type="radio" name="rate" id="rate-1">
-                                            <label for="rate-1" class="fas fa-star"></label>
-                                        </div>
+                                        <p class="subtotal">Rp. 12.000</p>
                                     </div>
                                 </div>
                             </div>
@@ -241,9 +225,8 @@
         </div>
     </section>
     <script>
-        let toggleContain = document.querySelector('.all-item');
-
-        document.querySelector('#contain_head').onclick = () => {
+        function openContain(id) {
+            let toggleContain = document.querySelector('.all-item'.concat(id));
             toggleContain.classList.toggle('active');
         }
     </script>

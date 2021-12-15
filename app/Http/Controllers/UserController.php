@@ -49,7 +49,8 @@ class UserController extends Controller
             }
         } else {
             //gagal masuk
-            echo 'ga bisa masuk';
+            //echo 'ga bisa masuk';
+            abort(403, "Tidak Bisa Masuk");
         }
     }
 

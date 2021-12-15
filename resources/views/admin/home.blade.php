@@ -133,7 +133,7 @@
             text-align: center;
         }
 
-        .status {
+        /* .status {
             padding: 2px 4px;
             color: var(--white);
             border-radius: 4px;
@@ -155,7 +155,7 @@
 
         .status.inprogress {
             background: #1795ce;
-        }
+        } */
 
         /* recent customers */
         .recentCustomers {
@@ -214,6 +214,9 @@
             color: var(--white);
         }
 
+        .cardHeader .btn:hover{
+            color: var(--white);
+        }
     </style>
 
     <!-- card -->
@@ -271,41 +274,41 @@
         <div class="recentOrders">
             <div class="cardHeader">
                 <h2>Recent Orders</h2>
-                <a href="#" class="btn">View All</a>
+                <a href="/admin/jual" class="btn">View All</a>
             </div>
             <table>
                 <thead>
                     <tr>
-                        <td>Name</td>
+                        <td>Book Name</td>
                         <td>Price</td>
-                        <td>Payment</td>
-                        <td>Status</td>
+                        <td>Qty</td>
+                        <td>ID Transaksi</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Star Refrigerator</td>
                         <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status delivered">Delivered</span></td>
+                        <td>5</td>
+                        <td>ID</td>
                     </tr>
                     <tr>
                         <td>Star Refrigerator</td>
                         <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status return">Return</span></td>
+                        <td>10</td>
+                        <td>ID</td>
                     </tr>
                     <tr>
                         <td>Star Refrigerator</td>
                         <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status inprogress">In Progress</span></td>
+                        <td>5</td>
+                        <td>ID</td>
                     </tr>
                     <tr>
                         <td>Star Refrigerator</td>
                         <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status pending">Pending</span></td>
+                        <td>3</td>
+                        <td>ID</td>
                     </tr>
                 </tbody>
             </table>
