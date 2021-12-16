@@ -7,12 +7,12 @@
 
     <style>
         /* .navigation {
-                margin-left: -20px;
-            }
+                                margin-left: -20px;
+                            }
 
-            .topbar .search ion-icon {
-                margin-top: 10px;
-            } */
+                            .topbar .search ion-icon {
+                                margin-top: 10px;
+                            } */
 
         .container_table {
             min-height: 100vh;
@@ -223,7 +223,7 @@
             font-weight: 800;
         }
 
-        .container_table .actionCust input{
+        .container_table .actionCust input {
             width: 50px;
             border-radius: 20%;
             border: none;
@@ -231,6 +231,7 @@
             text-align: center;
             background: transparent;
         }
+
     </style>
 
     <div class="container_table" data-scene>
@@ -250,6 +251,9 @@
                             </div>
                         </div>
                     </div>
+                    @php
+                        $supplierbooks = DB::table('supplierbooks')->get();
+                    @endphp
                     <div>
                         <table id="filtertable" class="table cust-datatable dataTable no-footer table-sortable">
                             <thead>
@@ -265,40 +269,42 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Supplier1</td>
-                                    <td>Dummy1</td>
-                                    <td>Action</td>
-                                    <td>Elex Media</td>
-                                    <td>Author1</td>
-                                    <td>Rp. 50.000</td>
-                                    <td>100</td>
-                                    <td>
-                                        <span class="actionCust">
-                                            <input type="number" min="0" max="100" placeholder="0"/>
-                                        </span>
-                                        <span class="actionCust">
-                                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Supplier2</td>
-                                    <td>Dummy2</td>
-                                    <td>Action</td>
-                                    <td>Elex Media</td>
-                                    <td>Author1</td>
-                                    <td>Rp. 50.000</td>
-                                    <td>100</td>
-                                    <td>
-                                        <span class="actionCust">
-                                            <input type="number" min="0" max="100" placeholder="0"/>
-                                        </span>
-                                        <span class="actionCust">
-                                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                                        </span>
-                                    </td>
-                                </tr>
+                                @foreach ($supplierbooks as $sb)
+                                    @php
+                                        $supp = DB::table('suppliers')
+                                            ->where('supplier_id', $sb->supplier_id)
+                                            ->first();
+                                        $book = DB::table('books')
+                                            ->where('book_id', $sb->book_id)
+                                            ->first();
+                                        $genre = DB::table('genres')
+                                            ->where('genre_id', $book->genre_id)
+                                            ->first()->genre_name;
+                                        $publisher = DB::table('publishers')
+                                            ->where('publisher_id', $book->publisher_id)
+                                            ->first()->publisher_name;
+                                        $author = DB::table('authors')
+                                            ->where('author_id', $book->author_id)
+                                            ->first()->author_name;
+                                    @endphp
+                                    <tr>
+                                        <td>{{ $supp->supplier_name }}</td>
+                                        <td>{{ $book->book_name }}</td>
+                                        <td>{{ $genre }}</td>
+                                        <td>{{ $publisher }}</td>
+                                        <td>{{ $author }}</td>
+                                        <td>Rp. {{ number_format($sb->price, 0, '', '.') }}</td>
+                                        <td>{{ $sb->qty }}</td>
+                                        <td>
+                                            <span class="actionCust">
+                                                <input type="number" min="1" max="{{ $sb->qty }}" placeholder="0" />
+                                            </span>
+                                            <span class="actionCust">
+                                                <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -7,12 +7,12 @@
 
     <style>
         /* .navigation {
-            margin-left: -20px;
-        }
+                    margin-left: -20px;
+                }
 
-        .topbar .search ion-icon {
-            margin-top: 10px;
-        } */
+                .topbar .search ion-icon {
+                    margin-top: 10px;
+                } */
 
         .container_table {
             min-height: 100vh;
@@ -265,6 +265,9 @@
                         </div>
                     </div>
                     <div>
+                        @php
+                            $suppliers = DB::table('suppliers')->get();
+                        @endphp
                         <table id="filtertable" class="table cust-datatable dataTable no-footer table-sortable">
                             <thead>
                                 <tr>
@@ -277,36 +280,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Dummy1</td>
-                                    <td>user@gmail.com</td>
-                                    <td>17-Apr-2020</td>
-                                    <td><span class="mode mode_on">Active</span></td>
-                                    <td>
-                                        <span class="actionCust">
-                                            <a href="#"><i class="fa fa-pencil-square-o"></i></a>
-                                        </span>
-                                        <span class="actionCust">
-                                            <a href="#"><i class="fa fa-trash"></i></a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Dummy2</td>
-                                    <td>user@gmail.com</td>
-                                    <td>17-Apr-2020</td>
-                                    <td><span class="mode mode_on">Active</span></td>
-                                    <td>
-                                        <span class="actionCust">
-                                            <a href="#"><i class="fa fa-pencil-square-o"></i></a>
-                                        </span>
-                                        <span class="actionCust">
-                                            <a href="#"><i class="fa fa-trash"></i></a>
-                                        </span>
-                                    </td>
-                                </tr>
+                                @foreach ($suppliers as $s)
+                                    <tr>
+                                        <td>{{ $s->supplier_id }}</td>
+                                        <td>{{ $s->supplier_name }}</td>
+                                        <td>{{ $s->supplier_email }}</td>
+                                        <td>{{ date('d-M-Y',strtotime($s->created_at)) }}</td>
+                                        <td><span class="mode mode_on">Active</span></td>
+                                        <td>
+                                            <span class="actionCust">
+                                                <a href="#"><i class="fa fa-pencil-square-o"></i></a>
+                                            </span>
+                                            <span class="actionCust">
+                                                <a href="#"><i class="fa fa-trash"></i></a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
