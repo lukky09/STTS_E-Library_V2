@@ -23,7 +23,7 @@ class user extends Authenticatable
         'user_lname',
         'user_pass',
         'user_saldo',
-        'user_role'
+        'user_isadmin'
     ];
 
     /**

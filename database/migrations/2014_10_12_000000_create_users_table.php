@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('user_email')->unique();
             $table->string('user_pass');
             $table->integer('user_saldo')->default(0);
-            $table->smallInteger('user_isadmin')->comment('0 = admin, 1 = user biasa')->default(0);
+            $table->smallInteger('user_isadmin')->comment('0 = user biasa, 1 = admin')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
