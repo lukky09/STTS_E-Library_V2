@@ -7,12 +7,12 @@
 
     <style>
         /* .navigation {
-                                margin-left: -20px;
-                            }
+                                                                margin-left: -20px;
+                                                            }
 
-                            .topbar .search ion-icon {
-                                margin-top: 10px;
-                            } */
+                                                            .topbar .search ion-icon {
+                                                                margin-top: 10px;
+                                                            } */
 
         .container_table {
             min-height: 100vh;
@@ -252,7 +252,10 @@
                         </div>
                     </div>
                     @php
-                        $supplierbooks = DB::table('supplierbooks')->get();
+                        $supplierbooks = DB::table('supplierbooks')
+                            ->where('qty', '>', 0)
+                            ->get();
+                        $i = 0;
                     @endphp
                     <div>
                         <table id="filtertable" class="table cust-datatable dataTable no-footer table-sortable">
@@ -287,20 +290,22 @@
                                             ->where('author_id', $book->author_id)
                                             ->first()->author_name;
                                     @endphp
-                                    <tr>
+                                    <tr id="baris{{$i}}">
                                         <td>{{ $supp->supplier_name }}</td>
                                         <td>{{ $book->book_name }}</td>
                                         <td>{{ $genre }}</td>
                                         <td>{{ $publisher }}</td>
                                         <td>{{ $author }}</td>
                                         <td>Rp. {{ number_format($sb->price, 0, '', '.') }}</td>
-                                        <td>{{ $sb->qty }}</td>
+                                        <td id="qty{{ $i }}">{{ $sb->qty }}</td>
                                         <td>
                                             <span class="actionCust">
-                                                <input type="number" min="1" max="{{ $sb->qty }}" placeholder="0" />
+                                                <input type="number" id="amt{{ $i }}" min="1"
+                                                    max="{{ $sb->qty }}" placeholder="1" />
                                             </span>
                                             <span class="actionCust">
-                                                <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                                                <a href="#"><i class="fa fa-shopping-cart"
+                                                        onclick="buy({{ $i }})"></i></a>
                                             </span>
                                         </td>
                                     </tr>
@@ -331,5 +336,28 @@
                 dataTable.search(this.value).draw();
             });
         });
+
+        function buy(id) {
+            const input = document.getElementById("amt"+id);
+            const view = document.getElementById("qty"+id);
+            const tabel = document.getElementById("baris"+id);
+            let inp = input.value;
+
+            $.ajax({
+                type: 'GET',
+                url: '/admin/buybook',
+                data: {
+                    jum: inp,
+                    index: id
+                },
+                success: function(data) {
+                    view.html("Rp. " + data.jum);
+                    myInput.setAttribute("value", data.newval);
+                    if (data.tot.substring(0, 1) == "-") {
+                        toastr.warning("You don't have enough money", 'Warning');
+                    }
+                }
+            });
+        }
     </script>
 @endsection

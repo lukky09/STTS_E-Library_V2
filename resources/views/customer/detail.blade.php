@@ -466,7 +466,7 @@
                             <div class="controls">
                                 <input type="hidden" value="{{ $id }}" name="id">
                                 <button type="button" id="decrement" onclick="stepper(this)"> - </button>
-                                <input type="number" name="qty" min="1" max="100" step="1" value="1" id="my-input" readonly>
+                                <input type="number" name="qty" min="1" max="{{$book->shop_qty}}" step="1" value="1" id="my-input" readonly>
                                 <button type="button" id="increment" onclick="stepper(this)"> + </button>
                             </div>
 

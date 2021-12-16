@@ -134,28 +134,28 @@
         }
 
         /* .status {
-            padding: 2px 4px;
-            color: var(--white);
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-        }
+                                    padding: 2px 4px;
+                                    color: var(--white);
+                                    border-radius: 4px;
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                }
 
-        .status.delivered {
-            background: #8de02c;
-        }
+                                .status.delivered {
+                                    background: #8de02c;
+                                }
 
-        .status.pending {
-            background: #f9ca3f;
-        }
+                                .status.pending {
+                                    background: #f9ca3f;
+                                }
 
-        .status.return {
-            background: #f00;
-        }
+                                .status.return {
+                                    background: #f00;
+                                }
 
-        .status.inprogress {
-            background: #1795ce;
-        } */
+                                .status.inprogress {
+                                    background: #1795ce;
+                                } */
 
         /* recent customers */
         .recentCustomers {
@@ -214,19 +214,25 @@
             color: var(--white);
         }
 
-        .cardHeader .btn:hover{
+        .cardHeader .btn:hover {
             color: var(--white);
         }
+
     </style>
 
     <!-- card -->
     <div class="cardBox" data-scene>
         @php
             $money = DB::table('usertrans')->get();
+            $no = DB::table('suppliertrans')->get();
             $saldo = 0;
             $jum = 0;
             foreach ($money as $m) {
                 $saldo += $m->subtotal;
+                $jum++;
+            }
+            foreach ($no as $n) {
+                $saldo -= $n->subtotal;
                 $jum++;
             }
         @endphp
@@ -241,7 +247,7 @@
         </div> --}}
         <div class="card">
             <div>
-                <div class="numbers">{{$jum}}</div>
+                <div class="numbers">{{ $jum }}</div>
                 <div class="cardName">Sales</div>
             </div>
             <div class="iconBx">
@@ -319,47 +325,45 @@
             <div class="cardHeader">
                 <h2>Recent Customers</h2>
             </div>
+            @php
+                $customers;
+                foreach ($money as $m) {
+                    $ada = false;
+                    if (isset($customers)) {
+                        for ($i = 0; $i < count($customers); $i++) {
+                            if ($customers[$i] == $m->user_id) {
+                                $ada = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!$ada) {
+                        $customers[] = $m->user_id;
+                        //4 adalah max orangnya
+                        if (count($customers) == 4) {
+                            break;
+                        }
+                    }
+                }
+            @endphp
             <table>
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx">
-                            <img src="{{ url(URL::asset('rss/images/profile.png')) }}">
-                        </div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx">
-                            <img src="{{ url(URL::asset('rss/images/profile.png')) }}">
-                        </div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx">
-                            <img src="{{ url(URL::asset('rss/images/profile.png')) }}">
-                        </div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="60px">
-                        <div class="imgBx">
-                            <img src="{{ url(URL::asset('rss/images/profile.png')) }}">
-                        </div>
-                    </td>
-                    <td>
-                        <h4>David <br> <span>Italy</span></h4>
-                    </td>
-                </tr>
+                @foreach ($customers as $c)
+                    @php
+                        $user = DB::table('users')
+                            ->where('user_id', $c)
+                            ->first();
+                    @endphp
+                    <tr>
+                        <td width="60px">
+                            <div class="imgBx">
+                                <img src="{{ url(URL::asset('rss/images/profile.png')) }}">
+                            </div>
+                        </td>
+                        <td>
+                            <h4>{{ $user->user_fname . ' ' . $user->user_lname }}<br> <span>{{ $user->user_email }}</span></h4>
+                        </td>
+                    </tr>
+                @endforeach
             </table>
         </div>
     </div>

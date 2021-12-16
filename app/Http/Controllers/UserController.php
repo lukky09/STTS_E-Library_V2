@@ -20,12 +20,12 @@ class UserController extends Controller
     public function toHomeView()
     {
         $books = Book::withoutTrashed()->inRandomOrder()->limit(6)->get();
-        if(getAuthUserType() == "supp"){
+        if (getAuthUserType() == "supp") {
             return redirect('supplier/');
-        }else if(getAuthUserType() == "shop"){
+        } else if (getAuthUserType() == "shop") {
             return redirect('admin/');
         }
-        return view('customer.home',["books"=>$books]);
+        return view('customer.home', ["books" => $books]);
         // $booksadd = Book::where('book_id','104')->first();
     }
 
@@ -42,9 +42,9 @@ class UserController extends Controller
         ];
 
         if (Auth::guard('user_provider')->attempt($credential)) {
-            if(getAuthUser()->user_isadmin == 1){
+            if (getAuthUser()->user_isadmin == 1) {
                 return redirect('/admin');
-            }else{
+            } else {
                 return redirect('/');
             }
         } else {
@@ -179,28 +179,33 @@ class UserController extends Controller
     public function doOrder(Request $req)
     {
         $price = 0;
-        foreach (Session::get('cartids') as $c){
+        if (!Session::has('cartids')) {
+            return back()->with("message", [0, "There's no book in your cart"]);
+        }
+        foreach (Session::get('cartids') as $c) {
             $book = Book::where('book_id', $c[0])->first();
             $price += $book->shop_price * $c[1];
         }
-        if(getAuthUser()->user_saldo >= $price){
+        if (getAuthUser()->user_saldo >= $price) {
             User::where('user_id', getAuthUser()->user_id)
-            ->update(['user_saldo' => getAuthUser()->user_saldo - $price]);
+                ->update(['user_saldo' => getAuthUser()->user_saldo - $price]);
 
             $result = UserTrans::create([
                 'user_id' => getAuthUser()->user_id,
                 'subtotal' => $price
             ]);
 
-            foreach (Session::get('cartids') as $c){
+            foreach (Session::get('cartids') as $c) {
                 $book = Book::find($c[0]);
-                $result->Books()->attach($book, ["qty"=>$c[1]]);
+                $book->shop_qty = $book->shop_qty - $c[1];
+                $book->save();
+                $result->Books()->attach($book, ["qty" => $c[1]]);
             }
 
             Session::forget('cartids');
-            return back()->with("message", "Pembelian berhasil");
+            return back()->with("message", [1, "Transaction Successful, Hope you enjoy your book(s) :)"]);
         } else {
-            return back()->with("message", "Saldo tidak cukup");
+            return back()->with("message",  [0, "Insufficient Balance"]);
         }
     }
 }

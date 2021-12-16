@@ -247,7 +247,8 @@
         <div class="wrapper_amount" data-aos="zoom-out-left">
             <div class="header_title">
                 <div class="title"> CURRENT BALANCE: </div>
-                <div class="amount"> <b> Rp {{ number_format(getAuthUser()->user_saldo, 2, ',', '.') }}</b> </div>
+                <div class="amount"> <b> Rp {{ number_format(getAuthUser()->user_saldo, 2, ',', '.') }}</b>
+                </div>
             </div>
             <div class="price_details">
                 <div class="item">
@@ -256,10 +257,11 @@
                 </div>
                 <div class="total">
                     <p>Result Balance :</p>
-                    <p class="ajax3">Rp {{ number_format( getAuthUser()->user_saldo - $price, 2, ',', '.') }}</p>
+                    <p class="ajax3">Rp {{ number_format(getAuthUser()->user_saldo - $price, 2, ',', '.') }}
+                    </p>
                 </div>
             </div>
-            <div class="checkout" id="checkout" onclick="toastMessage()">
+            <div class="checkout" id="checkout">
                 <a href="{{ url('doOrder') }}" class="btn">Place Order</a>
                 {{-- <a class="btn">Place Order</a> --}}
             </div>
@@ -291,6 +293,9 @@
                         $(".ajax2").html("Rp. " + data.jum);
                         $(".ajax3").html("Rp. " + data.tot);
                         myInput.setAttribute("value", data.newval);
+                        if (data.tot.substring(0, 1) == "-") {
+                            toastr.warning("You don't have enough money", 'Warning');
+                        }
                     }
                 });
             }
@@ -303,7 +308,7 @@
     <script>
         function toastMessage() {
             // Display a warning toast, with no title
-            toastr.warning('you dont have enough money','Warning')
+            toastr.warning('you dont have enough money', 'Warning')
 
             toastr.info('Please Top Up First');
 
@@ -325,4 +330,15 @@
             // })
         }
     </script>
+
+    @if (Session::has('message') && Session::get('message')[0]== 1)
+        <script>
+            toastr.success('{{ Session::get('message')[1] }}', 'Success Buy')
+        </script>
+    @elseif (Session::has('message') && Session::get('message')[0] == 0)
+        <script>
+            toastr.error('{{ Session::get('message')[1] }}')
+        </script>
+    @endif
+
 @endsection

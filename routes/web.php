@@ -76,6 +76,7 @@ Route::middleware(['supplier'])->group(function () {
 
 Route::middleware(['shop'])->group(function () {
     Route::prefix('admin')->group(function () {
+        Route::get('/buybook', [ShopController::class, 'buybook']);
         Route::get('/', function () {
             return view('admin.home');
         });
