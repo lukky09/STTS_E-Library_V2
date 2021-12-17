@@ -80,7 +80,7 @@
 
 <body>
     <!-- prelaoder -->
-    <div class="preloader">@include('preloader')</div>
+    <div class="loader">@include('preloader')</div>
 
     <main class="app">
         <div class="container_header">@include('admin.header')</div>
@@ -192,14 +192,14 @@
     </script>
 
     {{-- toast --}}
-    <script>
+    {{-- <script>
         $(function(){
             toastr.success("Success Message")
             toastr.info("Info Message")
             toastr.warning("Warning Message")
             toastr.error("error message")
         });
-    </script>
+    </script> --}}
 </body>
 
 </html>

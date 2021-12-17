@@ -81,7 +81,7 @@
             right: 25px;
         }
 
-        .container_table .dim_button {
+        /* .container_table .dim_button {
             display: inline-block;
             color: #fff;
             text-decoration: none;
@@ -94,9 +94,9 @@
             cursor: pointer;
             font-weight: 600;
             margin-bottom: 20px;
-        }
+        } */
 
-        .container_table .createSegment a {
+        /* .container_table .createSegment a {
             margin-bottom: 0px;
             border-radius: 50px;
             background: #ffffff;
@@ -110,7 +110,7 @@
             transition: all 0.4s ease;
             background: #007bff;
             color: #fff;
-        }
+        } */
 
         .container_table .add_flex {
             display: flex;
@@ -193,8 +193,8 @@
 
         .container_table .main-datatable .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
             color: #fff !important;
-            border: 1px solid #3d96f5 !important;
-            background: #4da3ff !important;
+            border: 1px solid #0B2243 !important;
+            background: #0B2243 !important;
             box-shadow: none;
         }
 
@@ -202,7 +202,7 @@
         .container_table .main-datatable .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
             color: #fff !important;
             border-color: transparent !important;
-            background: #007bff !important;
+            background: #0B2243 !important;
         }
 
         .container_table .main-datatable .dataTables_paginate {
@@ -223,6 +223,41 @@
             text-align: center;
             background: transparent;
         }
+
+        .container_table .createSegment {
+            display: flex;
+            width: 50%;
+        }
+
+        .container_table .createSegment .actionCust{
+            margin-top: 6%;
+        }
+
+        .container_table .actionCust:hover a{
+            background: #0B2243;
+            color: #fff;
+        }
+
+        .container_table .createSegment input[type="date"] {
+            background-color: #0B2243;
+            height: 50%;
+            width: 200px;
+            margin-top: 8%;
+            margin-right: 2%;
+            padding: 5px;
+            color: #fff;
+            font-size: 10px;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        ::-webkit-calendar-picker-indicator {
+            background-color: #ffffff;
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
     </style>
 
     <div class="container_table" data-scene>
@@ -232,6 +267,11 @@
                     <div class="row d-flex">
                         <div class="col-sm-4 createSegment">
                             <h3>Purchase Report</h3>
+                            <input type="date" name="date1">
+                            <input type="date" name="date2">
+                            <span class="actionCust">
+                                <a href="#"><i class="fa fa-filter"></i></a>
+                            </span>
                         </div>
                         <div class="col-sm-8 add_flex">
                             <div class="form-group searchInput">

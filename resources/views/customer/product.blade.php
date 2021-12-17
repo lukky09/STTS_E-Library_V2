@@ -1,7 +1,8 @@
 @extends('customer.main')
 
 @section('main')
-    <style>
+    {{-- <link rel="stylesheet" href="{{ URL::asset('css/product.css?version=#') }}" /> --}}
+    <style type="text/css" class="styles">
         header {
             background: #05636d;
         }
@@ -124,7 +125,7 @@
             margin-right: 2%;
         }
 
-        .main_container .filter-sort{
+        .main_container .filter-sort {
             height: 100%;
         }
 
@@ -385,12 +386,12 @@
     <div class="main_container" data-scene>
         <!-- Filter Gallery -->
         <div class="container-fluid filterbox">
-            <div class="filter-tabs" data-aos="fade-up">
+            <div class="filter-tabs">
                 <div class="filter-sort">
                     <div class="navigation">
                         <a href="javascript:void(0)" data-filter="all" class="button active">All</a>
                         @foreach ($genres as $genre)
-                            <a href="javascript:void(0)" data-filter="{{ $genre->genre_id }}"
+                            <a href="javascript:void(0)" data-filter="{{ $genre->genre_id }}""
                                 class="button active">{{ $genre->genre_name }}</a>
                         @endforeach
                     </div>
@@ -406,7 +407,7 @@
                                         ->where('author_id', '=', $book->author_id)
                                         ->first();
                                 @endphp
-                                <li class="team shot-thumbnail {{ $book->genre_id }}" data-aos="fade-up">
+                                <li class="team shot-thumbnail {{ $book->genre_id }}">
                                     <div class="multi-shot">
                                         <div class="dribbble-img">
                                             <a class="dribbble-link">
@@ -416,7 +417,7 @@
                                                             @if ($book->book_dir != 'Test')
                                                                 <img src="{{ asset('storage' . $book->book_dir) }}"">
                                                             @else
-                                                                    <img src="
+                                                                            <img src="
                                                                     {{ url(URL::asset('rss/book/img1.jpg')) }}">
                                                             @endif
                                                         </div>
@@ -540,5 +541,20 @@
                 $(this).addClass("active").siblings().removeClass("active");
             })
         })
+
+        refreshCSS = () => {
+            let links = document.getElementsByTagName('link');
+            for (let i = 0; i < links.length; i++) {
+                if (links[i].getAttribute('rel') == 'stylesheet') {
+                    let href = links[i].getAttribute('href')
+                        .split('?')[0];
+
+                    let newHref = href + '?version=' +
+                        new Date().getMilliseconds();
+
+                    links[i].setAttribute('href', newHref);
+                }
+            }
+        }
     </script>
 @endsection

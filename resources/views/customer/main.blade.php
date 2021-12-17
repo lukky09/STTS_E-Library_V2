@@ -148,7 +148,7 @@
 
 <body>
     <!-- prelaoder -->
-    <div class="preloader">@include('preloader')</div>
+    <div class="loader">@include('preloader')</div>
 
     <main class="app">
         <div class="container_header">@include('customer.header')</div>

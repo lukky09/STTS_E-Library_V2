@@ -1,6 +1,7 @@
 @extends('customer.main')
 
 @section('main')
+    {{-- <link rel="stylesheet" href="{{ URL::asset('css/search.css?version=#') }}" /> --}}
     <style>
         header {
             background: #05636d;
@@ -243,10 +244,10 @@
                     <h2>Product Shop List</h2>
                 </div>
                 <div class="display-style-btns" data-aos="zoom-out-right">
-                    <button type="button" id="grid-active-btn">
+                    <button type="button" id="grid-active-btn" onclick="refreshCSS()">
                         <i class="fas fa-th"></i>
                     </button>
-                    <button type="button" id="details-active-btn">
+                    <button type="button" id="details-active-btn" onclick="refreshCSS()">
                         <i class="fas fa-list-ul"></i>
                     </button>
                 </div>
@@ -316,5 +317,20 @@
             itemList.classList.add("details-active");
             a.style.height = "3000px";
         });
+
+        refreshCSS = () => {
+            let links = document.getElementsByTagName('link');
+            for (let i = 0; i < links.length; i++) {
+                if (links[i].getAttribute('rel') == 'stylesheet') {
+                    let href = links[i].getAttribute('href')
+                        .split('?')[0];
+
+                    let newHref = href + '?version=' +
+                        new Date().getMilliseconds();
+
+                    links[i].setAttribute('href', newHref);
+                }
+            }
+        }
     </script>
 @endsection
