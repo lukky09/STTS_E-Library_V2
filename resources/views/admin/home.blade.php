@@ -134,28 +134,28 @@
         }
 
         /* .status {
-                                    padding: 2px 4px;
-                                    color: var(--white);
-                                    border-radius: 4px;
-                                    font-size: 14px;
-                                    font-weight: 500;
-                                }
+                                        padding: 2px 4px;
+                                        color: var(--white);
+                                        border-radius: 4px;
+                                        font-size: 14px;
+                                        font-weight: 500;
+                                    }
 
-                                .status.delivered {
-                                    background: #8de02c;
-                                }
+                                    .status.delivered {
+                                        background: #8de02c;
+                                    }
 
-                                .status.pending {
-                                    background: #f9ca3f;
-                                }
+                                    .status.pending {
+                                        background: #f9ca3f;
+                                    }
 
-                                .status.return {
-                                    background: #f00;
-                                }
+                                    .status.return {
+                                        background: #f00;
+                                    }
 
-                                .status.inprogress {
-                                    background: #1795ce;
-                                } */
+                                    .status.inprogress {
+                                        background: #1795ce;
+                                    } */
 
         /* recent customers */
         .recentCustomers {
@@ -347,23 +347,26 @@
                 }
             @endphp
             <table>
-                @foreach ($customers as $c)
-                    @php
-                        $user = DB::table('users')
-                            ->where('user_id', $c)
-                            ->first();
-                    @endphp
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx">
-                                <img src="{{ url(URL::asset('rss/images/profile.png')) }}">
-                            </div>
-                        </td>
-                        <td>
-                            <h4>{{ $user->user_fname . ' ' . $user->user_lname }}<br> <span>{{ $user->user_email }}</span></h4>
-                        </td>
-                    </tr>
-                @endforeach
+                @if (isset($customers))
+                    @foreach ($customers as $c)
+                        @php
+                            $user = DB::table('users')
+                                ->where('user_id', $c)
+                                ->first();
+                        @endphp
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx">
+                                    <img src="{{ url(URL::asset('rss/images/profile.png')) }}">
+                                </div>
+                            </td>
+                            <td>
+                                <h4>{{ $user->user_fname . ' ' . $user->user_lname }}<br>
+                                    <span>{{ $user->user_email }}</span></h4>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
             </table>
         </div>
     </div>

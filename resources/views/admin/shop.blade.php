@@ -7,12 +7,12 @@
 
     <style>
         /* .navigation {
-                                                                margin-left: -20px;
-                                                            }
+                                                                                margin-left: -20px;
+                                                                            }
 
-                                                            .topbar .search ion-icon {
-                                                                margin-top: 10px;
-                                                            } */
+                                                                            .topbar .search ion-icon {
+                                                                                margin-top: 10px;
+                                                                            } */
 
         .container_table {
             min-height: 100vh;
@@ -290,7 +290,7 @@
                                             ->where('author_id', $book->author_id)
                                             ->first()->author_name;
                                     @endphp
-                                    <tr id="baris{{$i}}">
+                                    <tr id="baris{{ $i }}">
                                         <td>{{ $supp->supplier_name }}</td>
                                         <td>{{ $book->book_name }}</td>
                                         <td>{{ $genre }}</td>
@@ -301,7 +301,8 @@
                                         <td>
                                             <span class="actionCust">
                                                 <input type="number" id="amt{{ $i }}" min="1"
-                                                    max="{{ $sb->qty }}" placeholder="1" />
+                                                    max="{{ $sb->qty }}" placeholder="1"
+                                                    bookid="{{ $sb->book_id }}" suppid="{{ $sb->supplier_id }}" />
                                             </span>
                                             <span class="actionCust">
                                                 <a href="#"><i class="fa fa-shopping-cart"
@@ -338,24 +339,31 @@
         });
 
         function buy(id) {
-            const input = document.getElementById("amt"+id);
-            const view = document.getElementById("qty"+id);
-            const tabel = document.getElementById("baris"+id);
+            const input = document.getElementById("amt" + id);
+            const view = document.getElementById("qty" + id);
+            const tabel = document.getElementById("baris" + id);
             let inp = input.value;
+            let book = input.getAttribute("bookid");
+            let supp = input.getAttribute("suppid");
 
             $.ajax({
                 type: 'GET',
                 url: '/admin/buybook',
                 data: {
                     jum: inp,
-                    index: id
+                    index: id,
+                    bookid: book,
+                    suppid: supp
                 },
                 success: function(data) {
-                    view.html("Rp. " + data.jum);
-                    myInput.setAttribute("value", data.newval);
-                    if (data.tot.substring(0, 1) == "-") {
-                        toastr.warning("You don't have enough money", 'Warning');
+                    if (data.jum == 0) {
+                        tabel.remove();
+                    } else {
+                        input.value = 1;
+                        input.setAttribute("max", data.jum);
+                        view.innerHTML = data.jum;
                     }
+                    toastr.success("Transaction Successful")
                 }
             });
         }

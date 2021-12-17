@@ -14,8 +14,9 @@ class CreateSuppliertransTable extends Migration
     public function up()
     {
         Schema::create('suppliertrans', function (Blueprint $table) {
-            $table->integer('supptrans_id');
+            $table->id('supptrans_id')->autoIncrement();
             $table->integer('book_id');
+            $table->integer('supp_id');
             $table->integer('book_qty');
             $table->integer('subtotal');
         });
