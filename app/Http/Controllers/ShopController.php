@@ -7,6 +7,7 @@ use App\Models\Supplier;
 use App\Models\SupplierTrans;
 use App\Models\UserTrans;
 use App\Notifications\NotifyBookSold;
+use App\Models\user;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -44,5 +45,16 @@ class ShopController extends Controller
     {
         $trans = UserTrans::find($req->index);
         return response()->json($trans->Books);
+    }
+
+    public function filter(Request $req)
+    {
+        $trans = UserTrans::where('trans_date', '>=', date('Y-m-d H:i:s', strtotime($req->date1)))
+            ->where('trans_date', '<=', date('Y-m-d H:i:s', strtotime($req->date2)))
+            ->get();
+        foreach ($trans as $t) {
+            $users[] = user::find($t->user_id);
+        }
+        return response()->json(["tr" => $trans, "us" => $users]);
     }
 }

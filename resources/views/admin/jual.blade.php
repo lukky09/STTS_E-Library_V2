@@ -82,35 +82,35 @@
         }
 
         /* .container_table .dim_button {
-                                    display: inline-block;
-                                    color: #fff;
-                                    text-decoration: none;
-                                    text-transform: uppercase;
-                                    text-align: center;
-                                    padding-top: 6px;
-                                    background: rgb(57, 85, 136);
-                                    margin-right: 10px;
-                                    position: relative;
-                                    cursor: pointer;
-                                    font-weight: 600;
-                                    margin-bottom: 20px;
-                                } */
+                                                                                                        display: inline-block;
+                                                                                                        color: #fff;
+                                                                                                        text-decoration: none;
+                                                                                                        text-transform: uppercase;
+                                                                                                        text-align: center;
+                                                                                                        padding-top: 6px;
+                                                                                                        background: rgb(57, 85, 136);
+                                                                                                        margin-right: 10px;
+                                                                                                        position: relative;
+                                                                                                        cursor: pointer;
+                                                                                                        font-weight: 600;
+                                                                                                        margin-bottom: 20px;
+                                                                                                    } */
 
         /* .container_table .createSegment a {
-                                    margin-bottom: 0px;
-                                    border-radius: 50px;
-                                    background: #ffffff;
-                                    border: 1px solid #007bff;
-                                    color: #007bff;
-                                    transition: all 0.4s ease;
-                                } */
+                                                                                                        margin-bottom: 0px;
+                                                                                                        border-radius: 50px;
+                                                                                                        background: #ffffff;
+                                                                                                        border: 1px solid #007bff;
+                                                                                                        color: #007bff;
+                                                                                                        transition: all 0.4s ease;
+                                                                                                    } */
 
         /* .container_table .createSegment a:hover,
-                                .container_table .createSegment a:focus {
-                                    transition: all 0.4s ease;
-                                    background: #007bff;
-                                    color: #fff;
-                                } */
+                                                                                                    .container_table .createSegment a:focus {
+                                                                                                        transition: all 0.4s ease;
+                                                                                                        background: #007bff;
+                                                                                                        color: #fff;
+                                                                                                    } */
 
         .container_table .add_flex {
             display: flex;
@@ -268,9 +268,9 @@
                     <div class="row d-flex">
                         <div class="col-sm-4 createSegment">
                             <h3>Sales Report</h3>
-                            <input type="date" name="date1">
-                            <input type="date" name="date2">
-                            <span class="actionCust">
+                            <input type="date" name="date1" id="date1">
+                            <input type="date" name="date2" id="date2">
+                            <span class="actionCust" onclick="sorttrans()">
                                 <a href="#"><i class="fa fa-filter"></i></a>
                             </span>
                         </div>
@@ -297,7 +297,7 @@
                                     <th style="min-width: 66px">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="transbody">
                                 @foreach ($trans as $t)
                                     <tr>
                                         <td>{{ $t->trans_id }}</td>
@@ -410,6 +410,31 @@
                     });
                 }
             });
+        }
+
+        function sorttrans() {
+            console.log($("#date1").val() == "");
+            if ($("#date1").val() != "" && $("#date2").val() != "") {
+                $.ajax({
+                    type: 'GET',
+                    url: '/admin/filter',
+                    data: {
+                        date1: $("#date1").val(),
+                        date2: $("#date2").val()
+                    },
+                    success: function(data) {
+                        $("#transbody").html("");
+                        for (let index = 0; index < data.tr.length; index++) {
+                            $("#transbody").append('<tr><td>' + data.tr[index].trans_id + '</td><td>' + data.us[
+                                    index].user_fname + ' ' + data.us[index].user_lname +
+                                '</td><td>Rp. ' + thousands_separators(data.tr[index].subtotal) +
+                                '</td><td>'+data.tr[index].trans_date+'</td><td><span class="actionCust"><a href="#"><i class="fa fa-bookmark"onclick="opentrans( ' +
+                                data.tr[index].trans_id + ' )"></i></a></span></td></tr>'
+                            );
+                        }
+                    }
+                });
+            }
         }
 
         function thousands_separators(num) {

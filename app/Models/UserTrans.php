@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\user;
 
 class UserTrans extends Model
 {
@@ -23,7 +24,7 @@ class UserTrans extends Model
     public function Books()
     {
         return $this->belongsToMany(Book::class, 'usertransdetail', 'trans_id', 'book_id')
-                ->withPivot(['qty','price'])
-                ->as('detail');
+            ->withPivot(['qty', 'price'])
+            ->as('detail');
     }
 }
