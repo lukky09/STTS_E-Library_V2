@@ -17,6 +17,7 @@ class CreateUsertransdetailTable extends Migration
             $table->integer('trans_id');
             $table->integer('book_id');
             $table->integer('qty');
+            $table->integer('price');
         });
     }
 

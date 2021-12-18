@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\SupplierTrans;
+use App\Models\UserTrans;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -32,5 +33,11 @@ class ShopController extends Controller
             'subtotal' => $req->jum * $book->Suppliers->find($req->suppid)->pivot->price,
         ]);
         return response()->json(["jum" => $newstok]);
+    }
+
+    public function gettrans(Request $req)
+    {
+        $trans = UserTrans::find($req->index);
+        return response()->json($trans->Books);
     }
 }

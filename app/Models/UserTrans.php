@@ -16,13 +16,14 @@ class UserTrans extends Model
 
     protected $fillable = [
         'user_id',
-        'subtotal'
+        'subtotal',
+        'trans_date'
     ];
 
     public function Books()
     {
         return $this->belongsToMany(Book::class, 'usertransdetail', 'trans_id', 'book_id')
-                ->withPivot('qty')
+                ->withPivot(['qty','price'])
                 ->as('detail');
     }
 }

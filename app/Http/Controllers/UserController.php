@@ -178,6 +178,7 @@ class UserController extends Controller
 
     public function doOrder(Request $req)
     {
+        date_default_timezone_set('Asia/Jakarta');
         $price = 0;
         if (!Session::has('cartids')) {
             return back()->with("message", [0, "There's no book in your cart"]);
@@ -192,14 +193,15 @@ class UserController extends Controller
 
             $result = UserTrans::create([
                 'user_id' => getAuthUser()->user_id,
-                'subtotal' => $price
+                'subtotal' => $price,
+                'trans_date' => date('Y-m-d H:i:s')
             ]);
 
             foreach (Session::get('cartids') as $c) {
                 $book = Book::find($c[0]);
                 $book->shop_qty = $book->shop_qty - $c[1];
                 $book->save();
-                $result->Books()->attach($book, ["qty" => $c[1]]);
+                $result->Books()->attach($book, ["qty" => $c[1], "price" => $book->shop_price]);
             }
 
             Session::forget('cartids');

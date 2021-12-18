@@ -82,35 +82,35 @@
         }
 
         /* .container_table .dim_button {
-            display: inline-block;
-            color: #fff;
-            text-decoration: none;
-            text-transform: uppercase;
-            text-align: center;
-            padding-top: 6px;
-            background: rgb(57, 85, 136);
-            margin-right: 10px;
-            position: relative;
-            cursor: pointer;
-            font-weight: 600;
-            margin-bottom: 20px;
-        } */
+                                    display: inline-block;
+                                    color: #fff;
+                                    text-decoration: none;
+                                    text-transform: uppercase;
+                                    text-align: center;
+                                    padding-top: 6px;
+                                    background: rgb(57, 85, 136);
+                                    margin-right: 10px;
+                                    position: relative;
+                                    cursor: pointer;
+                                    font-weight: 600;
+                                    margin-bottom: 20px;
+                                } */
 
         /* .container_table .createSegment a {
-            margin-bottom: 0px;
-            border-radius: 50px;
-            background: #ffffff;
-            border: 1px solid #007bff;
-            color: #007bff;
-            transition: all 0.4s ease;
-        } */
+                                    margin-bottom: 0px;
+                                    border-radius: 50px;
+                                    background: #ffffff;
+                                    border: 1px solid #007bff;
+                                    color: #007bff;
+                                    transition: all 0.4s ease;
+                                } */
 
         /* .container_table .createSegment a:hover,
-        .container_table .createSegment a:focus {
-            transition: all 0.4s ease;
-            background: #007bff;
-            color: #fff;
-        } */
+                                .container_table .createSegment a:focus {
+                                    transition: all 0.4s ease;
+                                    background: #007bff;
+                                    color: #fff;
+                                } */
 
         .container_table .add_flex {
             display: flex;
@@ -229,11 +229,11 @@
             width: 50%;
         }
 
-        .container_table .createSegment .actionCust{
+        .container_table .createSegment .actionCust {
             margin-top: 6%;
         }
 
-        .container_table .actionCust:hover a{
+        .container_table .actionCust:hover a {
             background: #0B2243;
             color: #fff;
         }
@@ -292,8 +292,9 @@
                                 <tr>
                                     <th style="min-width: 20px">ID Transaksi</th>
                                     <th style="min-width: 100px">Customer</th>
-                                    <th style="min-width: 100px">Subtotal</th>
-                                    <th style="min-width: 100px">Action</th>
+                                    <th style="min-width: 66px">Subtotal</th>
+                                    <th style="min-width: 68px">Transacton Date</th>
+                                    <th style="min-width: 66px">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -307,9 +308,11 @@
                                         @endphp
                                         <td>{{ $u->user_fname . ' ' . $u->user_lname }}</td>
                                         <td>Rp. {{ number_format($t->subtotal, 2, ',', '.') }}</td>
+                                        <td>{{ date('d-M-Y', strtotime($t->trans_date)) }}</td>
                                         <td>
                                             <span class="actionCust">
-                                                <a href="#"><i class="fa fa-bookmark"></i></i></a>
+                                                <a href="#"><i class="fa fa-bookmark"
+                                                        onclick="opentrans({{ $t->trans_id }})"></i></a>
                                             </span>
                                         </td>
                                     </tr>
@@ -325,7 +328,7 @@
                 <div class="card_body">
                     <div class="row d-flex">
                         <div class="col-sm-4 createSegment">
-                            <h3>Book Report</h3>
+                            <h3>Transaction Detail</h3>
                         </div>
                         <div class="col-sm-8 add_flex">
                             <div class="form-group searchInput">
@@ -337,29 +340,16 @@
                         </div>
                     </div>
                     <div>
-                        @php
-                            $books = DB::table('books')->get();
-                        @endphp
                         <table id="filtertable1" class="table cust-datatable dataTable no-footer table-sortable">
                             <thead>
                                 <tr>
-                                    <th style="min-width: 20px">ID</th>
-                                    <th style="min-width: 100px">Title</th>
+                                    <th style="min-width: 20px">Book ID</th>
+                                    <th style="min-width: 100px">Book Title</th>
                                     <th style="min-width: 20px">Qty</th>
                                     <th style="min-width: 100px">Price</th>
-                                    <th style="min-width: 100px">Total</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($books as $book)
-                                    <tr>
-                                        <td>{{ $book->book_id }}</td>
-                                        <td>{{ $book->book_name }}</td>
-                                        <td>{{ $book->shop_qty }}</td>
-                                        <td>Rp. {{ number_format($book->shop_price, 2, ',', '.') }}</td>
-                                        <td>Rp. {{ number_format($book->shop_price, 2, ',', '.') }}</td>
-                                    </tr>
-                                @endforeach
+                            <tbody id="detailbody">
                             </tbody>
                         </table>
                     </div>
@@ -377,7 +367,7 @@
                     bSortable: false,
                     aTargets: ["nosort"],
                 }, ],
-                aoColumns: [null, null, null, null],
+                aoColumns: [null, null, null, null, null],
                 order: false,
                 bLengthChange: false,
                 dom: '<"top">ct<"top"p><"clear">',
@@ -392,7 +382,7 @@
                     bSortable: false,
                     aTargets: ["nosort"],
                 }, ],
-                aoColumns: [null, null, null, null, null],
+                aoColumns: [null, null, null, null],
                 order: false,
                 bLengthChange: false,
                 dom: '<"top">ct<"top"p><"clear">',
@@ -401,5 +391,31 @@
                 dataTable1.search(this.value).draw();
             });
         });
+
+        function opentrans(id) {
+            $.ajax({
+                type: 'GET',
+                url: '/admin/gettrans',
+                data: {
+                    index: id
+                },
+                success: function(data) {
+                    $("#detailbody").html("");
+                    data.forEach(book => {
+                        $("#detailbody").append("<tr><td>" + book.book_id + "</td><td>" + book
+                            .book_name + "</td><td>" + book.detail.qty +
+                            "</td><td>Rp. " + thousands_separators(book.detail.price) + "</td></tr>"
+                        );
+                        console.log(book);
+                    });
+                }
+            });
+        }
+
+        function thousands_separators(num) {
+            var num_parts = num.toString().split(".");
+            num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            return num_parts.join(".");
+        }
     </script>
 @endsection

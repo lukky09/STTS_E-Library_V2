@@ -17,6 +17,7 @@ class CreateUsertransTable extends Migration
             $table->id('trans_id')->autoIncrement();
             $table->integer('user_id');
             $table->integer('subtotal');
+            $table->timestamp('trans_date');
         });
     }
 
