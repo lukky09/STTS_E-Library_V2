@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Supplier;
 use App\Models\SupplierTrans;
 use App\Models\UserTrans;
+use App\Notifications\NotifyBookSold;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -32,6 +34,9 @@ class ShopController extends Controller
             'book_qty' => $req->jum,
             'subtotal' => $req->jum * $book->Suppliers->find($req->suppid)->pivot->price,
         ]);
+        $supplier_in_business = Supplier::where('supplier_id',$req->suppid)->first();
+        $isi = "Dear $supplier_in_business->supp_name, your book \"$book->book_name\" is sold";
+        $supplier_in_business->notify(new NotifyBookSold($isi));
         return response()->json(["jum" => $newstok]);
     }
 

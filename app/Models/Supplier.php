@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class Supplier extends Authenticatable
 {
     use HasFactory;
+    use Notifiable;
 
     protected $table = 'suppliers';
     protected $primaryKey = 'supplier_id';
@@ -33,4 +35,6 @@ class Supplier extends Authenticatable
     {
         return $this->belongsToMany(Book::class,'supplierbooks','supplier_id','book_id')->withPivot(['qty','price']);
     }
+
+    
 }
