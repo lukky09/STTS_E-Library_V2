@@ -82,35 +82,35 @@
         }
 
         /* .container_table .dim_button {
-                                                                                                        display: inline-block;
-                                                                                                        color: #fff;
-                                                                                                        text-decoration: none;
-                                                                                                        text-transform: uppercase;
-                                                                                                        text-align: center;
-                                                                                                        padding-top: 6px;
-                                                                                                        background: rgb(57, 85, 136);
-                                                                                                        margin-right: 10px;
-                                                                                                        position: relative;
-                                                                                                        cursor: pointer;
-                                                                                                        font-weight: 600;
-                                                                                                        margin-bottom: 20px;
-                                                                                                    } */
+                                                                                                                display: inline-block;
+                                                                                                                color: #fff;
+                                                                                                                text-decoration: none;
+                                                                                                                text-transform: uppercase;
+                                                                                                                text-align: center;
+                                                                                                                padding-top: 6px;
+                                                                                                                background: rgb(57, 85, 136);
+                                                                                                                margin-right: 10px;
+                                                                                                                position: relative;
+                                                                                                                cursor: pointer;
+                                                                                                                font-weight: 600;
+                                                                                                                margin-bottom: 20px;
+                                                                                                            } */
 
         /* .container_table .createSegment a {
-                                                                                                        margin-bottom: 0px;
-                                                                                                        border-radius: 50px;
-                                                                                                        background: #ffffff;
-                                                                                                        border: 1px solid #007bff;
-                                                                                                        color: #007bff;
-                                                                                                        transition: all 0.4s ease;
-                                                                                                    } */
+                                                                                                                margin-bottom: 0px;
+                                                                                                                border-radius: 50px;
+                                                                                                                background: #ffffff;
+                                                                                                                border: 1px solid #007bff;
+                                                                                                                color: #007bff;
+                                                                                                                transition: all 0.4s ease;
+                                                                                                            } */
 
         /* .container_table .createSegment a:hover,
-                                                                                                    .container_table .createSegment a:focus {
-                                                                                                        transition: all 0.4s ease;
-                                                                                                        background: #007bff;
-                                                                                                        color: #fff;
-                                                                                                    } */
+                                                                                                            .container_table .createSegment a:focus {
+                                                                                                                transition: all 0.4s ease;
+                                                                                                                background: #007bff;
+                                                                                                                color: #fff;
+                                                                                                            } */
 
         .container_table .add_flex {
             display: flex;
@@ -308,7 +308,7 @@
                                         @endphp
                                         <td>{{ $u->user_fname . ' ' . $u->user_lname }}</td>
                                         <td>Rp. {{ number_format($t->subtotal, 2, ',', '.') }}</td>
-                                        <td>{{ date('d-M-Y', strtotime($t->trans_date)) }}</td>
+                                        <td> {{ date('d-M-Y', strtotime($t->trans_date)) }} </td>
                                         <td>
                                             <span class="actionCust">
                                                 <a href="#"><i class="fa fa-bookmark"
@@ -428,7 +428,8 @@
                             $("#transbody").append('<tr><td>' + data.tr[index].trans_id + '</td><td>' + data.us[
                                     index].user_fname + ' ' + data.us[index].user_lname +
                                 '</td><td>Rp. ' + thousands_separators(data.tr[index].subtotal) +
-                                '</td><td>'+data.tr[index].trans_date+'</td><td><span class="actionCust"><a href="#"><i class="fa fa-bookmark"onclick="opentrans( ' +
+                                '</td><td>' + data.tr[index].trans_date +
+                                ' </td><td><span class="actionCust"><a href="#"><i class="fa fa-bookmark"onclick="opentrans( ' +
                                 data.tr[index].trans_id + ' )"></i></a></span></td></tr>'
                             );
                         }

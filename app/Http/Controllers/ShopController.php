@@ -35,7 +35,7 @@ class ShopController extends Controller
             'book_qty' => $req->jum,
             'subtotal' => $req->jum * $book->Suppliers->find($req->suppid)->pivot->price,
         ]);
-        $supplier_in_business = Supplier::where('supplier_id',$req->suppid)->first();
+        $supplier_in_business = Supplier::where('supplier_id', $req->suppid)->first();
         $isi = "Dear $supplier_in_business->supp_name, your book \"$book->book_name\" is sold";
         $supplier_in_business->notify(new NotifyBookSold($isi));
         return response()->json(["jum" => $newstok]);
@@ -54,6 +54,7 @@ class ShopController extends Controller
             ->get();
         foreach ($trans as $t) {
             $users[] = user::find($t->user_id);
+            $t->trans_date = date('d-M-Y', strtotime($t->trans_date));
         }
         return response()->json(["tr" => $trans, "us" => $users]);
     }
