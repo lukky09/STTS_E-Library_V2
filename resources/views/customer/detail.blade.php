@@ -394,6 +394,17 @@
         /* end-slider */
         /* end-recommendation */
 
+        .randombook{
+            width: 100%;
+            height: 100%;
+            /* padding: 2vh; */
+            padding-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
     </style>
 
     @php
@@ -466,7 +477,8 @@
                             <div class="controls">
                                 <input type="hidden" value="{{ $id }}" name="id">
                                 <button type="button" id="decrement" onclick="stepper(this)"> - </button>
-                                <input type="number" name="qty" min="1" max="{{$book->shop_qty}}" step="1" value="1" id="my-input" readonly>
+                                <input type="number" name="qty" min="1" max="{{ $book->shop_qty }}" step="1" value="1"
+                                    id="my-input" readonly>
                                 <button type="button" id="increment" onclick="stepper(this)"> + </button>
                             </div>
 
@@ -484,7 +496,46 @@
             <div class="sec3-inner" data-aos="zoom-out-left">
                 <h2>Recommendation Book</h2>
                 <div class="sec3-slider">
+                    @foreach ($books as $book1)
                     <div class="card">
+                        <div class="front">
+                            @if ($book1->book_dir == "Test")
+                                @php
+                                    $r = rand(10,50);
+                                    $g = rand(10,50);
+                                    $b = rand(10,50);
+                                    $rand = $r . $g . $b;
+                                    $chance = rand(1,3);
+                                    if($chance == 1){
+                                        $rand2 = dechex(rand(50,200)) . dechex(rand(50,200)) . dechex(rand(50,200));
+                                    }else{
+                                        $rand2 = $r+49 . $g+49 . $b+49;
+                                    }
+                                @endphp
+                                <div class="randombook" style="display: block; background: linear-gradient(to bottom, #{{$rand}}, #{{$rand2}});">
+                                    <div style="color: white; font-family: 'Times New Roman', Times, serif; border:solid white 2px;
+                                        font-size: 30px; height: 90%; margin: 10px 20px;">
+                                        {{$book1->book_name}}
+                                    </div>
+                                </div>
+                            @else
+                                <img src="{{ url(URL::asset('storage'.$book1->book_dir)) }}">
+                            @endif
+
+                        </div>
+                        <div class="back">
+                            <div class="back-content middle">
+                                <h2>{{$book1->book_name}}</h2>
+                                <span>{{$book1->Authors->author_name}}</span>
+                                <div class="sm">
+                                    <a href="{{ url('/addCart/' . $book1->book_id) }}"><img src={{ url(URL::asset('rss/icons/cart.png')) }}></a>
+                                    <a href="{{ url('/detail/' . $book1->book_id) }}"><img src={{ url(URL::asset('rss/icons/loupe.png')) }}></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                    {{-- <div class="card">
                         <div class="front">
                             <img src={{ url(URL::asset('rss/book/img3.jpg')) }}>
                         </div>
@@ -573,7 +624,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

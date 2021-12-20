@@ -309,31 +309,6 @@
     {{-- toast --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
-    <script>
-        function toastMessage() {
-            // Display a warning toast, with no title
-            toastr.warning('you dont have enough money', 'Warning')
-
-            toastr.info('Please Top Up First');
-
-            // Display a success toast, with a title
-            toastr.success('Success Buy', 'Message')
-
-            // Display an error toast, with a title
-            //toastr.error('Error message')
-
-            // // Immediately remove current toasts without using animation
-            // toastr.remove()
-
-            // // Remove current toasts using animation
-            // toastr.clear()
-
-            // // Override global options
-            // toastr.success('We do have the Kapua suite available.', 'Turtle Bay Resort', {
-            //     timeOut: 5000
-            // })
-        }
-    </script>
 
     @if (Session::has('message') && Session::get('message')[0]== 1)
         <script>

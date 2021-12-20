@@ -136,6 +136,10 @@
             color: #202020;
         }
 
+        a:-webkit-any-link {
+            text-decoration: none;
+        }
+
         .main_contain .item-img:hover .icon-list {
             bottom: 26px;
         }
@@ -244,10 +248,10 @@
                     <h2>Product Shop List</h2>
                 </div>
                 <div class="display-style-btns" data-aos="zoom-out-right">
-                    <button type="button" id="grid-active-btn" onclick="refreshCSS()">
+                    <button type="button" id="grid-active-btn">
                         <i class="fas fa-th"></i>
                     </button>
-                    <button type="button" id="details-active-btn" onclick="refreshCSS()">
+                    <button type="button" id="details-active-btn">
                         <i class="fas fa-list-ul"></i>
                     </button>
                 </div>
@@ -284,8 +288,12 @@
                                     <!--<span class="old-price">$275.60</span> -->
                                 </div>
                                 <p>{{ $b->book_synopsis }}</p>
-                                <button type="button" class="add-btn btn">add to cart</button>
-
+                                {{-- <button type="button" class="add-btn btn">add to cart</button> --}}
+                                @if (getAuthUserType() == 'user')
+                                    <a href="/addCart/{{ $b->book_id }}">
+                                        <button type="button" class="add-btn btn">add to cart</button>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     @endforeach

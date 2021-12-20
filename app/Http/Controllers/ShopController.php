@@ -19,7 +19,12 @@ class ShopController extends Controller
 
     public function detail(Request $req)
     {
-        return view('customer.detail', ['id' => $req->id]);
+        $books = Book::withoutTrashed()->inRandomOrder()->limit(6)->get();
+        return view('customer.detail',
+        [
+            'id' => $req->id,
+            "books" => $books
+        ]);
     }
 
     public function buybook(Request $req)

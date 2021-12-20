@@ -290,11 +290,11 @@
                         <table id="filtertable" class="table cust-datatable dataTable no-footer table-sortable">
                             <thead>
                                 <tr>
-                                    <th style="min-width: 20px">ID</th>
-                                    <th style="min-width: 160px">Book Title</th>
-                                    <th style="min-width: 100px">Supplier</th>
-                                    <th style="min-width: 20px">Book Qty</th>
-                                    <th style="min-width: 100px">Subtotal</th>
+                                    <th style="min-width: 20px">ID Transaksi</th>
+                                    <th style="min-width: 100px">Book Title</th>
+                                    <th style="min-width: 66px">Supplier</th>
+                                    <th style="min-width: 68px">Book Qty</th>
+                                    <th style="min-width: 66px">Total</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -326,7 +326,7 @@
                 <div class="card_body">
                     <div class="row d-flex">
                         <div class="col-sm-4 createSegment">
-                            <h3>Book Report</h3>
+                            <h3>Transaction Detail</h3>
                         </div>
                         <div class="col-sm-8 add_flex">
                             <div class="form-group searchInput">
@@ -378,7 +378,7 @@
                     bSortable: false,
                     aTargets: ["nosort"],
                 }, ],
-                aoColumns: [null, null, null, null],
+                aoColumns: [null, null, null, null, null],
                 order: false,
                 bLengthChange: false,
                 dom: '<"top">ct<"top"p><"clear">',

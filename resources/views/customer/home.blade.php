@@ -395,7 +395,7 @@
 
         /* end-news */
 
-        .randombook{
+        .randombook {
             width: 100%;
             height: 100%;
             /* padding: 2vh; */
@@ -405,15 +405,16 @@
             justify-content: center;
             align-items: center;
         }
+
     </style>
     <!-- header-banner -->
     <div class="header-landing" data-scene>
         <div class="content">
             @if (sudahLogin())
-                @if(getAuthUserType() == "user")
-                    <small>Welcome, {{getAuthUser()->user_fname}}, to our</small>
+                @if (getAuthUserType() == 'user')
+                    <small>Welcome, {{ getAuthUser()->user_fname }}, to our</small>
                 @elseif (getAuthUserType() == "supp")
-                    <small>Welcome, {{getAuthUser()->supplier_name}}, to our</small>
+                    <small>Welcome, {{ getAuthUser()->supplier_name }}, to our</small>
                 @endif
                 <h1>Book's<br> Biblichor Store</h1>
                 <button type="button" class="btn">Take a tour</button>
@@ -460,30 +461,32 @@
 
     <section class="sec2 left-right-sec" data-scene>
         @php
-            $randombook = DB::table('books')->inRandomorder()->first();
+            $randombook = DB::table('books')
+                ->inRandomorder()
+                ->first();
         @endphp
         <div class="container">
             <div class="sec2-inner">
                 <div class="img" data-aos="zoom-out-up">
-                    @if ($randombook->book_dir == "Test")
+                    @if ($randombook->book_dir == 'Test')
                         @php
-                            $rand = rand(40,80) . rand(40,90) . rand(40,60);
+                            $rand = rand(40, 80) . rand(40, 90) . rand(40, 60);
                         @endphp
-                        <div class="randombook" style="display: block; background-color: #{{$rand}} ;">
+                        <div class="randombook" style="display: block; background-color: #{{ $rand }} ;">
                             <div style="color: white; font-family: 'Times New Roman', Times, serif; border:solid white 2px;
-                                font-size: 50px; height: 400px; margin: 10px 20px;">
-                                {{$randombook->book_name}}
+                                    font-size: 50px; height: 400px; margin: 10px 20px;">
+                                {{ $randombook->book_name }}
                             </div>
                         </div>
                     @else
-                        <img src="{{asset('storage'.$randombook->book_dir) }}">
+                        <img src="{{ asset('storage' . $randombook->book_dir) }}">
                     @endif
                 </div>
                 <div class="text" data-aos="zoom-out-left">
-                    <h2>{{$randombook->book_name}}</h2>
+                    <h2>{{ $randombook->book_name }}</h2>
                     <div class="text-inner">
-                        <p>{{$randombook->book_synopsis}}</p>
-                        <a href="#" class="btn">Learn More</a>
+                        <p>{{ $randombook->book_synopsis }}</p>
+                        <a href="{{ url('/detail/' . $randombook->book_id) }}" class="btn">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -495,41 +498,43 @@
             <div class="sec3-inner" data-aos="zoom-out-left">
                 <h2>Popular Book</h2>
                 <div class="sec3-slider">
-
                     @foreach ($books as $book)
                         <div class="card">
                             <div class="front">
-                                @if ($book->book_dir == "Test")
+                                @if ($book->book_dir == 'Test')
                                     @php
-                                        $r = rand(10,50);
-                                        $g = rand(10,50);
-                                        $b = rand(10,50);
+                                        $r = rand(10, 50);
+                                        $g = rand(10, 50);
+                                        $b = rand(10, 50);
                                         $rand = $r . $g . $b;
-                                        $chance = rand(1,3);
-                                        if($chance == 1){
-                                            $rand2 = dechex(rand(50,200)) . dechex(rand(50,200)) . dechex(rand(50,200));
-                                        }else{
-                                            $rand2 = $r+49 . $g+49 . $b+49;
+                                        $chance = rand(1, 3);
+                                        if ($chance == 1) {
+                                            $rand2 = dechex(rand(50, 200)) . dechex(rand(50, 200)) . dechex(rand(50, 200));
+                                        } else {
+                                            $rand2 = $r + 49 . $g + 49 . $b + 49;
                                         }
                                     @endphp
-                                    <div class="randombook" style="display: block; background: linear-gradient(to bottom, #{{$rand}}, #{{$rand2}});">
+                                    <div class="randombook"
+                                        style="display: block; background: linear-gradient(to bottom, #{{ $rand }}, #{{ $rand2 }});">
                                         <div style="color: white; font-family: 'Times New Roman', Times, serif; border:solid white 2px;
-                                            font-size: 50px; height: 90%; margin: 10px 20px;">
-                                            {{$book->book_name}}
+                                                font-size: 50px; height: 90%; margin: 10px 20px;">
+                                            {{ $book->book_name }}
                                         </div>
                                     </div>
                                 @else
-                                    <img src="{{ url(URL::asset('storage'.$book->book_dir)) }}">
+                                    <img src="{{ url(URL::asset('storage' . $book->book_dir)) }}">
                                 @endif
 
                             </div>
                             <div class="back">
                                 <div class="back-content middle">
-                                    <h2>{{$book->book_name}}</h2>
-                                    <span>{{$book->Authors->author_name}}</span>
+                                    <h2>{{ $book->book_name }}</h2>
+                                    <span>{{ $book->Authors->author_name }}</span>
                                     <div class="sm">
-                                        <a href="{{ url('/addCart/' . $book->book_id) }}"><img src={{ url(URL::asset('rss/icons/cart.png')) }}></a>
-                                        <a href="{{ url('/detail/' . $book->book_id) }}"><img src={{ url(URL::asset('rss/icons/loupe.png')) }}></a>
+                                        <a href="{{ url('/addCart/' . $book->book_id) }}"><img
+                                                src={{ url(URL::asset('rss/icons/cart.png')) }}></a>
+                                        <a href="{{ url('/detail/' . $book->book_id) }}"><img
+                                                src={{ url(URL::asset('rss/icons/loupe.png')) }}></a>
                                     </div>
                                 </div>
                             </div>
@@ -643,18 +648,34 @@
     </section>
 
     <section class="sec2 left-right-sec" data-scene>
+        @php
+            $randombook = DB::table('books')
+                ->inRandomorder()
+                ->first();
+        @endphp
         <div class="container">
             <div class="sec2-inner">
                 <div class="text" data-aos="zoom-out-right">
-                    <h2>Le Mariage: The Promise of Forever</h2>
+                    <h2>{{ $randombook->book_name }}</h2>
                     <div class="text-inner">
-                        <p>Setelah kehilangan anak dan pernikahannya, Renae Adiana tidak lagi memercayai cinta dan adanya
-                            akhir yang bahagia. Dengan kekurangan terbesar yang dimiliki Renae, tidak akan ada laki-laki
-                            yang menginginkan Renae sebagai istrinya. </p>
-                        <a href="#" class="btn">Learn More</a>
+                        <p>{{ $randombook->book_synopsis }}</p>
+                        <a href="{{ url('/detail/' . $randombook->book_id) }}" class="btn">Learn More</a>
                     </div>
                 </div>
-                <div class="img" data-aos="zoom-out-left"><img src={{ url(URL::asset('rss/book/img2.jpg')) }}>
+                <div class="img" data-aos="zoom-out-left">
+                    @if ($randombook->book_dir == 'Test')
+                        @php
+                            $rand = rand(40, 80) . rand(40, 90) . rand(40, 60);
+                        @endphp
+                        <div class="randombook" style="display: block; background-color: #{{ $rand }} ;">
+                            <div style="color: white; font-family: 'Times New Roman', Times, serif; border:solid white 2px;
+                                    font-size: 50px; height: 400px; margin: 10px 20px;">
+                                {{ $randombook->book_name }}
+                            </div>
+                        </div>
+                    @else
+                        <img src="{{ asset('storage' . $randombook->book_dir) }}">
+                    @endif
                 </div>
             </div>
         </div>
