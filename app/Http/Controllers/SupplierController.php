@@ -99,7 +99,7 @@ class SupplierController extends Controller
             "bookdesc"=>"required|string"
         ]);
 
-        dump($req->file('photocover'));
+        // dump($req->file('photocover'));
 
         $namafile = strtolower(trim($req->input('booktitle'), ' ')).".".$req->file('photocover')->getClientOriginalExtension();
         $namafolder = "covers";
@@ -168,6 +168,7 @@ class SupplierController extends Controller
         // if(getAuthUserType() == "supp"){
         //     dump($user->notifications);
         // }
+        $daftarNotif = [];
 
         foreach ($user->notifications as $notif) {
             $notif->markAsRead();

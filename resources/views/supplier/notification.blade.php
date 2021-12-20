@@ -543,6 +543,7 @@
 
         <table class="table">
             @foreach ($daftarNotif as $eachNotification)
+                {{$eachNotification->markAsRead()}}
                 <tr>
                     <td style="width: 70vw;">{{$eachNotification['isi']}}</td>
                     <td>{{$eachNotification['tanggal']}}</td>

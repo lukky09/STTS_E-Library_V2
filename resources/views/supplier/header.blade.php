@@ -437,7 +437,11 @@
                 <div id="search-btn" class="fas fa-search"></div>
             </a></li>
             <li><a href="/supplier/notif">
-                <div id="notif-btn" class="fas fa-bell"></div>
+                @if(count(getAuthUser()->unreadNotifications)>0)
+                    <div id="notif-btn" class="fas fa-bell" style="color: red"></div>
+                @else
+                    <div id="notif-btn" class="fas fa-bell"></div>
+                @endif
             </a></li>
             {{-- belum login --}}
             @if (sudahLogin() == false)

@@ -218,7 +218,11 @@
                     <div class="product_wrap">
                         <div class="product_info">
                             <div class="product_img">
-                                <img src="{{ url(URL::asset('rss/book/img1.jpg')) }}">
+                                @if ($book->book_dir != 'Test')
+                                    <img src="{{ asset('storage' . $book->book_dir) }}">
+                                @else
+                                    <img src=" {{ url(URL::asset('rss/book/img1.jpg')) }}">
+                                @endif
                             </div>
                             <div class="product_data">
                                 <div class="description">

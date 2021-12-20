@@ -528,8 +528,8 @@
                                     <h2>{{$book->book_name}}</h2>
                                     <span>{{$book->Authors->author_name}}</span>
                                     <div class="sm">
-                                        <a href="#"><img src={{ url(URL::asset('rss/icons/cart.png')) }}></a>
-                                        <a href="#"><img src={{ url(URL::asset('rss/icons/loupe.png')) }}></a>
+                                        <a href="{{ url('/addCart/' . $book->book_id) }}"><img src={{ url(URL::asset('rss/icons/cart.png')) }}></a>
+                                        <a href="{{ url('/detail/' . $book->book_id) }}"><img src={{ url(URL::asset('rss/icons/loupe.png')) }}></a>
                                     </div>
                                 </div>
                             </div>
