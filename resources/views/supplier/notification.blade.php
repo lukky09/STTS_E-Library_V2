@@ -6,21 +6,31 @@
         background-color: #3E1F47;
         width: 100%;
         margin: 0;
-    }
 
+    }
     .addform{
         color: white;
-        /* width: 100vw; */
-        margin-left: auto;
-        margin-right: auto;
+        width: 100vw;
+        height: 100vh;
+        /* background: green; */
         background-size: cover;
         background-position: center;
-        height: 100vh;
         position: relative;
-        overflow: hidden;
-        z-index: 0;
+        display: flex;
+        justify-content: center;
+        /* overflow: hidden; */
     }
+    .addform table{
+        width: 50vw;
+        margin-left: auto;
+        margin-right: auto;
+        /* margin-top: 100px; */
+        border-radius: 20px;
+        /* border: 5px solid white; */
+        /* padding: 20px; */
 
+        /* background-color: black; */
+    }
     #overlaylayer{
         position: absolute;
         top: 0;
@@ -28,29 +38,12 @@
         width: 100%;
         height: 100%;
         background-image:linear-gradient(to bottom, rgba(20,5,10, 0.52), rgba(117, 19, 93, 0.2));
-        z-index: -1;
+        z-index: -2;
     }
-
-    .formmodal{
-        z-index: 1;
+    .addform table .table-header{
+        position: sticky;
+        top: 0;
     }
-
-    .addform form{
-        width: 50vw;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 100px;
-        border-radius: 20px;
-        /* border: 5px solid white; */
-        padding: 20px;
-        background-color: rgba(0, 0, 0, 0.7);
-    }
-
-    .addform form h1{
-        margin-top: 10px;
-        margin-bottom: 0px;
-    }
-
     .forminputs{
         height: 5vh;
         width: 100%;
@@ -61,10 +54,6 @@
         border: 5px solid white;
     }
     .row{
-        margin-top: 1vh;
-    }
-
-    #btnAdd{
         margin-top: 2vh;
     }
 
@@ -105,9 +94,9 @@
         }
 
         .content h1 {
-            /* font-size: 80px;
-            margin: 10px 0 10px;
-            line-height: 50px; */
+            font-size: 80px;
+            margin: 10px 0 30px;
+            line-height: 80px;
         }
 
         .bubbles img {
@@ -460,90 +449,106 @@
             color: #fff;
             background-color: #05636d;
         }
+        .table{
+            /* margin-top: 10vh; */
+        }
+
+
+
 
         /* end-news */
+
+        .place{
+            overflow-y: scroll;
+            height: 80vh;
+            /* background-color: aquamarine; */
+            margin-top: 16vh;
+            width: min-content;
+        }
+        .overflow-place{
+            /* overflow-y: scroll; */
+
+        }
+        .table{
+            width: max-content;
+            color: white;
+        }
+        table td{
+            /* border-left: 2px solid white; */
+            height: 100px;
+            padding: 5px;
+        }
+        table th{
+            padding: 10px;
+        }
+
+        table tr{
+            background-color: rgb(100,50,90);
+        }
+
+        .imgbooklist img{
+            max-width: 100px;
+            max-height: 100px;
+        }
+        .grey-data{
+            background-color: rgb(45, 45, 45);
+        }
+        .black-data{
+            background-color: rgb(25, 25, 25);
+        }
 </style>
-<div class="addform" data-scene style="background-image: url({{URL::asset('webres/pexels-pixabay-159711.jpg')}})">
+<div class="" style="display: flex; justify-content: center;">
     <div id="overlaylayer"></div>
-    <form action="{{url('supplier/doAddBook')}}" method="POST" class="formmodal" style="" enctype="multipart/form-data">
-        @csrf
+    <div class="place">
+        {{-- <table class="table" cellspacing="0" cellpadding="0">
+            @php
+                $books = DB::table('books')->get();
+            @endphp
+            <tr class="table-header">
+                <th style="width: 30vw;">TITLE</th>
+            </tr>
+            @php
+                $i=0;
+            @endphp
+            <div class="overflow-place">
+                @foreach ($books as $book)
+                    @php
+                        $author = DB::table('authors')->where('author_id',$book->author_id)->first()->author_name;
+                        $publisher = DB::table('publishers')->where('publisher_id',$book->publisher_id)->first()->publisher_name;
+                        $genre = DB::table('genres')->where('genre_id',$book->genre_id)->first()->genre_name;
+                        $i++;
+                    @endphp
+                    @if ($i%2==0)
+                        <tr class="grey-data">
+                            <td style="width: 30vw;">{{$book->book_name}}</td>
+                            <td>{{$genre}}</td>
+                            <td>{{$publisher}}</td>
+                            <td>{{$author}}</td>
+                            <td class="imgbooklist"><img src="{{asset('storage'.$book->book_dir)}}" alt=""></td>
+                        </tr>
+                    @else
+                        <tr class="black-data">
+                            <td style="width: 30vw;">{{$book->book_name}}</td>
+                            <td>{{$genre}}</td>
+                            <td>{{$publisher}}</td>
+                            <td>{{$author}}</td>
+                            <td class="imgbooklist"><img src="{{asset('storage'.$book->book_dir)}}" alt=""></td>
+                        </tr>
+                    @endif
 
-        @php
-            $genres = DB::table('genres')->get();
-            $publishers = DB::table('publishers')->get();
-            $authors = DB::table('authors')->get();
-        @endphp
-        <h2 style="margin: 0">Add Book</h2>
-        <div class="row">
-            <label for="form-title">Title</label>
-            <input type="text" name="booktitle" placeholder="title" class="form-control forminputs" id="form-title">
-            @error('booktitle')
-                <div class="err">{{$message}}</div>
-            @enderror
-        </div>
-        <div class="" style="display: flex;">
-            <div class="row" style="width: 30%;">
-                <label for="form-genres">Genre</label>
-                <select name="bookgenre" id="" class="form-control forminputs" id="form-genres">
-                    @foreach ($genres as $genre)
-                        <option value="{{$genre->genre_id}}">{{$genre->genre_name}}</option>
-                    @endforeach
-                </select>
-                @error('bookgenre')
-                    <div class="err">{{$message}}</div>
-                @enderror
-            </div>
-            <div class="row" style="width: 70%; padding-left: 1vw;">
-                <label for="form-publisher">Publisher</label>
-                <select name="bookpublisher" id="" class="form-control forminputs" id="form-publisher">
-                    @foreach ($publishers as $publisher)
-                        <option value="{{$publisher->publisher_id}}">{{$publisher->publisher_name}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-
-        {{-- <div class="row" style="display: flex;"> --}}
-            {{-- <div class="row" style="width: 30%">
-                <label for="form-price">Price</label>
-                <style>
-                    input::-webkit-outer-spin-button,
-                    input::-webkit-inner-spin-button {
-                        -webkit-appearance: none;
-                        margin: 0;
-                    }
-                </style>
-                <input type="number" class="form-control forminputs" name="bookprice" id="form-price">
-            </div> --}}
-            <div class="row">
-                <label for="form-author">Author</label>
-                <select name="bookauthor" id="" class="form-control forminputs" id="form-author" style="margin: 0;">
-                    @foreach ($authors as $author)
-                        <option value="{{$author->author_id}}">{{$author->author_name}}</option>
-                    @endforeach
-                </select>
+                @endforeach
             </div>
 
-        {{-- </div> --}}
+        </table> --}}
 
-        <div class="row" style="margin-top: 2vh;">
-            <label for="form-cover">Cover</label>
-            <input type="file" name="photocover" id="form-cover" class="form-control">
-        </div>
-        @error("photocover")
-            {{$message}}<br>
-        @enderror
-        <div class="row">
-            <label for="form-desc">Description</label>
-            <textarea name="bookdesc" id="form-desc" cols="30" rows="4" style="border-radius: 10px; width: 100%"></textarea>
-        </div>
-        @error("bookdesc")
-            {{$message}}<br>
-        @enderror
-        @if(session('message'))
-            <small>{{session('message')}}</small><br>
-        @endif
-        <button class="btn" id="btnAdd">Add</button>
-    </form>
+        <table class="table">
+            @foreach ($daftarNotif as $eachNotification)
+                <tr>
+                    <td style="width: 70vw;">{{$eachNotification['isi']}}</td>
+                    <td>{{$eachNotification['tanggal']}}</td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
 </div>
 @endsection
