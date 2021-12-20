@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RegisterMail;
 use App\Models\Book;
 use App\Models\user;
 use App\Models\UserTrans;
@@ -12,6 +13,7 @@ use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -65,12 +67,14 @@ class UserController extends Controller
                 'user_pass' => "required|min:8|confirmed",
             ]
         );
-        user::create([
+        $u = user::create([
             "user_fname" => $req->user_fname,
             "user_lname" => $req->user_lname,
             "user_email" => $req->user_email,
             "user_pass" => Hash::make($req->user_pass),
         ]);
+
+        Mail::to($u->user_email)->send(new RegisterMail($u));
 
         return redirect('/login');
     }
