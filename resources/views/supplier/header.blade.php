@@ -428,12 +428,16 @@
     </div>
     <div class="right-menu icons">
         <ul>
+
             <li>
                 <div id="menu-btn" class="fas fa-bars"></div>
             </li>
             {{-- <li><a href="#" class="fas fa-shopping-cart"></a></li> --}}
             <li><a>
                 <div id="search-btn" class="fas fa-search"></div>
+            </a></li>
+            <li><a href="/supplier/notif">
+                <div id="notif-btn" class="fas fa-bell"></div>
             </a></li>
             {{-- belum login --}}
             @if (sudahLogin() == false)

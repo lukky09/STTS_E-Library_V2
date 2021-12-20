@@ -11,6 +11,7 @@
     .addform{
         color: white;
         width: 100vw;
+        height: 100vh;
         /* background: green; */
         background-size: cover;
         background-position: center;
@@ -29,6 +30,15 @@
         /* padding: 20px; */
 
         /* background-color: black; */
+    }
+    #overlaylayer{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:linear-gradient(to bottom, rgba(20,5,10, 0.52), rgba(117, 19, 93, 0.2));
+        z-index: -2;
     }
     .addform table .table-header{
         position: sticky;
@@ -452,12 +462,16 @@
             overflow-y: scroll;
             height: 80vh;
             /* background-color: aquamarine; */
-            margin-top: 10vh;
+            margin-top: 16vh;
             width: min-content;
         }
         .overflow-place{
             /* overflow-y: scroll; */
 
+        }
+        .table{
+            width: max-content;
+            color: white;
         }
         table td{
             /* border-left: 2px solid white; */
@@ -483,16 +497,17 @@
             background-color: rgb(25, 25, 25);
         }
 </style>
-<div class="addform" data-scene>
-
-
+<div class="" style="display: flex; justify-content: center;">
+    <div id="overlaylayer"></div>
     <div class="place">
         <table class="table" cellspacing="0" cellpadding="0">
             @php
                 $books = DB::table('books')->get();
             @endphp
             <tr class="table-header">
-                <th>TITLE</th>
+                <th style="width: 30vw;">TITLE</th>
+                <th style="background-color: blueviolet">GENRE</th>
+                <th>PUBLISHER</th>
                 <th style="background-color: blueviolet">AUTHOR</th>
                 <th>COVER</th>
             </tr>
@@ -503,17 +518,23 @@
                 @foreach ($books as $book)
                     @php
                         $author = DB::table('authors')->where('author_id',$book->author_id)->first()->author_name;
+                        $publisher = DB::table('publishers')->where('publisher_id',$book->publisher_id)->first()->publisher_name;
+                        $genre = DB::table('genres')->where('genre_id',$book->genre_id)->first()->genre_name;
                         $i++;
                     @endphp
                     @if ($i%2==0)
                         <tr class="grey-data">
-                            <td>{{$book->book_name}}</td>
+                            <td style="width: 30vw;">{{$book->book_name}}</td>
+                            <td>{{$genre}}</td>
+                            <td>{{$publisher}}</td>
                             <td>{{$author}}</td>
                             <td class="imgbooklist"><img src="{{asset('storage'.$book->book_dir)}}" alt=""></td>
                         </tr>
                     @else
                         <tr class="black-data">
-                            <td>{{$book->book_name}}</td>
+                            <td style="width: 30vw;">{{$book->book_name}}</td>
+                            <td>{{$genre}}</td>
+                            <td>{{$publisher}}</td>
                             <td>{{$author}}</td>
                             <td class="imgbooklist"><img src="{{asset('storage'.$book->book_dir)}}" alt=""></td>
                         </tr>

@@ -36,7 +36,7 @@ class ShopController extends Controller
             'subtotal' => $req->jum * $book->Suppliers->find($req->suppid)->pivot->price,
         ]);
         $supplier_in_business = Supplier::where('supplier_id', $req->suppid)->first();
-        $isi = "Dear $supplier_in_business->supp_name, your book \"$book->book_name\" is sold";
+        $isi = "Dear $supplier_in_business->supplier_name, your book \"$book->book_name\" is sold with the amount of $req->jum copies";
         $supplier_in_business->notify(new NotifyBookSold($isi));
         return response()->json(["jum" => $newstok]);
     }

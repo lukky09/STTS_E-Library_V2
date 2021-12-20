@@ -15,8 +15,8 @@
         background-position: center;
         background-attachment: scroll;
         width:100vw;
-        height: 80vh;
-        padding-top: 20vh;
+        height: 100vh;
+        padding-top: 0vh;
         position: relative;
         margin: 0px;
         /* overflow: hidden; */
@@ -504,6 +504,7 @@
         .contain{
             display: flex;
             height: 60vh;
+            padding-top: 15vh;
         }
 </style>
 <div class="addform" data-scene style="background-image: url({{URL::asset('webres/pexels-pixabay-159711.jpg')}});">

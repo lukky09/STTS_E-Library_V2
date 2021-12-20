@@ -7,6 +7,7 @@ use App\Models\Supplier;
 use App\Rules\CorrectPasswordRule;
 use App\Rules\RegisteredUserRule;
 use App\Rules\UniqueMail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -159,5 +160,26 @@ class SupplierController extends Controller
         return redirect('supplier/supply')->with('message', "Supplied $req->bookamount copies of \"$book->book_name\"");
 
 
+    }
+
+    public function toNotifList(Request $req)
+    {
+        $user = getAuthUser();
+        // if(getAuthUserType() == "supp"){
+        //     dump($user->notifications);
+        // }
+
+        foreach ($user->notifications as $notif) {
+            $notif->markAsRead();
+            $data = $notif->data;
+
+            $isi = $data['text'];
+            $tanggal = Carbon::parse($notif->created_at)->format('d F Y h:i');
+            $daftarNotif[] = [
+                "isi"=>$isi,
+                "tanggal"=>$tanggal
+            ];
+        }
+        return view('supplier.notification', ['daftarNotif'=>$daftarNotif]);
     }
 }
