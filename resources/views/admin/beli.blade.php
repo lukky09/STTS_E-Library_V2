@@ -82,35 +82,35 @@
         }
 
         /* .container_table .dim_button {
-            display: inline-block;
-            color: #fff;
-            text-decoration: none;
-            text-transform: uppercase;
-            text-align: center;
-            padding-top: 6px;
-            background: rgb(57, 85, 136);
-            margin-right: 10px;
-            position: relative;
-            cursor: pointer;
-            font-weight: 600;
-            margin-bottom: 20px;
-        } */
+                            display: inline-block;
+                            color: #fff;
+                            text-decoration: none;
+                            text-transform: uppercase;
+                            text-align: center;
+                            padding-top: 6px;
+                            background: rgb(57, 85, 136);
+                            margin-right: 10px;
+                            position: relative;
+                            cursor: pointer;
+                            font-weight: 600;
+                            margin-bottom: 20px;
+                        } */
 
         /* .container_table .createSegment a {
-            margin-bottom: 0px;
-            border-radius: 50px;
-            background: #ffffff;
-            border: 1px solid #007bff;
-            color: #007bff;
-            transition: all 0.4s ease;
-        }
+                            margin-bottom: 0px;
+                            border-radius: 50px;
+                            background: #ffffff;
+                            border: 1px solid #007bff;
+                            color: #007bff;
+                            transition: all 0.4s ease;
+                        }
 
-        .container_table .createSegment a:hover,
-        .container_table .createSegment a:focus {
-            transition: all 0.4s ease;
-            background: #007bff;
-            color: #fff;
-        } */
+                        .container_table .createSegment a:hover,
+                        .container_table .createSegment a:focus {
+                            transition: all 0.4s ease;
+                            background: #007bff;
+                            color: #fff;
+                        } */
 
         .container_table .add_flex {
             display: flex;
@@ -215,7 +215,7 @@
             font-weight: 800;
         }
 
-        .container_table .actionCust input{
+        .container_table .actionCust input {
             width: 50px;
             border-radius: 20%;
             border: none;
@@ -229,11 +229,11 @@
             width: 50%;
         }
 
-        .container_table .createSegment .actionCust{
+        .container_table .createSegment .actionCust {
             margin-top: 6%;
         }
 
-        .container_table .actionCust:hover a{
+        .container_table .actionCust:hover a {
             background: #0B2243;
             color: #fff;
         }
@@ -258,6 +258,7 @@
             cursor: pointer;
             border-radius: 3px;
         }
+
     </style>
 
     <div class="container_table" data-scene>
@@ -283,36 +284,37 @@
                         </div>
                     </div>
                     <div>
+                        @php
+                            $trans = DB::table('suppliertrans')->get();
+                        @endphp
                         <table id="filtertable" class="table cust-datatable dataTable no-footer table-sortable">
                             <thead>
                                 <tr>
                                     <th style="min-width: 20px">ID</th>
-                                    <th style="min-width: 100px">ID Customer</th>
-                                    <th style="min-width: 100px">Total</th>
-                                    <th style="min-width: 100px">Action</th>
+                                    <th style="min-width: 160px">Book Title</th>
+                                    <th style="min-width: 100px">Supplier</th>
+                                    <th style="min-width: 20px">Book Qty</th>
+                                    <th style="min-width: 100px">Subtotal</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Dummy1</td>
-                                    <td>Rp. 20.000</td>
-                                    <td>
-                                        <span class="actionCust">
-                                            <a href="#"><i class="fa fa-bookmark"></i></i></a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Dummy2</td>
-                                    <td>Rp 50.000</td>
-                                    <td>
-                                        <span class="actionCust">
-                                            <a href="#"><i class="fa fa-bookmark"></i></a>
-                                        </span>
-                                    </td>
-                                </tr>
+                                @foreach ($trans as $t)
+                                    @php
+                                        $book = DB::table('books')
+                                            ->where('book_id', $t->book_id)
+                                            ->first();
+                                        $supp = DB::table('suppliers')
+                                            ->where('supplier_id', $t->supp_id)
+                                            ->first();
+                                    @endphp
+                                    <tr>
+                                        <td>{{ $t->supptrans_id }}</td>
+                                        <td>{{ $book->book_name }}</td>
+                                        <td>{{ $supp->supplier_name }}</td>
+                                        <td>{{ $t->book_qty }}</td>
+                                        <td>Rp. {{ number_format($t->subtotal, 0, '', '.') }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
