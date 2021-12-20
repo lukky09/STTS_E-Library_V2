@@ -374,13 +374,13 @@
         $(document).ready(function() {
             var dataTable = $("#filtertable").DataTable({
                 pageLength: 5,
-                aoColumnDefs: [{
-                    bSortable: false,
-                    aTargets: ["nosort"],
-                }, ],
+                // aoColumnDefs: [{
+                //     bSortable: false,
+                //     aTargets: ["nosort"],
+                // }, ],
                 aoColumns: [null, null, null, null, null],
-                order: false,
-                bLengthChange: false,
+                // order: false,
+                // bLengthChange: false,
                 dom: '<"top">ct<"top"p><"clear">',
             });
             $("#filterbox").keyup(function() {
@@ -388,13 +388,13 @@
             });
             var dataTable1 = $("#filtertable1").DataTable({
                 pageLength: 5,
-                aoColumnDefs: [{
-                    bSortable: false,
-                    aTargets: ["nosort"],
-                }, ],
+                // aoColumnDefs: [{
+                //     bSortable: false,
+                //     aTargets: ["nosort"],
+                // }, ],
                 aoColumns: [null, null, null, null, null],
-                order: false,
-                bLengthChange: false,
+                // order: false,
+                // bLengthChange: false,
                 dom: '<"top">ct<"top"p><"clear">',
             });
             $("#filterbox1").keyup(function() {

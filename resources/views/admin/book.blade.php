@@ -317,7 +317,7 @@
                         <table id="filtertable" class="table cust-datatable dataTable no-footer table-sortable">
                             <thead>
                                 <tr>
-                                    <th style="width: 20px">ID</th>
+                                    <th style="width: 50px">ID</th>
                                     <th style="width: 50px">Action</th>
                                     <th style="width: 100px">Title</th>
                                     <th style="width: 60px">Genre</th>
@@ -382,13 +382,13 @@
         $(document).ready(function() {
             var dataTable = $("#filtertable").DataTable({
                 pageLength: 5,
-                aoColumnDefs: [{
-                    bSortable: false,
-                    aTargets: ["nosort"],
-                }, ],
+                // aoColumnDefs: [{
+                //     bSortable: false,
+                //     aTargets: ["nosort"],
+                // }, ],
                 aoColumns: [null, null, null, null, null, null, null, null, null],
-                order: false,
-                bLengthChange: false,
+                // order: false,
+                // bLengthChange: false,
                 dom: '<"top">ct<"top"p><"clear">',
             });
             $("#filterbox").keyup(function() {
