@@ -290,13 +290,17 @@
                                     <td>{{$user->user_fname}} {{$user->user_lname}}</td>
                                     <td>{{$user->user_email}}</td>
                                     <td>{{date('d-M-Y', strtotime($user->created_at))}}</td>
+                                    @if ($user->deleted_at == null)
                                     <td><span class="mode mode_on">Active</span></td>
+                                    @else
+                                    <td><span class="mode mode_off">Inactive</span></td>
+                                    @endif
                                     <td>
                                         <span class="actionCust">
                                             <a href="#"><i class="fa fa-pencil-square-o"></i></a>
                                         </span>
                                         <span class="actionCust">
-                                            <a href="#"><i class="fa fa-trash"></i></a>
+                                            <a href="{{url('admin/boopuser/'.$user->user_id)}}"><i class="fa fa-trash"></i></a>
                                         </span>
                                     </td>
                                 </tr>

@@ -7,12 +7,12 @@
 
     <style>
         /* .navigation {
-                                margin-left: -20px;
-                            }
+                                    margin-left: -20px;
+                                }
 
-                            .topbar .search ion-icon {
-                                margin-top: 10px;
-                            } */
+                                .topbar .search ion-icon {
+                                    margin-top: 10px;
+                                } */
 
         .container_table {
             min-height: 100vh;
@@ -176,20 +176,20 @@
         }
 
         /* .container_table .main-datatable .actionCust a {
-            display: inline-block;
-            color: #8a8a8a;
-            font-size: 12px;
-            border: 1px solid #d4d4d4;
-            padding: 10px 11px;
-            margin: 2px 3px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
+                display: inline-block;
+                color: #8a8a8a;
+                font-size: 12px;
+                border: 1px solid #d4d4d4;
+                padding: 10px 11px;
+                margin: 2px 3px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
 
-        .container_table .main-datatable .actionCust a i {
-            color: #8e8e8e;
-            margin: 2px;
-        } */
+            .container_table .main-datatable .actionCust a i {
+                color: #8e8e8e;
+                margin: 2px;
+            } */
 
         .container_table .main-datatable .dataTables_wrapper .dataTables_paginate .paginate_button {
             color: #999999 !important;
@@ -270,7 +270,7 @@
             color: #fff;
         }
 
-        .main-datatable .dropdown-menu i{
+        .main-datatable .dropdown-menu i {
             color: #05636d;
             margin-right: 10px;
         }
@@ -325,7 +325,7 @@
                                     <th style="width: 80px">Author</th>
                                     <th style="width: 70px">Price</th>
                                     <th style="width: 20px">Stock</th>
-                                    <th style="width: 60px">Status</th>
+                                    <th style="width: 100px">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -354,7 +354,7 @@
                                                             <i class="fa fa-pencil-square-o"></i>Edit</a>
                                                     </li>
                                                     <li>
-                                                        <a href="#" target="_black"> <i class="fa fa-trash"></i> Delete
+                                                        <a href="{{url('admin/boopbook/'.$book->book_id)}}" target="_black"> <i class="fa fa-trash"></i> Disable/Restore
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -366,7 +366,11 @@
                                         <td>{{ $author }}</td>
                                         <td>Rp. {{ number_format($book->shop_price, 2, ',', '.') }}</td>
                                         <td>{{ $book->shop_qty }}</td>
-                                        <td><span class="mode mode_on">Active</span></td>
+                                        @if ($book->deleted_at == null)
+                                            <td><span class="mode mode_on">Active</span></td>
+                                        @else
+                                            <td><span class="mode mode_off">Inactive</span></td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>
