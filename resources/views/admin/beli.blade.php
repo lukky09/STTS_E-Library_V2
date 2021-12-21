@@ -321,52 +321,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 main-datatable">
-                <div class="card_body">
-                    <div class="row d-flex">
-                        <div class="col-sm-4 createSegment">
-                            <h3>Transaction Detail</h3>
-                        </div>
-                        <div class="col-sm-8 add_flex">
-                            <div class="form-group searchInput">
-                                <input type="search" class="form-control" id="filterbox1" placeholder=" Search" />
-                                <span class="actionCust">
-                                    <a href="#"><i class="fa fa-search"></i></a>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        @php
-                            $books = DB::table('books')->get();
-                        @endphp
-                        <table id="filtertable1" class="table cust-datatable dataTable no-footer table-sortable">
-                            <thead>
-                                <tr>
-                                    <th style="min-width: 20px">ID</th>
-                                    <th style="min-width: 100px">Title</th>
-                                    <th style="min-width: 20px">Stock</th>
-                                    <th style="min-width: 100px">Price</th>
-                                    <th style="min-width: 100px">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($books as $book)
-                                    <tr>
-                                        <td>{{ $book->book_id }}</td>
-                                        <td>{{ $book->book_name }}</td>
-                                        <td>{{ $book->shop_qty }}</td>
-                                        <td>Rp. {{ number_format($book->shop_price, 2, ',', '.') }}</td>
-                                        <td>Rp. {{ number_format($book->shop_price, 2, ',', '.') }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- pagination -->
