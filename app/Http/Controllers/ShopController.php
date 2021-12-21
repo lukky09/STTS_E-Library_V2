@@ -12,6 +12,22 @@ use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
+    public function home(Request $request)
+    {
+        $money = UserTrans::get();
+        $no = SupplierTrans::get();
+        $saldo = UserTrans::sum('subtotal');
+        $saldo -= SupplierTrans::sum('subtotal');
+        $jum = UserTrans::count('subtotal');
+        $jum += SupplierTrans::count('subtotal');
+        $recent = UserTrans::select('user_id')
+                ->orderByDesc('trans_date')
+                ->groupBy('user_id')
+                ->limit(4)->get();
+        return view('admin.home', ['money'=>$money, 'no'=>$no, 'saldo'=>$saldo,
+                    'jum'=>$jum, 'recent'=>$recent]);
+    }
+
     public function search(Request $req)
     {
         return view('customer.search', ['search' => $req->isisearch]);
