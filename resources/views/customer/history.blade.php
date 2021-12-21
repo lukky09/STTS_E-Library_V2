@@ -148,7 +148,29 @@
         <div class="main-wrapper">
             <div class="container">
                 <div class="main-title" id="main_title" data-aos="fade-up"><h2>History Shop List</h2></div>
-                <div class="container-item">
+                @foreach (getAuthUser()->UserTrans as $trans)
+                    <div class="container-item">
+                        <div class="collapsible">
+                            <label class="contain_head" onclick="openContain({{$trans->$trans_id}})">{{$trans->trans_id}}</label>
+                            <div class="contain_date">{{$trans->trans_date}}</div>
+                            <div class="all-item all-item1">
+                                @foreach ($trans->Books as $book)
+                                    <div class="collapsible-text">
+                                        <div class="product-details">
+                                            <div class="header-details">
+                                                <h3 class="title">{{$book->book_name}}</h3>
+                                                <p class="jum">{{$book->detail->qty}}x</p>
+                                                <p class="price">{{$book->shop_price}} </p>
+                                                <p class="subtotal">{{$book->detail->qty * $book->shop_price}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                {{-- <div class="container-item">
                     <div class="collapsible">
                         <label class="contain_head" onclick="openContain(0)">Nomer Nota</label>
                         <div class="all-item all-item0">
@@ -159,7 +181,7 @@
                                         <h3 class="title">Nama Buku</h3>
                                         <p class="jum">5x</p>
                                         <p class="price">Rp. 12.000 </p>
-                                        <p class="subtotal">Rp. 12.000</p>
+                                        <p class="subtotal">Rp. 12.000</p> --}}
                                         {{-- <div class="star-widget">
                                             <input type="radio" name="rate" id="rate-5">
                                             <label for="rate-5" class="fas fa-star"></label>
@@ -172,7 +194,7 @@
                                             <input type="radio" name="rate" id="rate-1">
                                             <label for="rate-1" class="fas fa-star"></label>
                                         </div> --}}
-                                    </div>
+                                    {{-- </div>
                                 </div>
                             </div>
                             <div class="collapsible-text">
@@ -217,7 +239,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="text">
                 Thank you for buying from us
