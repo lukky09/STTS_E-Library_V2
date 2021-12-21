@@ -307,7 +307,7 @@
                                                 ->first();
                                         @endphp
                                         <td>{{ $u->user_fname . ' ' . $u->user_lname }}</td>
-                                        <td>Rp. {{ number_format($t->subtotal, 2, ',', '.') }}</td>
+                                        <td>Rp. {{ number_format($t->subtota, 0, '', '.') }}</td>
                                         <td> {{ date('d-M-Y', strtotime($t->trans_date)) }} </td>
                                         <td>
                                             <span class="actionCust">
@@ -430,8 +430,6 @@
                                     data.tr[index].trans_id + ' )"></i></a></span></td></tr>'
                                 );
                             }
-                            dataTable.ajax.reload();
-                            dataTable1.ajax.reload();
                         }
                 })
             }

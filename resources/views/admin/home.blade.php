@@ -286,7 +286,7 @@
                             @if ($count < 4)
                                 <tr>
                                     <td>{{$book->book_name}}</td>
-                                    <td>${{$book->shop_price}}</td>
+                                    <td>{{$book->shop_price}}</td>
                                     <td>{{$book->detail->qty}}</td>
                                     <td>{{$book->detail->trans_id}}</td>
                                 </tr>
