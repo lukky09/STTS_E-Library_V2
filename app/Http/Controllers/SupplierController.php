@@ -171,15 +171,17 @@ class SupplierController extends Controller
         $daftarNotif = [];
 
         foreach ($user->notifications as $notif) {
-            $notif->markAsRead();
-            $data = $notif->data;
+            if($notif->read_at ==null){
+                $notif->markAsRead();
+                $data = $notif->data;
 
-            $isi = $data['text'];
-            $tanggal = Carbon::parse($notif->created_at)->format('d F Y h:i');
-            $daftarNotif[] = [
-                "isi"=>$isi,
-                "tanggal"=>$tanggal
-            ];
+                $isi = $data['text'];
+                $tanggal = Carbon::parse($notif->created_at)->format('d F Y h:i');
+                $daftarNotif[] = [
+                    "isi"=>$isi,
+                    "tanggal"=>$tanggal
+                ];
+            }
         }
         return view('supplier.notification', ['daftarNotif'=>$daftarNotif]);
     }
