@@ -217,27 +217,28 @@
     <div class="container_form">
         <div class="container">
             <div class="title">Edit Buku</div>
-            <form action="#">
+            <form action="{{url('admin/book/doEditBook')}}"  method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details">ID</span>
-                        <input type="text" readonly>
+                        <input type="text" name="id" value="{{$book->book_id}}" readonly>
                     </div>
                     <div class="input-box">
                         <span class="details">Name</span>
-                        <input type="text" required>
+                        <input type="text" name="name" value="{{$book->book_name}}" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Qty</span>
-                        <input type="number">
+                        <input type="number" name="qty" value="{{$book->shop_qty}}">
                     </div>
                     <div class="input-box">
                         <span class="details">Price</span>
-                        <input type="number">
+                        <input type="number" name="price" value="{{$book->shop_price}}">
                     </div>
                     <div class="input-box">
                         <span class="details">Synopsis</span>
-                        <textarea name="" id="" cols="40" rows="5"></textarea>
+                        <textarea name="" id="" cols="40" rows="5" name="synopsis">{{$book->book_synopsis}}</textarea>
                     </div>
                     @php
                         $genres = DB::table('genres')->get();
@@ -246,7 +247,11 @@
                         <span class="details">Genre</span>
                         <select name="genre" id="genre">
                             @foreach ($genres as $g)
-                                <option value="{{$g->genre_id}}">{{$g->genre_name}}</option>
+                                @if ($g->genre_id == $book->genre_id)
+                                    <option value="{{$g->genre_id}}" selected>{{$g->genre_name}}</option>
+                                @else
+                                    <option value="{{$g->genre_id}}">{{$g->genre_name}}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
@@ -257,7 +262,7 @@
                         <span class="details">Publisher</span>
                         <select name="publishers" id="publishers">
                             @foreach ($publishers as $p)
-                                <option value="{{$p->publisher_id}}">{{$p->publisher_name}}</option>
+                                <option value="{{$p->publisher_id}}" @if ($p->publisher_id == $book->publisher_id) selected @endif>{{$p->publisher_name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -268,7 +273,7 @@
                         <span class="details">Author</span>
                         <select name="author" id="author">
                             @foreach ($authors as $a)
-                                <option value="{{$a->author_id}}">{{$a->author_name}}</option>
+                                <option value="{{$a->author_id}}" @if ($a->author_id == $book->author_id) selected @endif>{{$a->author_name}}</option>
                             @endforeach
                         </select>
                     </div>

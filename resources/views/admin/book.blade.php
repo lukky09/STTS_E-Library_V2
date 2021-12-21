@@ -350,7 +350,7 @@
                                                 </a>
                                                 <ul class="dropdown-menu dropdown_more">
                                                     <li>
-                                                        <a href="/admin/book/{id}/edit" target="_black">
+                                                        <a href="/admin/book/{{$book->book_id}}/edit" target="_black">
                                                             <i class="fa fa-pencil-square-o"></i>Edit</a>
                                                     </li>
                                                     <li>

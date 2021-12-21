@@ -87,9 +87,8 @@ Route::middleware(['shop'])->group(function () {
         Route::get('/book', function () {
             return view('admin.book');
         });
-        Route::get('/book/{id}/edit', function () {
-            return view('admin.editbook');
-        });
+        Route::get('/book/{id}/edit', [ShopController::class, 'toEditBook']);
+        Route::post('/book/doEditBook', [ShopController::class, 'doEditBook']);
         Route::get('/supplier', function () {
             return view('admin.supplier');
         });

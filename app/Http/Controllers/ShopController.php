@@ -80,4 +80,45 @@ class ShopController extends Controller
         }
         return response()->json(["tr" => $trans, "us" => $users]);
     }
+
+    public function toEditBook(Request $request)
+    {
+        $book = Book::where('book_id','=',$request->id)->first();
+
+        return view('admin.editbook',['book'=>$book]);
+    }
+
+    public function doEditBook(Request $request)
+    {
+        $customMessage = [
+            "name.required"=>"Title required",
+            "synopsis.required"=>"Description must be filled",
+            "file.required"=>"Please submit cover photo"
+        ];
+        $request->validate([
+            "name"=>"required|string",
+            "genre"=>"required",
+            "publishers"=>"required",
+            "author"=>"required",
+            "file" => "required|mimes:png,jpg,jpeg|max:5120",
+            "synopsis"=>"required|string"
+        ]);
+
+        $namafile = strtolower(trim($request->input('name'), ' ')).".".$request->file('file')->getClientOriginalExtension();
+        $namafolder = "covers";
+        $request->file('file')->storeAs($namafolder,$namafile,'public');
+
+        Book::where('book_id','=',$request->id)->update([
+            'book_name' => $request->name,
+            'shop_qty' => $request->qty,
+            'shop_price' => $request->price,
+            'book_synopsis' => $request->synopsis,
+            'genre_id' => $request->genre,
+            'publisher_id' => $request->publishers,
+            'author_id' => $request->author,
+            'book_dir' => "/covers/$namafile",
+        ]);
+
+        return redirect('admin/book');
+    }
 }
