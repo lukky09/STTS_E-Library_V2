@@ -151,7 +151,7 @@
                 @foreach (getAuthUser()->UserTrans as $trans)
                     <div class="container-item">
                         <div class="collapsible">
-                            <label class="contain_head" onclick="openContain({{$trans->$trans_id}})">{{$trans->trans_id}}</label>
+                            <label class="contain_head" onclick="openContain({{$trans->trans_id}})">{{$trans->trans_id}}</label>
                             <div class="contain_date">{{$trans->trans_date}}</div>
                             <div class="all-item all-item1">
                                 @foreach ($trans->Books as $book)
