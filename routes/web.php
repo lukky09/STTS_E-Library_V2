@@ -77,6 +77,8 @@ Route::middleware(['supplier'])->group(function () {
 
 Route::middleware(['shop'])->group(function () {
     Route::prefix('admin')->group(function () {
+        Route::get('/boopuser/{id}', [ShopController::class, 'deleteorrestoreuser']);
+        Route::get('/boopbook/{id}', [ShopController::class, 'deleteorrestorebuku']);
         Route::get('/buybook', [ShopController::class, 'buybook']);
         Route::get('/gettrans', [ShopController::class, 'gettrans']);
         Route::get('/filter', [ShopController::class, 'filter']);

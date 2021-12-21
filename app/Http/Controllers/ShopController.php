@@ -80,4 +80,26 @@ class ShopController extends Controller
         }
         return response()->json(["tr" => $trans, "us" => $users]);
     }
+
+    public function deleteorrestoreuser(Request $req)
+    {
+        $user = user::withTrashed()->find($req->id);
+        if($user->trashed()){
+            $user->restore();
+        }else{
+            $user->delete();
+        }
+        return redirect('/admin/customer');
+    }
+
+    public function deleteorrestorebuku(Request $req)
+    {
+        $buk = Book::withTrashed()->find($req->id);
+        if($buk->trashed()){
+            $buk->restore();
+        }else{
+            $buk->delete();
+        }
+        return redirect('/admin/book');
+    }
 }
