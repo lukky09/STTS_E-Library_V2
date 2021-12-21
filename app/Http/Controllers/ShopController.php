@@ -57,6 +57,7 @@ class ShopController extends Controller
         $trans = UserTrans::where('trans_date', '>=', date('Y-m-d H:i:s', strtotime($req->date1)))
             ->where('trans_date', '<=', date('Y-m-d H:i:s', strtotime($req->date2)))
             ->get();
+        $users = [];
         foreach ($trans as $t) {
             $users[] = user::find($t->user_id);
             $t->trans_date = date('d-M-Y', strtotime($t->trans_date));
