@@ -92,15 +92,14 @@ class ShopController extends Controller
     {
         $customMessage = [
             "name.required"=>"Title required",
-            "synopsis.required"=>"Description must be filled",
-            "file.required"=>"Please submit cover photo"
+            "synopsis.required"=>"Description must be filled"
         ];
         $request->validate([
             "name"=>"required|string",
             "genre"=>"required",
             "publishers"=>"required",
             "author"=>"required",
-            "file" => "required|mimes:png,jpg,jpeg|max:5120",
+            "file" => "mimes:png,jpg,jpeg|max:5120",
             "synopsis"=>"required|string"
         ]);
 

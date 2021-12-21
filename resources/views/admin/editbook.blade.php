@@ -238,7 +238,7 @@
                     </div>
                     <div class="input-box">
                         <span class="details">Synopsis</span>
-                        <textarea name="" id="" cols="40" rows="5" name="synopsis">{{$book->book_synopsis}}</textarea>
+                        <textarea id="" cols="40" rows="5" name="synopsis">{{$book->book_synopsis}}</textarea>
                     </div>
                     @php
                         $genres = DB::table('genres')->get();
