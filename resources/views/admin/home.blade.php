@@ -222,20 +222,6 @@
 
     <!-- card -->
     <div class="cardBox" data-scene>
-        @php
-            $money = DB::table('usertrans')->get();
-            $no = DB::table('suppliertrans')->get();
-            $saldo = 0;
-            $jum = 0;
-            foreach ($money as $m) {
-                $saldo += $m->subtotal;
-                $jum++;
-            }
-            foreach ($no as $n) {
-                $saldo -= $n->subtotal;
-                $jum++;
-            }
-        @endphp
         {{-- <div class="card">
             <div>
                 <div class="numbers">1, 504</div>
@@ -325,35 +311,9 @@
             <div class="cardHeader">
                 <h2>Recent Customers</h2>
             </div>
-            @php
-                $customers;
-                foreach ($money as $m) {
-                    $ada = false;
-                    if (isset($customers)) {
-                        for ($i = 0; $i < count($customers); $i++) {
-                            if ($customers[$i] == $m->user_id) {
-                                $ada = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (!$ada) {
-                        $customers[] = $m->user_id;
-                        //4 adalah max orangnya
-                        if (count($customers) == 4) {
-                            break;
-                        }
-                    }
-                }
-            @endphp
             <table>
-                @if (isset($customers))
-                    @foreach ($customers as $c)
-                        @php
-                            $user = DB::table('users')
-                                ->where('user_id', $c)
-                                ->first();
-                        @endphp
+                @if (isset($recent))
+                    @foreach ($recent as $user)
                         <tr>
                             <td width="60px">
                                 <div class="imgBx">
@@ -361,8 +321,8 @@
                                 </div>
                             </td>
                             <td>
-                                <h4>{{ $user->user_fname . ' ' . $user->user_lname }}<br>
-                                    <span>{{ $user->user_email }}</span></h4>
+                                <h4>{{ $user->User->user_fname . ' ' . $user->User->user_lname }}<br>
+                                    <span>{{ $user->User->user_email }}</span></h4>
                             </td>
                         </tr>
                     @endforeach

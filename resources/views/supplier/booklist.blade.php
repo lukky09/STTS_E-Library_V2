@@ -466,7 +466,7 @@
             width: min-content;
         }
         .overflow-place{
-            /* overflow-y: scroll; */
+            overflow-y: scroll;
 
         }
         .table{
