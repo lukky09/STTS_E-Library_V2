@@ -541,15 +541,29 @@
 
         </table> --}}
 
-        <table class="table">
-            @foreach ($daftarNotif as $eachNotification)
-                {{$eachNotification->markAsRead()}}
-                <tr>
-                    <td style="width: 70vw;">{{$eachNotification['isi']}}</td>
-                    <td>{{$eachNotification['tanggal']}}</td>
-                </tr>
-            @endforeach
-        </table>
+        @if (sizeof($daftarNotif) > 0)
+            <table class="table">
+                @foreach ($daftarNotif as $eachNotification)
+                    {{-- {{$eachNotification->markAsRead()}} --}}
+                    <tr>
+                        <td style="width: 70vw;">{{$eachNotification['isi']}}</td>
+                        <td>{{$eachNotification['tanggal']}}</td>
+                    </tr>
+                @endforeach
+            </table>
+        @else
+            <h2 class="header-no-notif">No notification</h2>
+            <style>
+                .place{
+                    overflow: hidden;
+                }
+                .header-no-notif{
+                    color: white;
+                    width: 50vh;
+                }
+            </style>
+        @endif
+
     </div>
 </div>
 @endsection

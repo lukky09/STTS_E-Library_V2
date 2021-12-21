@@ -239,31 +239,37 @@
                         <span class="details">Synopsis</span>
                         <textarea name="" id="" cols="40" rows="5"></textarea>
                     </div>
+                    @php
+                        $genres = DB::table('genres')->get();
+                    @endphp
                     <div class="input-box">
                         <span class="details">Genre</span>
                         <select name="genre" id="genre">
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
+                            @foreach ($genres as $g)
+                                <option value="{{$g->genre_id}}">{{$g->genre_name}}</option>
+                            @endforeach
                         </select>
                     </div>
+                    @php
+                        $publishers = DB::table('publishers')->get();
+                    @endphp
                     <div class="input-box">
                         <span class="details">Publisher</span>
                         <select name="publishers" id="publishers">
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
+                            @foreach ($publishers as $p)
+                                <option value="{{$p->publisher_id}}">{{$p->publisher_name}}</option>
+                            @endforeach
                         </select>
                     </div>
+                    @php
+                        $authors = DB::table('authors')->get();
+                    @endphp
                     <div class="input-box">
                         <span class="details">Author</span>
                         <select name="author" id="author">
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
+                            @foreach ($authors as $a)
+                                <option value="{{$a->author_id}}">{{$a->author_name}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="container_upload">
@@ -282,7 +288,7 @@
     </div>
 
     <script>
-        const form = document.querySelector("form"),
+        const form = document.querySelector(".container_upload"),
             fileInput = document.querySelector(".file-input"),
             progressArea = document.querySelector(".progress-area"),
             uploadedArea = document.querySelector(".uploaded-area");
