@@ -94,16 +94,18 @@
     .list table{
         /* height: 5vh; */
         /* overflow: scroll; */
-        border: 4px solid rgb(200, 120, 190);
+        /* border: 2px solid rgb(200, 120, 190); */
+        width: 100%;
         /* background-color: purple; */
     }
     .list table th{
-        border: 3px solid rgb(200, 120, 190);
+        /* border: 2px solid rgb(200, 120, 190); */
         padding: 5px;
         margin: 0;
     }
     .list table td{
-        border: 3px solid rgb(200, 120, 190);
+        /* border: 2px solid rgb(200, 120, 190); */
+        background-color: purple;
         padding: 5px;
         margin: 0;
     }
@@ -563,23 +565,25 @@
         <div class="list">
             <h2 style="margin: 0;">Supplied</h2>
             <div class="table-place">
-                <table cellspacing="0" cellpadding="0">
+                <table cellspacing="2" cellpadding="0">
                     <tr>
                         <th>Title</th>
                         <th>Copies</th>
                         <th>Price</th>
                     </tr>
-                    @foreach ($listSupplied as $eachSupplied)
-                        @php
-                            $booktitle = $books->pluck('book_id')->search($eachSupplied->book_id);
-                            // dump($booktitle);
-                        @endphp
-                        <tr>
-                            <td>{{$books[$booktitle]->book_name}}</td>
-                            <td>{{$eachSupplied->qty}}</td>
-                            <td>{{$eachSupplied->price}}</td>
-                        </tr>
-                    @endforeach
+                    <div class="overflow-place">
+                        @foreach ($listSupplied as $eachSupplied)
+                            @php
+                                $booktitle = $books->pluck('book_id')->search($eachSupplied->book_id);
+                                // dump($booktitle);
+                            @endphp
+                            <tr>
+                                <td>{{$books[$booktitle]->book_name}}</td>
+                                <td>{{$eachSupplied->qty}}</td>
+                                <td>{{$eachSupplied->price}}</td>
+                            </tr>
+                        @endforeach
+                    </div>
                 </table>
             </div>
         </div>
