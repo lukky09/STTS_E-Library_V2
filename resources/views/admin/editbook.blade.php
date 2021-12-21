@@ -217,28 +217,28 @@
     <div class="container_form">
         <div class="container">
             <div class="title">Edit Buku</div>
-            <form action="{{url('admin/book/doEditBook')}}"  method="POST" enctype="multipart/form-data">
+            <form action="{{ url('admin/book/doEditBook') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details">ID</span>
-                        <input type="text" name="id" value="{{$book->book_id}}" readonly>
+                        <input type="text" name="id" value="{{ $book->book_id }}" readonly>
                     </div>
                     <div class="input-box">
                         <span class="details">Name</span>
-                        <input type="text" name="name" value="{{$book->book_name}}" required>
+                        <input type="text" name="name" value="{{ $book->book_name }}" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Qty</span>
-                        <input type="number" name="qty" value="{{$book->shop_qty}}">
+                        <input type="number" name="qty" value="{{ $book->shop_qty }}">
                     </div>
                     <div class="input-box">
                         <span class="details">Price</span>
-                        <input type="number" name="price" value="{{$book->shop_price}}">
+                        <input type="number" name="price" value="{{ $book->shop_price }}">
                     </div>
                     <div class="input-box">
                         <span class="details">Synopsis</span>
-                        <textarea id="" cols="40" rows="5" name="synopsis">{{$book->book_synopsis}}</textarea>
+                        <textarea id="" cols="40" rows="5" name="synopsis">{{ $book->book_synopsis }}</textarea>
                     </div>
                     @php
                         $genres = DB::table('genres')->get();
@@ -248,9 +248,9 @@
                         <select name="genre" id="genre">
                             @foreach ($genres as $g)
                                 @if ($g->genre_id == $book->genre_id)
-                                    <option value="{{$g->genre_id}}" selected>{{$g->genre_name}}</option>
+                                    <option value="{{ $g->genre_id }}" selected>{{ $g->genre_name }}</option>
                                 @else
-                                    <option value="{{$g->genre_id}}">{{$g->genre_name}}</option>
+                                    <option value="{{ $g->genre_id }}">{{ $g->genre_name }}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -262,7 +262,9 @@
                         <span class="details">Publisher</span>
                         <select name="publishers" id="publishers">
                             @foreach ($publishers as $p)
-                                <option value="{{$p->publisher_id}}" @if ($p->publisher_id == $book->publisher_id) selected @endif>{{$p->publisher_name}}</option>
+                                <option value="{{ $p->publisher_id }}" @if ($p->publisher_id == $book->publisher_id) selected @endif>
+                                    {{ $p->publisher_name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -273,7 +275,8 @@
                         <span class="details">Author</span>
                         <select name="author" id="author">
                             @foreach ($authors as $a)
-                                <option value="{{$a->author_id}}" @if ($a->author_id == $book->author_id) selected @endif>{{$a->author_name}}</option>
+                                <option value="{{ $a->author_id }}" @if ($a->author_id == $book->author_id) selected @endif>{{ $a->author_name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -305,15 +308,23 @@
         fileInput.onchange = ({
             target
         }) => {
-            let file = target.files[0]; //getting file [0] this means if user has selected multiple files then get first one only
+            let file = target.files[
+                0]; //getting file [0] this means if user has selected multiple files then get first one only
             if (file) {
                 let fileName = file.name; //getting file name
-                if (fileName.length >= 12) { //if file name length is greater than 12 then split it and add ...
-                    let splitName = fileName.split('.');
-                    fileName = splitName[0].substring(0, 13) + "... ." + splitName[1];
-                }
                 uploadedArea.innerHTML = fileName;
             }
         }
     </script>
+
+    {{-- toast --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    @if ($errors->any())
+        @foreach ($errors->all() as $pesanError)
+            <script>
+                toastr.error('Error !!', '{{ Session::get('$pesanError') }}')
+            </script>
+        @endforeach
+    @endif
 @endsection
