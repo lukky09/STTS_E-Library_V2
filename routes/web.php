@@ -80,9 +80,7 @@ Route::middleware(['shop'])->group(function () {
         Route::get('/buybook', [ShopController::class, 'buybook']);
         Route::get('/gettrans', [ShopController::class, 'gettrans']);
         Route::get('/filter', [ShopController::class, 'filter']);
-        Route::get('/', function () {
-            return view('admin.home');
-        });
+        Route::get('/', [ShopController::class, 'home']);
         Route::get('/customer', function () {
             return view('admin.customer');
         });

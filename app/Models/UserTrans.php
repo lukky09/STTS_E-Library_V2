@@ -27,4 +27,9 @@ class UserTrans extends Model
             ->withPivot(['qty', 'price'])
             ->as('detail');
     }
+
+    public function User()
+    {
+        return $this->hasOne(User::class, 'user_id', 'user_id');
+    }
 }
