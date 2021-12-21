@@ -278,30 +278,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Star Refrigerator</td>
-                        <td>$1200</td>
-                        <td>5</td>
-                        <td>ID</td>
-                    </tr>
-                    <tr>
-                        <td>Star Refrigerator</td>
-                        <td>$1200</td>
-                        <td>10</td>
-                        <td>ID</td>
-                    </tr>
-                    <tr>
-                        <td>Star Refrigerator</td>
-                        <td>$1200</td>
-                        <td>5</td>
-                        <td>ID</td>
-                    </tr>
-                    <tr>
-                        <td>Star Refrigerator</td>
-                        <td>$1200</td>
-                        <td>3</td>
-                        <td>ID</td>
-                    </tr>
+                    <?php
+                    $count = 0;
+                    ?>
+                    @foreach ($trans as $item)
+                        @foreach ($item->Books as $book)
+                            @if ($count < 4)
+                                <tr>
+                                    <td>{{$book->book_name}}</td>
+                                    <td>${{$book->shop_price}}</td>
+                                    <td>{{$book->detail->qty}}</td>
+                                    <td>{{$book->detail->trans_id}}</td>
+                                </tr>
+                                <?php
+                                $count++;
+                                ?>
+                            @endif
+                        @endforeach
+                    @endforeach
                 </tbody>
             </table>
         </div>

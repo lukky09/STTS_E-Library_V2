@@ -14,7 +14,7 @@ class ShopController extends Controller
 {
     public function home(Request $request)
     {
-        $money = UserTrans::get();
+        $trans = UserTrans::get();
         $no = SupplierTrans::get();
         $saldo = UserTrans::sum('subtotal');
         $saldo -= SupplierTrans::sum('subtotal');
@@ -24,7 +24,7 @@ class ShopController extends Controller
                 ->orderByDesc('trans_date')
                 ->groupBy('user_id')
                 ->limit(4)->get();
-        return view('admin.home', ['money'=>$money, 'no'=>$no, 'saldo'=>$saldo,
+        return view('admin.home', ['trans'=>$trans, 'no'=>$no, 'saldo'=>$saldo,
                     'jum'=>$jum, 'recent'=>$recent]);
     }
 
