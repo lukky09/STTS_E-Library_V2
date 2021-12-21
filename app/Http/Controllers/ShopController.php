@@ -103,20 +103,34 @@ class ShopController extends Controller
             "synopsis"=>"required|string"
         ]);
 
-        $namafile = strtolower(trim($request->input('name'), ' ')).".".$request->file('file')->getClientOriginalExtension();
-        $namafolder = "covers";
-        $request->file('file')->storeAs($namafolder,$namafile,'public');
+        if($request->file != null){
+            $namafile = strtolower(trim($request->input('name'), ' ')).".".$request->file('file')->getClientOriginalExtension();
+            $namafolder = "covers";
+            $request->file('file')->storeAs($namafolder,$namafile,'public');
 
-        Book::where('book_id','=',$request->id)->update([
-            'book_name' => $request->name,
-            'shop_qty' => $request->qty,
-            'shop_price' => $request->price,
-            'book_synopsis' => $request->synopsis,
-            'genre_id' => $request->genre,
-            'publisher_id' => $request->publishers,
-            'author_id' => $request->author,
-            'book_dir' => "/covers/$namafile",
-        ]);
+            Book::where('book_id','=',$request->id)->update([
+                'book_name' => $request->name,
+                'shop_qty' => $request->qty,
+                'shop_price' => $request->price,
+                'book_synopsis' => $request->synopsis,
+                'genre_id' => $request->genre,
+                'publisher_id' => $request->publishers,
+                'author_id' => $request->author,
+                'book_dir' => "/covers/$namafile",
+            ]);
+        }
+        else {
+            Book::where('book_id','=',$request->id)->update([
+                'book_name' => $request->name,
+                'shop_qty' => $request->qty,
+                'shop_price' => $request->price,
+                'book_synopsis' => $request->synopsis,
+                'genre_id' => $request->genre,
+                'publisher_id' => $request->publishers,
+                'author_id' => $request->author,
+                'book_dir' => "Test",
+            ]);
+        }
 
         return redirect('admin/book');
     }
