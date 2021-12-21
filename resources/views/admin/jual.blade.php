@@ -307,7 +307,7 @@
                                                 ->first();
                                         @endphp
                                         <td>{{ $u->user_fname . ' ' . $u->user_lname }}</td>
-                                        <td>Rp. {{ number_format($t->subtota, 0, '', '.') }}</td>
+                                        <td>Rp. {{ number_format($t->subtotal, 0, '', '.') }}</td>
                                         <td> {{ date('d-M-Y', strtotime($t->trans_date)) }} </td>
                                         <td>
                                             <span class="actionCust">
